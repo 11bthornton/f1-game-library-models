@@ -1,17 +1,20 @@
 [package]
-name = "f1-game-library-models-25"
-version = "0.1.1"
-edition = "2024"
-authors = ["Ben Thornton <11bthornton@gmail.com>"]
-description = "Models associated with the F1 Video Game series for UDP Telemetry"
-readme = "README.md"
+name         = "f1-game-library-models-25"
+version      = "0.1.1"
+edition      = "2024"
+authors      = ["Ben Thornton <11bthornton@gmail.com>"]
+description  = "Models associated with the F1 Video Game series for UDP Telemetry"
+readme       = "README.md"
 license-file = "LICENSE"
-keywords = ["gamedev"]
-repository = "https://github.com/11bthornton/f1-game-library-models"
-homepage = "https://github.com/11bthornton/f1-game-library-models"
+keywords     = ["gamedev"]
+repository   = "https://github.com/11bthornton/f1-game-library-models"
+homepage     = "https://github.com/11bthornton/f1-game-library-models"
+
+[release]
+allow-branch = ["main"]
 
 [dependencies]
-bincode = "1.3.3"
-serde = {version = "1.0.144", features = ["derive"]}
-serde-big-array = "0.5.1"
-serde_repr = "0.1.20"
+bincode            = "1.3.3"
+serde              = { version = "1.0.144", features = ["derive"] }
+serde-big-array    = "0.5.1"
+serde_repr         = "0.1.20"
