@@ -13,7 +13,7 @@ dependencies = [
 
 [[package]]
 name = "f1-game-library-models-25"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "bincode",
  "serde",
