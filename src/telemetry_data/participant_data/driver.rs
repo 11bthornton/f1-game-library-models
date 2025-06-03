@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible drivers in the game
 #[derive(Deserialize_repr, Debug, Serialize_repr, Copy, Clone, PartialEq)]
 #[repr(u8)]
-pub enum Driver
-{
+pub enum Driver {
     /// Driver: Carlos Sainz
     #[serde(rename = "Carlos Sainz")]
     CarlosSainz = 0,

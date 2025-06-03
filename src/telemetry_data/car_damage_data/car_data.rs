@@ -1,16 +1,8 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;
 
-use super::{
-    BrakeData,
-    EngineWear,
-    TyreData,
-    WingDamage,
-};
+use super::{BrakeData, EngineWear, TyreData, WingDamage};
 
 /// Damage data for a single car.
 ///
@@ -37,8 +29,7 @@ use super::{
 /// * `mgu_h_damage` - MGU-H damage percentage (F1 2024+)
 /// * `active_aero_damage` - Active aero damage percentage (F1 2025+)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct CarDamageData
-{
+pub struct CarDamageData {
     /// Tyre wear and damage data
     pub tyres: TyreData,
     /// Brake damage data

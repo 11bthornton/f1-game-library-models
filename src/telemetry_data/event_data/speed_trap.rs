@@ -1,15 +1,11 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Speed trap event.
 ///
 /// This event occurs when a vehicle triggers a speed trap.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
 #[repr(C)]
-pub struct SpeedTrap
-{
+pub struct SpeedTrap {
     /// Index of the vehicle that triggered the speed trap
     #[serde(with = "crate::utils::u8_as_usize")]
     pub vehicle_index: usize,

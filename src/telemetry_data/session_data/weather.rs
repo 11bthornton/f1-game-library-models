@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Weather conditions in the session
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy, Default, PartialEq)]
 #[repr(u8)]
-pub enum Weather
-{
+pub enum Weather {
     /// Clear weather
     #[default]
     Clear = 0,

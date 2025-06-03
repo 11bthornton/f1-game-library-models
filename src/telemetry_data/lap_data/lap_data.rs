@@ -1,13 +1,7 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::{
-    driver_status::DriverStatus,
-    pit_status::PitStatus,
-    result_status::ResultStatus,
-    sector::Sector,
+    driver_status::DriverStatus, pit_status::PitStatus, result_status::ResultStatus, sector::Sector,
 };
 
 /// Lap data for a single car.
@@ -47,8 +41,7 @@ use super::{
 /// * `pit_stop_timer_in_ms` - Time of the actual pit stop in milliseconds
 /// * `pit_stop_should_serve_pen` - Whether the car should serve a penalty at this stop
 #[derive(Deserialize, Debug, Default, Serialize, Clone, Copy, PartialEq)]
-pub struct LapData
-{
+pub struct LapData {
     /// Last completed lap time in milliseconds
     pub last_lap_time_in_ms: u32,
     /// Current lap time in milliseconds

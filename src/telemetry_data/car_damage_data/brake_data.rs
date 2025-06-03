@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;
 
@@ -13,8 +10,7 @@ use crate::telemetry_data::WheelData;
 ///
 /// * `damage` - Brake damage percentage for each wheel [RL, RR, FL, FR]
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct BrakeData
-{
+pub struct BrakeData {
     /// Brake damage percentage for each wheel [RL, RR, FL, FR]
     pub damage: WheelData<u8>,
 }

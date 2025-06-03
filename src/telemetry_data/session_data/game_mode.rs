@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible game modes in the game
 #[derive(Debug, Copy, Clone, PartialEq, Deserialize_repr, Serialize_repr)]
 #[repr(u8)]
-pub enum GameMode
-{
+pub enum GameMode {
     EventMode = 0,
     GrandPrix = 3,
     GrandPrix23 = 4,

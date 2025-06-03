@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Final classification data for a single car.
 ///
@@ -24,8 +21,7 @@ use serde::{
 /// * `tyre_stints_visual` - Visual tyre compounds displayed in each stint
 /// * `tyre_stints_end_laps` - Lap numbers when each tyre stint ended
 #[derive(Deserialize, Debug, Serialize, Copy, Clone)]
-pub struct FinalClassificationData
-{
+pub struct FinalClassificationData {
     /// Finishing position of the car
     pub position: u8,
     /// Number of laps completed

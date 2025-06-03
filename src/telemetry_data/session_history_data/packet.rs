@@ -1,13 +1,7 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
-use super::{
-    LapHistoryData,
-    TyreStintHistoryData,
-};
+use super::{LapHistoryData, TyreStintHistoryData};
 use crate::telemetry_data::packet_header::PacketHeader;
 
 /// Packet containing session history data for a specific car
@@ -15,8 +9,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// This structure contains historical data for a single car in the session,
 /// including lap times, sector times, and tyre usage.
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct PacketSessionHistoryData
-{
+pub struct PacketSessionHistoryData {
     /// Header information for the packet
     pub header: PacketHeader,
 

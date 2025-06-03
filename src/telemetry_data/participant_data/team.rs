@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible teams in the game
 #[derive(Debug, Copy, Clone, PartialEq, Deserialize_repr, Serialize_repr)]
 #[repr(u8)]
-pub enum Team
-{
+pub enum Team {
     Mercedes = 0,
 
     Ferrari = 1,
@@ -166,10 +162,8 @@ pub enum Team
     None = 255,
 }
 
-impl Team
-{
-    pub fn to_string(&self) -> &'static str
-    {
+impl Team {
+    pub fn to_string(&self) -> &'static str {
         match self {
             Team::Mercedes => "Mercedes",
             Team::Ferrari => "Ferrari",

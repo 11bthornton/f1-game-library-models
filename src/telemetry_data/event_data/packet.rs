@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::event_type::EventType;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -12,8 +9,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// event type information properly structured.
 #[derive(Debug, Serialize, Deserialize, Default, Clone, Copy)]
 #[repr(C)]
-pub struct PacketEventData
-{
+pub struct PacketEventData {
     /// Header information for the packet
     pub m_header: PacketHeader,
 

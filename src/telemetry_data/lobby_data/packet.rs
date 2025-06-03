@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::lobby_info_data::LobbyInfoData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -16,8 +13,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `num_players` - Number of players in the lobby
 /// * `lobby_players` - Array of lobby information for each player (up to 22 players)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct PacketLobbyInfoData
-{
+pub struct PacketLobbyInfoData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Number of players in the lobby

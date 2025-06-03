@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::final_classification_data::FinalClassificationData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -17,8 +14,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `num_cars` - Number of cars in the final classification
 /// * `classification_data` - Array of classification data for each car (up to 22 cars)
 #[derive(Deserialize, Debug, Serialize, Copy, Clone)]
-pub struct PacketClassificationData
-{
+pub struct PacketClassificationData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Number of cars in the final classification

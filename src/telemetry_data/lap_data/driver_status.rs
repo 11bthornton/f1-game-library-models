@@ -1,15 +1,11 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Driver status.
 ///
 /// These represent the various states a driver can be in during a session.
 #[derive(Deserialize_repr, Debug, Default, Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
-pub enum DriverStatus
-{
+pub enum DriverStatus {
     /// Driver is in the garage
     #[serde(rename = "In Garage")]
     InGarage = 0,

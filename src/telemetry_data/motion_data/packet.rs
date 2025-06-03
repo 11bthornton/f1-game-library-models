@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::CarMotionData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -12,8 +9,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// It includes arrays of motion data for each car, as well as additional data
 /// for the player's car.
 #[derive(Debug, Clone, Copy, Default, Serialize, Deserialize)]
-pub struct PacketMotionData
-{
+pub struct PacketMotionData {
     pub packet_header: PacketHeader,
 
     /// Motion data for all cars on track

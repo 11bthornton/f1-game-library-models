@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Formula category for the current session
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy)]
 #[repr(u8)]
-pub enum Formula
-{
+pub enum Formula {
     /// Modern F1 cars
     #[serde(rename = "F1 Modern")]
     F1Modern,

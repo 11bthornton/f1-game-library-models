@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Dynamic racing line assist setting
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy)]
 #[repr(u8)]
-pub enum DynamicRacingLine
-{
+pub enum DynamicRacingLine {
     /// 2D racing line
     #[serde(rename = "2d")]
     TwoD,

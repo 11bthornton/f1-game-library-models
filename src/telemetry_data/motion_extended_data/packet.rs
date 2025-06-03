@@ -1,14 +1,8 @@
 use std::str;
 
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
-use crate::telemetry_data::{
-    WheelData,
-    packet_header::PacketHeader,
-};
+use crate::telemetry_data::{WheelData, packet_header::PacketHeader};
 
 /// Extended motion data packet for the player's car.
 ///
@@ -43,8 +37,7 @@ use crate::telemetry_data::{
 /// Note: All wheel arrays have the following order: RL (Rear Left), RR (Rear Right), FL (Front
 /// Left), FR (Front Right)
 #[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-pub struct PacketMotionExData
-{
+pub struct PacketMotionExData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Suspension position for each wheel [RL, RR, FL, FR]

@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Engine component wear data.
 ///
@@ -16,8 +13,7 @@ use serde::{
 /// * `mguk` - MGU-K wear percentage
 /// * `tc` - Turbocharger wear percentage
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct EngineWear
-{
+pub struct EngineWear {
     /// MGU-H wear percentage
     pub mguh: u8,
     /// Energy Store wear percentage

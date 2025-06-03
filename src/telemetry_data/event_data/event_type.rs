@@ -1,14 +1,10 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::{safety_car::SafetyCar, *};
 
 /// Types of events that can occur during a race.
 #[derive(Serialize, Deserialize, Debug, Clone, Copy, Default)]
-pub enum EventType
-{
+pub enum EventType {
     /// Button press event
     Buttons(Buttons),
 

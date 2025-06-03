@@ -1,14 +1,10 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Car motion data for a single vehicle.
 ///
 /// Contains physics data for a single car such as position, rotation, velocity, and acceleration.
 #[derive(Debug, Clone, Copy, Default, Serialize, Deserialize)]
-pub struct CarMotionData
-{
+pub struct CarMotionData {
     /// World space X position - meters
     pub world_position_x: f32,
     /// World space Y position - meters

@@ -1,15 +1,11 @@
 use std::fmt;
 
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Track identifiers for all circuits in F1 games
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy, PartialEq)]
 #[repr(i8)]
-pub enum Track
-{
+pub enum Track {
     Unknown = -1,
     Melbourne = 0,
     PaulRicard = 1,
@@ -46,10 +42,8 @@ pub enum Track
     Losail = 32,
 }
 
-impl fmt::Display for Track
-{
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result
-    {
+impl fmt::Display for Track {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match self {
             Track::Unknown => "Unknown",
             Track::Melbourne => "Melbourne, Australia",

@@ -10,16 +10,8 @@ mod tyre_compounds;
 mod vehicle_flags;
 
 pub use car_status_data::CarStatusData;
-pub use driver_aids::{
-    AntiLockBrakes,
-    FuelMix,
-    PitLimiterStatus,
-    TractionControl,
-};
+pub use driver_aids::{AntiLockBrakes, FuelMix, PitLimiterStatus, TractionControl};
 pub use ers::DeployMode;
 pub use packet::PacketCarStatusData;
-pub use tyre_compounds::{
-    ActualTyreCompound,
-    VisualTyreCompound,
-};
+pub use tyre_compounds::{ActualTyreCompound, VisualTyreCompound};
 pub use vehicle_flags::VehicleFiaFlags;

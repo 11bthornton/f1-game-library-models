@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible nationalities in the game
 #[derive(Deserialize_repr, Debug, Serialize_repr, Copy, Clone, PartialEq)]
 #[repr(u8)]
-pub enum Nationality
-{
+pub enum Nationality {
     /// Default nationality
     Default = 0,
 

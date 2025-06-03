@@ -1,8 +1,5 @@
 use serde::Serialize;
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Visual tyre compound types.
 ///
@@ -10,8 +7,7 @@ use serde_repr::{
 /// which can be different from the actual compound used.
 #[derive(Deserialize_repr, Debug, Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
-pub enum VisualTyreCompound
-{
+pub enum VisualTyreCompound {
     /// No tyre compound
     None = 0,
 
@@ -72,8 +68,7 @@ pub enum VisualTyreCompound
 /// which can be different from how they appear visually.
 #[derive(Deserialize_repr, Debug, Serialize, Clone, Copy)]
 #[repr(u8)]
-pub enum ActualTyreCompound
-{
+pub enum ActualTyreCompound {
     /// No tyre compound (for non-player cars)
     None = 0,
     /// C5 compound (softest)

@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Types of penalties that can be issued during a race.
 #[derive(Serialize_repr, Deserialize_repr, Debug, Default, Clone, Copy)]
 #[repr(u8)]
-pub enum PenaltyType
-{
+pub enum PenaltyType {
     /// Driver must drive through the pit lane without stopping
     #[default]
     DriveThrough = 0,

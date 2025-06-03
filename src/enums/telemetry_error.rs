@@ -1,6 +1,5 @@
 #[derive(Debug)]
-pub enum TelemetryError
-{
+pub enum TelemetryError {
     DeserialisationError(String),
     ConnectionError(String),
     TimeoutError(String),

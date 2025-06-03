@@ -1,19 +1,11 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::{
-    AntiLockBrakes,
-    GearboxAssist,
-    Team,
-    TractionControl,
-    packet_header::PacketHeader,
+    AntiLockBrakes, GearboxAssist, Team, TractionControl, packet_header::PacketHeader,
 };
 
 #[derive(Deserialize, Debug, Serialize, Copy, Clone, PartialEq)]
-pub struct PacketTimeTrialData
-{
+pub struct PacketTimeTrialData {
     pub header: PacketHeader,
 
     #[serde(with = "crate::utils::u8_as_usize")]

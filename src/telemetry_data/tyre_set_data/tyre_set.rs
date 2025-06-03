@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Data for a single tyre set.
 ///
@@ -20,8 +17,7 @@ use serde::{
 /// * `lap_delta_time` - Lap delta time in milliseconds compared to fitted set
 /// * `fitted` - Whether the set is fitted or not
 #[derive(Deserialize, Debug, Serialize, Copy, Clone)]
-pub struct TyreSetData
-{
+pub struct TyreSetData {
     /// Actual tyre compound used
     pub actual_tyre_compound: crate::telemetry_data::car_status_data::ActualTyreCompound,
     /// Visual tyre compound used

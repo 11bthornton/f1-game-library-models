@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;
 
@@ -17,8 +14,7 @@ use crate::telemetry_data::WheelData;
 /// * `carcass_temperature` - Tyre carcass temperature for each wheel [RL, RR, FL, FR] (F1 2024+)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 #[repr(C)]
-pub struct TyreData
-{
+pub struct TyreData {
     /// Tyre wear percentage for each wheel [RL, RR, FL, FR]
     pub wear: WheelData<f32>,
     /// Tyre damage percentage for each wheel [RL, RR, FL, FR]

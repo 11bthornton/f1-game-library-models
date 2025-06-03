@@ -1,25 +1,12 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
 use super::{
-    GameMode,
-    RuleSet,
-    assist_toggle::AssistToggle,
-    dynamic_racing_line::DynamicRacingLine,
-    dynamic_racing_line_type::DynamicRacingLineType,
-    forecast_accuracy::ForecastAccuracy,
-    formula::Formula,
-    gearbox_assist::GearboxAssist,
-    marshal_zone::MarshalZone,
-    network_game::NetworkGame,
-    safety_car_status::SafetyCarStatus,
-    session_type::SessionType,
-    track::Track,
-    weather::Weather,
-    weather_forecast_sample::WeatherForecastSample,
+    GameMode, RuleSet, assist_toggle::AssistToggle, dynamic_racing_line::DynamicRacingLine,
+    dynamic_racing_line_type::DynamicRacingLineType, forecast_accuracy::ForecastAccuracy,
+    formula::Formula, gearbox_assist::GearboxAssist, marshal_zone::MarshalZone,
+    network_game::NetworkGame, safety_car_status::SafetyCarStatus, session_type::SessionType,
+    track::Track, weather::Weather, weather_forecast_sample::WeatherForecastSample,
 };
 use crate::telemetry_data::packet_header::PacketHeader;
 
@@ -30,8 +17,7 @@ const WEATHER_FORECAST_SAMPLE_SIZE: usize = 64;
 /// This structure contains detailed information about the current session,
 /// including weather conditions, track details, and game settings.
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct PacketSessionData
-{
+pub struct PacketSessionData {
     /// Header information for the packet
     pub header: PacketHeader,
 

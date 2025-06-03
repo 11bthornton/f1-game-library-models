@@ -1,17 +1,8 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
-use super::{
-    Platform,
-    ReadyStatus,
-};
-use crate::telemetry_data::participant_data::{
-    Nationality,
-    Team,
-};
+use super::{Platform, ReadyStatus};
+use crate::telemetry_data::participant_data::{Nationality, Team};
 
 /// Lobby information for a single player.
 ///
@@ -28,8 +19,7 @@ use crate::telemetry_data::participant_data::{
 /// * `car_number` - Car number selected by the player
 /// * `ready_status` - Readiness status of the player
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct LobbyInfoData
-{
+pub struct LobbyInfoData {
     /// Whether the player is AI (true) or Human (false) controlled
     pub ai_controlled: bool,
     /// Team selected by the player (255 if no team currently selected)

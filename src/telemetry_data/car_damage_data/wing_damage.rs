@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Wing damage data.
 ///
@@ -13,8 +10,7 @@ use serde::{
 /// * `front_right` - Front right wing damage percentage
 /// * `rear` - Rear wing damage percentage
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct WingDamage
-{
+pub struct WingDamage {
     /// Front left wing damage percentage
     pub front_left: u8,
     /// Front right wing damage percentage

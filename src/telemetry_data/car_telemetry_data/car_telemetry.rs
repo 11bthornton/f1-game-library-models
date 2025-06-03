@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;
 
@@ -29,8 +26,7 @@ use crate::telemetry_data::WheelData;
 /// * `tyre_pressures` - Tyre pressures for each wheel [RL, RR, FL, FR]
 /// * `surface_types` - Driving surface type for each wheel [RL, RR, FL, FR]
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-pub struct CarTelemetryData
-{
+pub struct CarTelemetryData {
     /// Speed of the car in km/h
     pub speed: u16,
     /// Throttle application (0.0 to 1.0)

@@ -1,14 +1,10 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::car_setup_data::CarSetupData;
 use crate::telemetry_data::packet_header::PacketHeader;
 
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct PacketCarSetupData
-{
+pub struct PacketCarSetupData {
     /// Header information for the packet
     pub header: PacketHeader,
 

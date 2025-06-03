@@ -1,19 +1,9 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::{
-    driver_aids::{
-        AntiLockBrakes,
-        FuelMix,
-        PitLimiterStatus,
-        TractionControl,
-    },
-    tyre_compounds::{
-        ActualTyreCompound,
-        VisualTyreCompound,
-    }, VehicleFiaFlags,
+    VehicleFiaFlags,
+    driver_aids::{AntiLockBrakes, FuelMix, PitLimiterStatus, TractionControl},
+    tyre_compounds::{ActualTyreCompound, VisualTyreCompound},
 };
 
 /// Status data for a single car.
@@ -50,8 +40,7 @@ use super::{
 /// * `network_paused` - Whether the car is paused in a network game
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 #[repr(C)]
-pub struct CarStatusData
-{
+pub struct CarStatusData {
     /// Traction control setting (0 = off, 1 = medium, 2 = full)
     pub traction_control: TractionControl,
     /// Anti-lock brakes setting (0 = off, 1 = on)

@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::tyre_set::TyreSetData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -17,8 +14,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `tyre_set_data` - Array of tyre set data (13 dry + 7 wet = 20 total)
 /// * `fitted_idx` - Index into array of the currently fitted tyre set
 #[derive(Deserialize, Debug, Serialize, Copy, Clone)]
-pub struct PacketTyreSetsData
-{
+pub struct PacketTyreSetsData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Index of the car this data relates to

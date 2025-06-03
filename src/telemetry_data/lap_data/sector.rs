@@ -6,8 +6,7 @@ use serde_repr::Deserialize_repr;
 /// These represent the three timing sectors of a track.
 #[derive(Deserialize_repr, Debug, Default, Serialize, Clone, Copy, PartialEq)]
 #[repr(u8)]
-pub enum Sector
-{
+pub enum Sector {
     /// First sector of the track
     #[default]
     #[serde(rename = "Sector One")]

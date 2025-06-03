@@ -6,10 +6,7 @@
 ///
 /// The main entry point for working with telemetry data is the `F1Data` enum,
 /// which encapsulates all possible telemetry packet types.
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 pub mod car_damage_data;
 pub mod car_setup_data;
@@ -48,8 +45,7 @@ pub use tyre_set_data::*;
 pub use utility::*;
 
 #[derive(Deserialize, Serialize, Debug, Copy, Clone)]
-pub enum F1Data
-{
+pub enum F1Data {
     /// Car damage information
     CarDamageData(PacketCarDamageData),
 

@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Setup data for a single car.
 ///
@@ -33,8 +30,7 @@ use serde::{
 /// * `ballast` - Ballast weight
 /// * `fuel_load` - Fuel load weight
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct CarSetupData
-{
+pub struct CarSetupData {
     /// Front wing aero setting
     pub front_wing: u8,
 

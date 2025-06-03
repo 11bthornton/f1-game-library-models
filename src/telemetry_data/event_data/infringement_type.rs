@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Types of rule infringements that can occur during a race.
 #[derive(Serialize_repr, Deserialize_repr, Debug, Default, Clone, Copy)]
 #[repr(u8)]
-pub enum InfringementType
-{
+pub enum InfringementType {
     /// Blocking another driver by driving too slowly
     #[default]
     SlowDrivingBlock = 0,
@@ -175,10 +171,8 @@ pub enum InfringementType
     Attribute = 54,
 }
 
-impl InfringementType
-{
-    pub fn pretty_description(&self) -> &'static str
-    {
+impl InfringementType {
+    pub fn pretty_description(&self) -> &'static str {
         match self {
             InfringementType::SlowDrivingBlock => "Blocking by Slow Driving",
             InfringementType::WrongWayBlock => "Blocking by Wrong Way Driving",

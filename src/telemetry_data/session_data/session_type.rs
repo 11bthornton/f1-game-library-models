@@ -1,12 +1,8 @@
 use std::fmt;
 
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
-pub(crate) mod session_type_values
-{
+pub(crate) mod session_type_values {
     pub const UNKNOWN: u8 = 0;
 
     pub const PRACTICE_ONE: u8 = 1;
@@ -49,8 +45,7 @@ pub(crate) mod session_type_values
 /// Types of sessions in F1 games
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy, Default, PartialEq)]
 #[repr(u8)]
-pub enum SessionType
-{
+pub enum SessionType {
     /// Unknown session type
     #[default]
     Unknown = session_type_values::UNKNOWN,
@@ -105,10 +100,8 @@ pub enum SessionType
     TimeTrial = session_type_values::TIME_TRIAL,
 }
 
-impl fmt::Display for SessionType
-{
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result
-    {
+impl fmt::Display for SessionType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         let name = match self {
             SessionType::Unknown => "Unknown",
             SessionType::PracticeOne => "Practice One",
@@ -134,10 +127,8 @@ impl fmt::Display for SessionType
     }
 }
 
-impl SessionType
-{
-    pub fn is_practice(&self) -> bool
-    {
+impl SessionType {
+    pub fn is_practice(&self) -> bool {
         matches!(
             self,
             SessionType::PracticeOne
@@ -147,8 +138,7 @@ impl SessionType
         )
     }
 
-    pub fn is_qualifying(&self) -> bool
-    {
+    pub fn is_qualifying(&self) -> bool {
         matches!(
             self,
             SessionType::QualifyingOne
@@ -164,8 +154,7 @@ impl SessionType
         )
     }
 
-    pub fn is_sprint_qualifying(&self) -> bool
-    {
+    pub fn is_sprint_qualifying(&self) -> bool {
         matches!(
             self,
             SessionType::SprintShootOutOne
@@ -176,21 +165,18 @@ impl SessionType
         )
     }
 
-    pub fn is_sprint(&self) -> bool
-    {
+    pub fn is_sprint(&self) -> bool {
         matches!(self, SessionType::RaceTwo | SessionType::RaceThree) // Might be wrong, go check
     }
 
-    pub fn is_race(&self) -> bool
-    {
+    pub fn is_race(&self) -> bool {
         matches!(
             self,
             SessionType::Race | SessionType::RaceTwo | SessionType::RaceThree
         )
     }
 
-    pub fn is_time_trial(&self) -> bool
-    {
+    pub fn is_time_trial(&self) -> bool {
         matches!(self, SessionType::TimeTrial)
     }
 }

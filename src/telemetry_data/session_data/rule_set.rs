@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible rule sets in the game
 #[derive(Debug, Copy, Clone, PartialEq, Deserialize_repr, Serialize_repr)]
 #[repr(u8)]
-pub enum RuleSet
-{
+pub enum RuleSet {
     PracticeAndQualifying = 0,
     Race = 1,
     TimeTrial = 2,

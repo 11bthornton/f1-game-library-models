@@ -6,8 +6,7 @@ use serde_repr::Deserialize_repr;
 /// These represent the various race result states a car can have.
 #[derive(Deserialize_repr, Debug, Default, Serialize, Clone, Copy, PartialEq)]
 #[repr(u8)]
-pub enum ResultStatus
-{
+pub enum ResultStatus {
     /// Invalid result
     #[default]
     #[serde(rename = "Invalid")]

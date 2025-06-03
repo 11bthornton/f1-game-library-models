@@ -6,8 +6,7 @@ use serde_repr::Deserialize_repr;
 /// These represent the various readiness states a player can have in a lobby.
 #[derive(Debug, Deserialize_repr, Serialize, Clone, Copy)]
 #[repr(u8)]
-pub enum ReadyStatus
-{
+pub enum ReadyStatus {
     /// Player is not ready to start
     #[serde(rename = "Not Ready")]
     NotReady,

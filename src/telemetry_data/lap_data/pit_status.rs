@@ -6,8 +6,7 @@ use serde_repr::Deserialize_repr;
 /// These represent the various pit-related states a car can be in.
 #[derive(Deserialize_repr, Debug, Default, Serialize, Clone, Copy, PartialEq)]
 #[repr(u8)]
-pub enum PitStatus
-{
+pub enum PitStatus {
     /// Not in pit area
     #[default]
     #[serde(rename = "None")]

@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::car_status_data;
 
@@ -10,8 +7,7 @@ use crate::telemetry_data::car_status_data;
 /// Contains information about a tyre stint, including when it ended
 /// and which compounds were used
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-pub struct TyreStintHistoryData
-{
+pub struct TyreStintHistoryData {
     /// Lap number when this stint ended
     pub end_lap: u8,
     /// Actual tyre compound used in this stint

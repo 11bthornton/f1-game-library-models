@@ -1,19 +1,12 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
-use super::{
-    session_type::SessionType,
-    weather::Weather,
-};
+use super::{session_type::SessionType, weather::Weather};
 
 /// Weather forecast data for a specific time point
 ///
 /// Contains predicted weather conditions and temperatures
 #[derive(Deserialize, Debug, Serialize, Default, Copy, Clone, PartialEq)]
-pub struct WeatherForecastSample
-{
+pub struct WeatherForecastSample {
     /// Session type this forecast is for
     pub session_type: SessionType,
 

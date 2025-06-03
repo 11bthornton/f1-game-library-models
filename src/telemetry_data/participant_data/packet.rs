@@ -1,14 +1,10 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::participant_data::ParticipantData;
 use crate::telemetry_data::packet_header::PacketHeader;
 
 #[derive(Deserialize, Debug, Serialize, Copy, Clone, PartialEq)]
-pub struct PacketParticipantData
-{
+pub struct PacketParticipantData {
     /// Packet header containing identifying information
     pub header: PacketHeader,
 

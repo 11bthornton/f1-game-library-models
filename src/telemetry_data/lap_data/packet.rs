@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::lap_data::LapData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -17,8 +14,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `time_trial_pb_car_idx` - Index of personal best car in time trial
 /// * `m_time_trial_rival_car_idx` - Index of rival car in time trial
 #[derive(Deserialize, Debug, Default, Serialize, Clone, Copy, PartialEq)]
-pub struct PacketLapData
-{
+pub struct PacketLapData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Array of lap data for each car (up to 22 cars)

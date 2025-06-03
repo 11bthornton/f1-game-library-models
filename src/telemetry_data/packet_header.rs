@@ -3,10 +3,7 @@
 /// This module defines the common header structure that is present in all F1 telemetry
 /// data packets. The header contains metadata about the packet, such as its format,
 /// the game version, session information, and more.
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 /// Header structure for all F1 telemetry data packets.
 ///
@@ -30,8 +27,7 @@ use serde::{
 /// * `secondary_player_car_index` - Index of the secondary player's car (split-screen)
 #[derive(Deserialize, Debug, Default, Serialize, Copy, Clone, PartialEq)]
 #[repr(packed)]
-pub struct PacketHeader
-{
+pub struct PacketHeader {
     /// Format of the packet (game-specific)
     pub packet_format: u16,
     /// Game year (e.g., 23 for F1 2023)

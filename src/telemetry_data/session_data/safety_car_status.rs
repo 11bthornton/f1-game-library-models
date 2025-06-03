@@ -1,13 +1,9 @@
-use serde_repr::{
-    Deserialize_repr,
-    Serialize_repr,
-};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Safety car status in the current session
 #[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy)]
 #[repr(u8)]
-pub enum SafetyCarStatus
-{
+pub enum SafetyCarStatus {
     /// No safety car on track
     #[serde(rename = "No Safety Car")]
     NoSafetyCar,

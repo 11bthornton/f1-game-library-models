@@ -1,20 +1,13 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
-use super::{
-    infringement_type::InfringementType,
-    penalty_type::PenaltyType,
-};
+use super::{infringement_type::InfringementType, penalty_type::PenaltyType};
 
 /// Penalty event.
 ///
 /// This event occurs when a penalty is issued to a vehicle.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
 #[repr(C)]
-pub struct Penalty
-{
+pub struct Penalty {
     /// Type of penalty issued
     pub penalty_type: PenaltyType,
 

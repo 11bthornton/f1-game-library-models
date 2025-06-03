@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::car_status_data::CarStatusData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -16,8 +13,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `car_status_data` - Array of status data for each car (up to 22 cars)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 #[repr(C)]
-pub struct PacketCarStatusData
-{
+pub struct PacketCarStatusData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Array of status data for each car (up to 22 cars)

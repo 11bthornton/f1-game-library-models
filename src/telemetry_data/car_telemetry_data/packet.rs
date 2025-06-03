@@ -1,7 +1,4 @@
-use serde::{
-    Deserialize,
-    Serialize,
-};
+use serde::{Deserialize, Serialize};
 
 use super::car_telemetry::CarTelemetryData;
 use crate::telemetry_data::packet_header::PacketHeader;
@@ -19,8 +16,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `mfd_panel_index_secondary_player` - Index of the MFD panel for the secondary player
 /// * `suggested_gear` - Suggested gear for the player (-1 if no suggestion)
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-pub struct PacketCarTelemetryData
-{
+pub struct PacketCarTelemetryData {
     /// Header information for the packet
     pub m_header: PacketHeader,
     /// Array of telemetry data for each car (exactly 22 cars)
