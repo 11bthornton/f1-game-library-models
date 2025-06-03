@@ -8,6 +8,8 @@ readme = "README.md"
 license = "MIT"
 license-file = "LICENSE"
 keywords = ["gamedev"]
+repository = "https://github.com/11bthornton/f1-game-library-models"
+homepage = "https://github.com/11bthornton/f1-game-library-models"
 
 [dependencies]
 bincode = "1.3.3"
