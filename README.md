@@ -1,6 +1,6 @@
 # F1 Game Library Models
 
-I built this library primarily to learn about Rust package management on [crates.io](crates.io) and the various CI/CD tools available for Rust on Github, so the library shouldn't really be used for anything you're needing to really depend upon - I nevertheless hope you find it useful.
+I built this library primarily to learn about Rust package management on [crates.io](https://crates.io) and the various CI/CD tools available for Rust on Github, so the library shouldn't be used for anything you need to rely on - I nevertheless hope you find it useful.
 
 This is part of a larger project I have to do some interesting things with the UDP telemetry data the F1 video game series spits out during races or during the menus.
 
