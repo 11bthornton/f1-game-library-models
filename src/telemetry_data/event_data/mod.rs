@@ -15,7 +15,6 @@ mod fastest_lap;
 mod flash_back;
 mod infringement_type;
 mod lights_out;
-mod macros;
 mod overtake;
 mod packet;
 mod packet_internal;

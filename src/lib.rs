@@ -1,6 +1,5 @@
 #![allow(clippy::module_inception)]
 
-pub mod enums;
 pub mod telemetry_data;
 
 pub(crate) mod utils;
