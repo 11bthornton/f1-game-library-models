@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;
 
-use super::{EngineWear, TyreData, WingDamage};
+use super::{EngineWear, WingDamage};
 
 /// Damage data for a single car.
 ///
@@ -31,7 +31,6 @@ use super::{EngineWear, TyreData, WingDamage};
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 pub struct CarDamageData {
     /// Tyre wear and damage data
-    pub tyres: TyreData,
     pub tyre_wear: WheelData<f32>,
     pub tyre_damage: WheelData<u8>,
     /// Brake damage data
