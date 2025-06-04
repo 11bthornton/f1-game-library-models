@@ -4,5 +4,4 @@ use serde::{Deserialize, Serialize};
 ///
 /// This event occurs when a vehicle triggers an alternative speed trap.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct AlternateSpeedTrap;

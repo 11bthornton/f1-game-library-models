@@ -6,7 +6,6 @@ use super::{infringement_type::InfringementType, penalty_type::PenaltyType};
 ///
 /// This event occurs when a penalty is issued to a vehicle.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct Penalty {
     /// Type of penalty issued
     pub penalty_type: PenaltyType,

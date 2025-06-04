@@ -26,7 +26,6 @@ use serde::{Deserialize, Serialize};
 /// * `player_car_index` - Index of the player's car in the data arrays
 /// * `secondary_player_car_index` - Index of the secondary player's car (split-screen)
 #[derive(Deserialize, Debug, Default, Serialize, Copy, Clone, PartialEq)]
-#[repr(packed)]
 pub struct PacketHeader {
     /// Format of the packet (game-specific)
     pub packet_format: u16,

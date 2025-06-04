@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// This event occurs when the player uses the flashback feature to rewind time.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct FlashBack {
     /// Frame identifier for the flashback
     pub flashback_frame_identifier: u32,

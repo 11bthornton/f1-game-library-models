@@ -36,7 +36,6 @@ pub mod u8_as_usize {
         fn test_u8_as_usize() {
             let value: u8 = 10;
             let serialized = bincode::serialize(&value).unwrap();
-
             let deserialized: TestStruct = bincode::deserialize(&serialized).unwrap();
             assert_eq!(10, deserialized.value);
         }

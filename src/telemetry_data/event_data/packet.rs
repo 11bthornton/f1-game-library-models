@@ -8,7 +8,6 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// This structure contains the decoded event data with the specific
 /// event type information properly structured.
 #[derive(Debug, Serialize, Deserialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct PacketEventData {
     /// Header information for the packet
     pub m_header: PacketHeader,
