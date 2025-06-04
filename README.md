@@ -6,7 +6,7 @@ This is part of a larger project I have to do some interesting things with the U
 
 It is based on the [UDP Specification](https://forums.ea.com/blog/f1-games-game-info-hub-en/ea-sports%E2%84%A2-f1%C2%AE25-udp-specification/12187347) for the F1-2025 video game. Previous versions are not supported.
 
-This project defines the data types and various utility methods you might want need. It does not handle parsing.
+This project defines the data types and various utility methods you might want or need. It does not handle parsing.
 
 ## Contributing
 
