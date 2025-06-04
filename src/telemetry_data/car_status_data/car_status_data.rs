@@ -39,7 +39,6 @@ use super::{
 /// * `ers_deployed_this_lap` - ERS energy deployed this lap
 /// * `network_paused` - Whether the car is paused in a network game
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-#[repr(C)]
 pub struct CarStatusData {
     /// Traction control setting (0 = off, 1 = medium, 2 = full)
     pub traction_control: TractionControl,

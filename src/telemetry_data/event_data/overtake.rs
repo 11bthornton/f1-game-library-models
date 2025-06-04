@@ -4,7 +4,6 @@ use serde::{Deserialize, Serialize};
 ///
 /// Contains details about which vehicle overtook another vehicle.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct Overtake {
     /// Index of the vehicle that performed the overtake
     #[serde(with = "crate::utils::u8_as_usize")]

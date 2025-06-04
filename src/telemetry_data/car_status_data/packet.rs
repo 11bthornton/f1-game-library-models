@@ -12,7 +12,6 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// * `header` - Header information for the packet
 /// * `car_status_data` - Array of status data for each car (up to 22 cars)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
-#[repr(C)]
 pub struct PacketCarStatusData {
     /// Header information for the packet
     pub header: PacketHeader,

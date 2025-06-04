@@ -4,5 +4,4 @@ use serde::{Deserialize, Serialize};
 ///
 /// This event occurs when the current session ends.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
-#[repr(C)]
 pub struct SessionEnd;
