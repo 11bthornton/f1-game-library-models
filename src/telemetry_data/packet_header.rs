@@ -4,6 +4,7 @@
 /// data packets. The header contains metadata about the packet, such as its format,
 /// the game version, session information, and more.
 use serde::{Deserialize, Serialize};
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Header structure for all F1 telemetry data packets.
 ///
@@ -38,7 +39,7 @@ pub struct PacketHeader {
     /// Version of the packet format
     pub packet_version: u8,
     /// Identifier for the packet type
-    pub packet_id: u8,
+    pub packet_id: PacketId,
     /// Unique identifier for the session
     pub session_uid: u64,
     /// Session timestamp
@@ -53,4 +54,28 @@ pub struct PacketHeader {
     /// Index of the secondary player's car (split-screen)
     #[serde(with = "crate::utils::u8_as_usize")]
     pub secondary_player_car_index: usize,
+}
+
+#[derive(Deserialize_repr, Debug, Default, Serialize_repr, Copy, Clone, PartialEq)]
+#[repr(u8)]
+pub enum PacketId {
+    MotionPacket = 0,
+    SessionPacket = 1,
+    LapDataPacket = 2,
+    EventPacket = 3,
+    ParticipantsPacket = 4,
+    CarSetupsPacket = 5,
+    CarTelemetryPacket = 6,
+    CarStatusPacket = 7,
+    FinalClassificationPacket = 8,
+    LobbyInfoPacket = 9,
+    CarDamagePacket = 10,
+    SessionHistoryPacket = 11,
+    TyreSetsPacket = 12,
+    MotionExPacket = 13,
+    TimeTrialPacket = 14,
+    LapPositionPacket = 15,
+    #[default]
+    #[serde(other)]
+    PacketIdMax = 16,
 }

@@ -46,6 +46,7 @@ pub use infringement_type::InfringementType;
 pub use lights_out::LightsOut;
 pub use overtake::Overtake;
 pub use packet::PacketEventData;
+pub use packet::deserialise_event_packet_from_bytes;
 pub use packet_internal::InternalPacketEventData;
 pub use penalty::Penalty;
 pub use penalty_type::PenaltyType;

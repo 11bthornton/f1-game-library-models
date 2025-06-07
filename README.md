@@ -12,3 +12,11 @@ This project defines the data types and various utility methods you might want o
 
 Feel free to submit a PR if something is wrong or you'd like to offer enhancements!
 
+## ⚠️ Disclaimer
+This project is not affiliated with, endorsed by, or associated with Formula 1, the FIA, any official F1 teams, or the developers and publishers of the F1 video game series.
+
+All team names and references (e.g., Mercedes, Ferrari, Red Bull Racing) are used solely for the purposes of data interoperability and representation, based on publicly observable or inferred values from the official F1 game's telemetry specification. These names may be trademarks of their respective owners.
+
+The enums, structs, and identifiers provided in this crate are derived from the F1 game's published or reverse-engineered telemetry specification, and are intended to support community tools and data analysis.
+
+Their use in this project is purely informational and does not imply any endorsement or ownership. If you are a rights holder and have concerns, please contact the maintainer.
