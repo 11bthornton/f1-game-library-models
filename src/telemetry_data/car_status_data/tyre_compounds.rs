@@ -39,11 +39,11 @@ pub enum VisualTyreCompound {
     #[serde(rename = "WET")]
     ClassicWet = 10,
 
-    /// F2 2019 wet compound
+    /// F2 wet compound
     #[serde(rename = "WET")]
     F220Wet = 15,
 
-    /// F2 2019 super soft compound
+    /// F2 super soft compound
     #[serde(rename = "SS")]
     F220SuperSoft = 19,
 
