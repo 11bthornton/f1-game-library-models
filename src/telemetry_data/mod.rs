@@ -128,8 +128,6 @@ pub fn deserialise_udp_packet_from_bytes(
         Box::new(e) as Box<dyn std::error::Error>
     })?;
 
-    println!("Parsing packet with ID: {:#?}", header.packet_id);
-
     if header.packet_id == PacketId::EventPacket {
         Ok(F1Data::EventData(deserialise_event_packet_from_bytes(
             bytes,
