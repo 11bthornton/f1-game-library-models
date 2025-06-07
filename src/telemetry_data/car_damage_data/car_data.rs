@@ -35,7 +35,7 @@ pub struct CarDamageData {
     pub tyre_damage: WheelData<u8>,
     /// Brake damage data
     pub brakes_damage: WheelData<u8>,
-    pub blisters: WheelData<f32>,
+    pub blisters: WheelData<u8>,
     /// Wing damage data
     pub wing_damage: WingDamage,
     /// Floor damage percentage

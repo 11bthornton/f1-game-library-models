@@ -58,3 +58,4 @@ pub use speed_trap::SpeedTrap;
 pub use start_lights::StartLights;
 pub use stop_go_penalty_served::StopGoPenaltyServed;
 pub use team_mate_in_pits::TeamMateInPits;
+pub use packet::deserialise_event_packet_from_bytes;
