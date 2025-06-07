@@ -312,7 +312,7 @@ impl Team {
             Team::Alpine24 => "Alpine 24",
             Team::RB24 => "RB 24",
             Team::Haas24 => "Haas 24",
-            Team::McLaren24 => "Mc Laren 24",
+            Team::McLaren24 => "McLaren 24",
             Team::Sauber24 => "Sauber 24",
             Team::None => "None",
         }
