@@ -39,13 +39,13 @@ pub enum VisualTyreCompound {
     #[serde(rename = "WET")]
     ClassicWet = 10,
 
-    /// F2 2019 wet compound
+    /// F2 wet compound
     #[serde(rename = "WET")]
-    F219Wet = 15,
+    F220Wet = 15,
 
-    /// F2 2019 super soft compound
+    /// F2 super soft compound
     #[serde(rename = "SS")]
-    F219SuperSoft = 19,
+    F220SuperSoft = 19,
 
     /// F2 soft compound
     #[serde(rename = "SOFT")]
@@ -58,8 +58,6 @@ pub enum VisualTyreCompound {
     /// F2 hard compound
     #[serde(rename = "HARD")]
     F2Hard = 22,
-
-    Okay = 63,
 }
 
 /// Actual tyre compound types.
@@ -83,6 +81,8 @@ pub enum ActualTyreCompound {
     C1 = 20,
     /// C0 compound (development/special)
     C0 = 21,
+    /// C6 compound
+    C6 = 22,
     /// Intermediate compound
     Inter = 7,
     /// Wet compound

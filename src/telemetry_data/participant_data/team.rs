@@ -16,13 +16,13 @@ pub enum Team {
 
     Alpine = 5,
 
-    AlphaTauri = 6,
+    RB = 6, // Updated from AlphaTauri to RB
 
     Haas = 7,
 
     McLaren = 8,
 
-    AlfaRomeo = 9,
+    Sauber = 9, // Updated from AlfaRomeo to Sauber
 
     Mercedes2020 = 85,
 
@@ -100,13 +100,13 @@ pub enum Team {
 
     Alpine22 = 123,
 
-    AlphaTauri22 = 124,
+    RB22 = 124, // Updated from AlphaTauri22 to RB22
 
     Haas22 = 125,
 
     McLaren22 = 126,
 
-    AlfaRomeo22 = 127,
+    Sauber22 = 127, // Updated from AlfaRomeo22 to Sauber22
 
     Konnersport22 = 128,
 
@@ -156,9 +156,57 @@ pub enum Team {
 
     Virtuosi23 = 153,
 
-    #[serde(other)]
-    WhoKnows = 157,
+    F1Generic = 41, // Added new team
 
+    APXGP24 = 142, // Added new team
+
+    APXGP25 = 154, // Added new team
+
+    Konnersport24 = 155, // Added new team
+
+    ArtGP24 = 158, // Added new team
+
+    Campos24 = 159, // Added new team
+
+    RodinMotorsport24 = 160, // Added new team
+
+    AIXRacing24 = 161, // Added new team
+
+    DAMS24 = 162, // Added new team
+
+    Hitech24 = 163, // Added new team
+
+    MPMotorsport24 = 164, // Added new team
+
+    Prema24 = 165, // Added new team
+
+    Trident24 = 166, // Added new team
+
+    VanAmersfoortRacing24 = 167, // Added new team
+
+    Invicta24 = 168, // Added new team
+
+    Mercedes24 = 185, // Added new team
+
+    Ferrari24 = 186, // Added new team
+
+    RedBullRacing24 = 187, // Added new team
+
+    Williams24 = 188, // Added new team
+
+    AstonMartin24 = 189, // Added new team
+
+    Alpine24 = 190, // Added new team
+
+    RB24 = 191, // Added new team
+
+    Haas24 = 192, // Added new team
+
+    McLaren24 = 193, // Added new team
+
+    Sauber24 = 194, // Added new team
+
+    #[serde(other)]
     None = 255,
 }
 
@@ -171,10 +219,10 @@ impl Team {
             Team::Williams => "Williams",
             Team::AstonMartin => "Aston Martin",
             Team::Alpine => "Alpine",
-            Team::AlphaTauri => "Alpha Tauri",
+            Team::RB => "RB",
             Team::Haas => "Haas",
             Team::McLaren => "McLaren",
-            Team::AlfaRomeo => "Alfa Romeo",
+            Team::Sauber => "Sauber",
             Team::Mercedes2020 => "Mercedes 2020",
             Team::Ferrari2020 => "Ferrari 2020",
             Team::RedBull2020 => "Red Bull 2020",
@@ -213,10 +261,10 @@ impl Team {
             Team::Williams22 => "Williams 22",
             Team::AstonMartin22 => "Aston Martin 22",
             Team::Alpine22 => "Alpine 22",
-            Team::AlphaTauri22 => "Alpha Tauri 22",
+            Team::RB22 => "RB 22",
             Team::Haas22 => "Haas 22",
-            Team::McLaren22 => "Mc Laren 22",
-            Team::AlfaRomeo22 => "Alfa Romeo 22",
+            Team::McLaren22 => "McLaren 22",
+            Team::Sauber22 => "Sauber 22",
             Team::Konnersport22 => "Konnersport 22",
             Team::Konnersport => "Konnersport",
             Team::Prema22 => "Prema 22",
@@ -241,8 +289,32 @@ impl Team {
             Team::Trident23 => "Trident '23",
             Team::VanAmersfoortRacing23 => "Van Amersfoort Racing '23",
             Team::Virtuosi23 => "Virtuosi '23",
+            Team::F1Generic => "F1 Generic",
+            Team::APXGP24 => "APX GP 24",
+            Team::APXGP25 => "APX GP 25",
+            Team::Konnersport24 => "Konnersport 24",
+            Team::ArtGP24 => "Art GP 24",
+            Team::Campos24 => "Campos 24",
+            Team::RodinMotorsport24 => "Rodin Motorsport 24",
+            Team::AIXRacing24 => "AIX Racing 24",
+            Team::DAMS24 => "DAMS 24",
+            Team::Hitech24 => "Hitech 24",
+            Team::MPMotorsport24 => "MP Motorsport 24",
+            Team::Prema24 => "Prema 24",
+            Team::Trident24 => "Trident 24",
+            Team::VanAmersfoortRacing24 => "Van Amersfoort Racing 24",
+            Team::Invicta24 => "Invicta 24",
+            Team::Mercedes24 => "Mercedes 24",
+            Team::Ferrari24 => "Ferrari 24",
+            Team::RedBullRacing24 => "Red Bull Racing 24",
+            Team::Williams24 => "Williams 24",
+            Team::AstonMartin24 => "Aston Martin 24",
+            Team::Alpine24 => "Alpine 24",
+            Team::RB24 => "RB 24",
+            Team::Haas24 => "Haas 24",
+            Team::McLaren24 => "McLaren 24",
+            Team::Sauber24 => "Sauber 24",
             Team::None => "None",
-            Team::WhoKnows => "Who Knows",
         }
     }
 }

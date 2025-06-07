@@ -124,9 +124,9 @@ pub enum Driver {
     #[serde(rename = "Howard Clarke")]
     HowardClarke = 33,
 
-    /// Driver: Wilheim Kaufmann
-    #[serde(rename = "Wilheim Kaufmann")]
-    WilheimKaufmann = 34,
+    /// Driver: Lars Kaufmann
+    #[serde(rename = "Lars Kaufmann")]
+    LarsKaufmann = 34,
 
     /// Driver: Marie Laursen
     #[serde(rename = "Marie Laursen")]
@@ -300,9 +300,9 @@ pub enum Driver {
     #[serde(rename = "Nikita Mazepin")]
     NikitaMazepin = 79,
 
-    /// Driver: Guanya Zhou
-    #[serde(rename = "Guanya Zhou")]
-    GuanyaZhou = 80,
+    /// Driver: Guanyu Zhou
+    #[serde(rename = "Guanyu Zhou")]
+    GuanyuZhou = 80,
 
     /// Driver: Mick Schumacher
     #[serde(rename = "Mick Schumacher")]
@@ -536,4 +536,72 @@ pub enum Driver {
 
     #[serde(other)]
     Unknown = 255,
+
+    /// Driver: Joshua Durksen
+    #[serde(rename = "Joshua Durksen")]
+    JoshuaDurksen = 164,
+
+    /// Driver: Andrea Kimi Antonelli
+    #[serde(rename = "Andrea Kimi Antonelli")]
+    AndreaKimiAntonelli = 165,
+
+    /// Driver: Ritomo Miyata
+    #[serde(rename = "Ritomo Miyata")]
+    RitomoMiyata = 166,
+
+    /// Driver: Rafael Villagomez
+    #[serde(rename = "Rafael Villagomez")]
+    RafaelVillagomez = 167,
+
+    /// Driver: Zak O'Sullivan
+    #[serde(rename = "Zak O'Sullivan")]
+    ZakOSullivan = 168,
+
+    /// Driver: Pepe Marti
+    #[serde(rename = "Pepe Marti")]
+    PepeMarti = 169,
+
+    /// Driver: Sonny Hayes
+    #[serde(rename = "Sonny Hayes")]
+    SonnyHayes = 170,
+
+    /// Driver: Joshua Pearce
+    #[serde(rename = "Joshua Pearce")]
+    JoshuaPearce = 171,
+
+    /// Driver: Callum Voisin
+    #[serde(rename = "Callum Voisin")]
+    CallumVoisin = 172,
+
+    /// Driver: Matias Zagazeta
+    #[serde(rename = "Matias Zagazeta")]
+    MatiasZagazeta = 173,
+
+    /// Driver: Nikola Tsolov
+    #[serde(rename = "Nikola Tsolov")]
+    NikolaTsolov = 174,
+
+    /// Driver: Tim Tramnitz
+    #[serde(rename = "Tim Tramnitz")]
+    TimTramnitz = 175,
+
+    /// Driver: Luca Cortez
+    #[serde(rename = "Luca Cortez")]
+    LucaCortez = 185,
+
+    /// Driver: Paul Aron
+    #[serde(rename = "Paul Aron")]
+    PaulAron = 160,
+
+    /// Driver: Gabriel Bortoleto
+    #[serde(rename = "Gabriel Bortoleto")]
+    GabrielBortoleto = 161,
+
+    /// Driver: Franco Colapinto
+    #[serde(rename = "Franco Colapinto")]
+    FrancoColapinto = 162,
+
+    /// Driver: Taylor Barnard
+    #[serde(rename = "Taylor Barnard")]
+    TaylorBarnard = 163,
 }

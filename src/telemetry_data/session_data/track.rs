@@ -40,6 +40,9 @@ pub enum Track {
     Miami = 30,
     LasVegas = 31,
     Losail = 32,
+    SilverstoneReverse = 39, // Added new track
+    AustriaReverse = 40,     // Added new track
+    ZandvoortReverse = 41,   // Added new track
 }
 
 impl fmt::Display for Track {
@@ -79,6 +82,9 @@ impl fmt::Display for Track {
             Track::Miami => "Miami, USA",
             Track::LasVegas => "Las Vegas, USA",
             Track::Losail => "Losail, Qatar",
+            Track::SilverstoneReverse => "Silverstone Reverse, UK",
+            Track::AustriaReverse => "Austria Reverse, Austria",
+            Track::ZandvoortReverse => "Zandvoort Reverse, Netherlands",
         };
         write!(f, "{}", name)
     }

@@ -13,4 +13,5 @@ pub enum RuleSet {
     Drift = 9,
     AverageSpeedZone = 10,
     RivalDuel = 11,
+    Elimination = 12,
 }
