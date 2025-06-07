@@ -83,7 +83,7 @@ impl fmt::Display for Track {
             Track::LasVegas => "Las Vegas, USA",
             Track::Losail => "Losail, Qatar",
             Track::SilverstoneReverse => "Silverstone Reverse, UK",
-            Track::AustriaReverse => "Austria Reverse",
+            Track::AustriaReverse => "Austria Reverse, Austria",
             Track::ZandvoortReverse => "Zandvoort Reverse, Netherlands",
         };
         write!(f, "{}", name)
