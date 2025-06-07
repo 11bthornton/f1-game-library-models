@@ -96,7 +96,7 @@ pub enum F1Data {
     /// Lap positions data
     LapPositionsData(PacketLapPositionsData),
 
-    None
+    None,
 }
 
 macro_rules! deserialise_packet_type {
@@ -119,7 +119,9 @@ macro_rules! deserialise_packet_type {
     };
 }
 
-pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> Result<F1Data, Box<dyn std::error::Error>> {
+pub fn deserialise_udp_packet_from_bytes(
+    bytes: &[u8],
+) -> Result<F1Data, Box<dyn std::error::Error>> {
     // Deserialize header only (don't use reader)
     let header: PacketHeader = bincode::deserialize(bytes).map_err(|e| {
         println!("Failed to deserialize PacketHeader: {}", e);
@@ -129,7 +131,9 @@ pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> Result<F1Data, Box<dyn
     println!("Parsing packet with ID: {:#?}", header.packet_id);
 
     if header.packet_id == PacketId::EventPacket {
-        Ok(F1Data::EventData(deserialise_event_packet_from_bytes(bytes)?))
+        Ok(F1Data::EventData(deserialise_event_packet_from_bytes(
+            bytes,
+        )?))
     } else {
         deserialise_packet_type!(
             header, bytes,

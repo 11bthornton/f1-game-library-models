@@ -41,8 +41,8 @@ pub enum Track {
     LasVegas = 31,
     Losail = 32,
     SilverstoneReverse = 39, // Added new track
-    AustriaReverse = 40, // Added new track
-    ZandvoortReverse = 41, // Added new track
+    AustriaReverse = 40,     // Added new track
+    ZandvoortReverse = 41,   // Added new track
 }
 
 impl fmt::Display for Track {

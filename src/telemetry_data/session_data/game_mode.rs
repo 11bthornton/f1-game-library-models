@@ -25,10 +25,10 @@ pub enum GameMode {
     Career24Online = 24,
     MyTeamCareer24 = 25,
     CuratedCareer24 = 26,
-    MyTeamCareer25 = 27, // Added new mode
-    DriverCareer25 = 28, // Added new mode
-    Career25Online = 29, // Added new mode
+    MyTeamCareer25 = 27,    // Added new mode
+    DriverCareer25 = 28,    // Added new mode
+    Career25Online = 29,    // Added new mode
     ChallengeCareer25 = 30, // Added new mode
-    StoryModeAPXGP = 75, // Added new mode
+    StoryModeAPXGP = 75,    // Added new mode
     Benchmark = 127,
 }

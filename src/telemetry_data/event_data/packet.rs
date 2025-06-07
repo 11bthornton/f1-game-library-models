@@ -42,38 +42,38 @@ macro_rules! deserialise_event_type {
     };
 }
 
-pub fn deserialise_event_packet_from_bytes(bytes: &[u8]) -> Result<PacketEventData, Box<dyn std::error::Error>> {
+pub fn deserialise_event_packet_from_bytes(
+    bytes: &[u8],
+) -> Result<PacketEventData, Box<dyn std::error::Error>> {
     let internal_representation: InternalPacketEventData =
         bincode::deserialize(bytes).map_err(|e| e.to_string())?;
 
-    Ok(
-        PacketEventData {
-            m_header: internal_representation.m_header,
-            event_string_code: internal_representation.event_string_code,
-            r#type: deserialise_event_type!(
-                internal_representation,
-                b"SSTA" => SessionStart(SessionStart),
-                b"SEND" => SessionEnd(SessionEnd),
-                b"FTLP" => FastestLap(FastestLap),
-                b"RTMT" => Retirement(Retirement),
-                b"DRSE" => DrsEnabled(DrsEnabled),
-                b"DRSD" => DrsDisabled(DrsDisabled),
-                b"TMPT" => TeamMateInPits(TeamMateInPits),
-                b"CHQF" => ChequeredFlag(ChequeredFlag),
-                b"RCWN" => RaceWinner(RaceWinner),
-                b"PENA" => Penalty(Penalty),
-                b"SPTP" => SpeedTrap(SpeedTrap),
-                b"STLG" => StartLights(StartLights),
-                b"LGOT" => LightsOut(LightsOut),
-                b"DTSV" => DriveThroughPenaltyServed(DriveThroughPenaltyServed),
-                b"SGSV" => StopGoPenaltyServed(StopGoPenaltyServed),
-                b"FLBK" => FlashBack(FlashBack),
-                b"BUTN" => Buttons(Buttons),
-                b"RDFL" => RedFlag(RedFlag),
-                b"OVTK" => Overtake(Overtake),
-                b"SCAR" => SafetyCar(SafetyCar),
-                b"COLL" => Collision(Collision)
-            )?,
-        }
-    )
+    Ok(PacketEventData {
+        m_header: internal_representation.m_header,
+        event_string_code: internal_representation.event_string_code,
+        r#type: deserialise_event_type!(
+            internal_representation,
+            b"SSTA" => SessionStart(SessionStart),
+            b"SEND" => SessionEnd(SessionEnd),
+            b"FTLP" => FastestLap(FastestLap),
+            b"RTMT" => Retirement(Retirement),
+            b"DRSE" => DrsEnabled(DrsEnabled),
+            b"DRSD" => DrsDisabled(DrsDisabled),
+            b"TMPT" => TeamMateInPits(TeamMateInPits),
+            b"CHQF" => ChequeredFlag(ChequeredFlag),
+            b"RCWN" => RaceWinner(RaceWinner),
+            b"PENA" => Penalty(Penalty),
+            b"SPTP" => SpeedTrap(SpeedTrap),
+            b"STLG" => StartLights(StartLights),
+            b"LGOT" => LightsOut(LightsOut),
+            b"DTSV" => DriveThroughPenaltyServed(DriveThroughPenaltyServed),
+            b"SGSV" => StopGoPenaltyServed(StopGoPenaltyServed),
+            b"FLBK" => FlashBack(FlashBack),
+            b"BUTN" => Buttons(Buttons),
+            b"RDFL" => RedFlag(RedFlag),
+            b"OVTK" => Overtake(Overtake),
+            b"SCAR" => SafetyCar(SafetyCar),
+            b"COLL" => Collision(Collision)
+        )?,
+    })
 }
