@@ -9,7 +9,7 @@
 //! This project defines the data types and various utility methods you might want or need.
 //!
 //! ## Example Usage
-//! ```rust
+//! ```no_run
 //! use f1_game_library_models_25::telemetry_data::F1Data;
 //!
 //! #[tokio::main]
@@ -31,7 +31,7 @@
 //!         
 //!         // Do cool stuff
 //!         match packet {
-//!             F1Data::CarTelemetryData(data) => println!("Telemetry: {:?}", data),
+//!             F1Data::TelemetryData(data) => println!("Telemetry: {:?}", data),
 //!             F1Data::LapData(data) => println!("Lap: {:?}", data),
 //!             _ => {}
 //!         }
