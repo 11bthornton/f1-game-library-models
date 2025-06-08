@@ -13,6 +13,7 @@ use super::{EngineWear, WingDamage};
 ///
 /// * `tyres` - Tyre wear and damage data
 /// * `brakes_damage` - Brake damage data
+/// * `blisters` - Tyre blisters data
 /// * `wing_damage` - Wing damage data
 /// * `floor_damage` - Floor damage percentage
 /// * `diffuser_damage` - Diffuser damage percentage
@@ -30,11 +31,13 @@ use super::{EngineWear, WingDamage};
 /// * `active_aero_damage` - Active aero damage percentage (F1 2025+)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 pub struct CarDamageData {
-    /// Tyre wear and damage data
+    /// Tyre wear data
     pub tyre_wear: WheelData<f32>,
+    /// Tyre damage data
     pub tyre_damage: WheelData<u8>,
     /// Brake damage data
     pub brakes_damage: WheelData<u8>,
+    /// Tyre blisters data
     pub blisters: WheelData<u8>,
     /// Wing damage data
     pub wing_damage: WingDamage,
@@ -58,5 +61,4 @@ pub struct CarDamageData {
     pub engine_blown: bool,
     /// Whether the engine has seized
     pub engine_seized: bool,
-    // pub another_field_that_should_not_work: [f32; 16]
 }

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::car_telemetry::CarTelemetryData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing telemetry data for all cars in the session.
 ///
@@ -20,7 +20,7 @@ pub struct PacketCarTelemetryData {
     /// Header information for the packet
     pub m_header: PacketHeader,
     /// Array of telemetry data for each car (exactly 22 cars)
-    pub telemetry_data: [CarTelemetryData; 22],
+    pub telemetry_data: [CarTelemetryData; MAX_CARS_IN_SESSION],
     /// Index of the MFD panel being displayed
     pub mfd_panel_index: u8,
     /// Index of the MFD panel for the secondary player

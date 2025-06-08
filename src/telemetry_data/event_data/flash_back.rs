@@ -1,3 +1,5 @@
+//! Defines the FlashBack event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Flashback event.

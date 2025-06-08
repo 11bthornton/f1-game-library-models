@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::CarDamageData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing damage data for all cars in the session.
 ///
@@ -16,5 +16,5 @@ pub struct PacketCarDamageData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Array of damage data for each car (up to 22 cars)
-    pub car_damage_data: [CarDamageData; 22],
+    pub car_damage_data: [CarDamageData; MAX_CARS_IN_SESSION],
 }

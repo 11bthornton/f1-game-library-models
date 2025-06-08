@@ -1,3 +1,5 @@
+//! Defines the types of penalties that can be issued during seeions
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Types of penalties that can be issued during a race.

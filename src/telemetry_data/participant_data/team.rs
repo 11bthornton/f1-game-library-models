@@ -1,3 +1,5 @@
+//! Defines the `Team` enum representing all possible teams in the game.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible teams in the game

@@ -1,3 +1,5 @@
+//! Defines the `DrsEnabled` telemetry data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// DRS enabled event.

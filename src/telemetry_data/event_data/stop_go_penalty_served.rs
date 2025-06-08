@@ -1,3 +1,5 @@
+//! Defines the `StopGoPenaltyServed` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Stop-go penalty served event.

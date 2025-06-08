@@ -27,7 +27,7 @@ use crate::telemetry_data::WheelData;
 /// * `surface_types` - Driving surface type for each wheel [RL, RR, FL, FR]
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
 pub struct CarTelemetryData {
-    /// Speed of the car in km/h
+    /// Speed of the car, in chosen units (e.g., km/h)
     pub speed: u16,
     /// Throttle application (0.0 to 1.0)
     pub throttle: f32,

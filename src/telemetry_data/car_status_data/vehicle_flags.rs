@@ -16,6 +16,6 @@ pub enum VehicleFiaFlags {
     Blue = 2,
     /// Yellow flag (danger on track)
     Yellow = 3,
-
+    /// Red flag (session stopped)
     Red = 4,
 }

@@ -1,3 +1,5 @@
+//! Session end event data.
+
 use serde::{Deserialize, Serialize};
 
 /// Session end event.

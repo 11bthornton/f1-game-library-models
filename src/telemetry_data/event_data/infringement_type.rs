@@ -1,3 +1,5 @@
+//! Defines the types of rule infringements that can occur during sessions.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Types of rule infringements that can occur during a race.
@@ -153,7 +155,7 @@ pub enum InfringementType {
     GearboxChange = 48,
 
     /// Penalty for making changes under parc fermé conditions
-    ParcFerméEdit = 49,
+    ParcFermeEdit = 49,
 
     /// Grid penalty applied in a league race
     LeaguePenalty = 50,
@@ -237,7 +239,7 @@ impl InfringementType {
             InfringementType::UnservedDriveThrough => "Unserved Drive Through Penalty",
             InfringementType::EngineChange => "Engine Component Change",
             InfringementType::GearboxChange => "Gearbox Change",
-            InfringementType::ParcFerméEdit => "Parc Fermé Change",
+            InfringementType::ParcFermeEdit => "Parc Fermé Change",
             InfringementType::LeaguePenalty => "League Grid Penalty",
             InfringementType::RetryPenalty => "Retry Penalty",
             InfringementType::IllegalTime => "Illegal Time Gain",

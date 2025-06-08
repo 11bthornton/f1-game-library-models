@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::lap_data::LapData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing lap data for all cars in the session.
 ///
@@ -18,7 +18,7 @@ pub struct PacketLapData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Array of lap data for each car (up to 22 cars)
-    pub lap_data: [LapData; 22],
+    pub lap_data: [LapData; MAX_CARS_IN_SESSION],
 
     /// Index of personal best car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]

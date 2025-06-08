@@ -17,13 +17,13 @@ pub struct EngineWear {
     /// MGU-H wear percentage
     pub mguh: u8,
     /// Energy Store wear percentage
-    pub es: u8,
+    pub energy_store: u8,
     /// Control Electronics wear percentage
-    pub ce: u8,
+    pub control_electronics: u8,
     /// Internal Combustion Engine wear percentage
-    pub ice: u8,
+    pub internal_combustion_engine: u8,
     /// MGU-K wear percentage
     pub mguk: u8,
     /// Turbocharger wear percentage
-    pub tc: u8,
+    pub turbocharger: u8,
 }

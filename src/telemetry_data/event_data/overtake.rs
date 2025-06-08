@@ -1,3 +1,5 @@
+//! Defines the `Overtake` struct, which contains information about an overtake event.
+
 use serde::{Deserialize, Serialize};
 
 /// Information about an overtake event.

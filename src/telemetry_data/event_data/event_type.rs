@@ -1,3 +1,5 @@
+//! Defines the types of events that can occur during in-game sessions.
+
 use serde::{Deserialize, Serialize};
 
 use super::{safety_car::SafetyCar, *};
@@ -65,8 +67,10 @@ pub enum EventType {
     /// Red flag event
     RedFlag(RedFlag),
 
+    /// Collision event
     Collision(Collision),
 
+    /// Safety car event
     SafetyCar(SafetyCar),
 
     /// No event (default)

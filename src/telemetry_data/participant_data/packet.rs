@@ -1,7 +1,9 @@
+//! Defines the PacketParticipantData structure for telemetry data.
+
 use serde::{Deserialize, Serialize};
 
 use super::participant_data::ParticipantData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 #[derive(Deserialize, Debug, Serialize, Copy, Clone, PartialEq)]
 pub struct PacketParticipantData {
@@ -12,5 +14,5 @@ pub struct PacketParticipantData {
     pub num_active_cars: u8,
 
     /// Array of participant data for all cars
-    pub participants: [ParticipantData; 22],
+    pub participants: [ParticipantData; MAX_CARS_IN_SESSION],
 }

@@ -1,3 +1,5 @@
+//! Defines the `StartLights` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Start lights event.

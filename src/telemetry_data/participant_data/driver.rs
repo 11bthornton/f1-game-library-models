@@ -1,3 +1,5 @@
+//! Defines the `Driver` enum representing all possible drivers in the game.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible drivers in the game

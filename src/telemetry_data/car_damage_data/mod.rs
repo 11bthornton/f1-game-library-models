@@ -1,7 +1,7 @@
-/// Car damage data components for F1 games.
-///
-/// This module contains structures for representing damage information components
-/// for cars in F1 games.
+//! Car damage data components for F1 games.
+//!
+//! This module contains structures for representing damage information components
+//! for cars in F1 games.
 mod car_data;
 mod engine_wear;
 mod packet;

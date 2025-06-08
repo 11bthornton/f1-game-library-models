@@ -1,4 +1,4 @@
-use std::str;
+//! Defines the extended motion data packet structure for the player's car in F1 telemetry.
 
 use serde::{Deserialize, Serialize};
 
@@ -80,20 +80,20 @@ pub struct PacketMotionExData {
     pub front_wheels_angle: f32,
     /// Vertical forces for each wheel [RL, RR, FL, FR]
     pub wheel_vert_force: WheelData<f32>,
-
+    /// Front aero height
     pub front_aero_height: f32,
-
+    /// Rear aero height
     pub rear_aero_height: f32,
-
+    /// Front roll angle in radians
     pub front_roll_angle: f32,
-
+    /// Rear roll angle in radians
     pub rear_roll_angle: f32,
-
+    /// Chassis yaw in radians
     pub chassis_yaw: f32,
-
+    /// Chassis roll in radians
     pub chassis_pitch: f32,
-
+    /// Chassis pitch in radians
     pub wheel_camber: WheelData<f32>,
-
+    /// Wheel camber gain for each wheel [RL, RR, FL, FR]
     pub wheel_camber_gain: WheelData<f32>,
 }

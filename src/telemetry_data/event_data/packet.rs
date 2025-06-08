@@ -1,3 +1,5 @@
+//! Defines the structure for the event data packet and its deserialization.
+
 use serde::Serialize;
 
 use super::event_type::EventType;
@@ -24,6 +26,8 @@ pub struct PacketEventData {
     pub r#type: EventType,
 }
 
+// Helper macro,
+// TODO: More descriptive error?
 macro_rules! deserialise_event_type {
     ($internal_repr:expr, $($event_code:pat => $variant:ident($ty:ty)),* $(,)?) => {
         match &($internal_repr.event_string_code) {
@@ -42,12 +46,17 @@ macro_rules! deserialise_event_type {
     };
 }
 
+/// Use this function to deserialize a byte slice into a `PacketEventData` structure.
 pub fn deserialise_event_packet_from_bytes(
     bytes: &[u8],
 ) -> Result<PacketEventData, Box<dyn std::error::Error>> {
+    // Deserialise to an intermediate representation
+    // to figure out which event type it is.
     let internal_representation: InternalPacketEventData =
         bincode::deserialize(bytes).map_err(|e| e.to_string())?;
 
+    // Then match against the event string code
+    // to determine the specific event type and produce the final structure.
     Ok(PacketEventData {
         m_header: internal_representation.m_header,
         event_string_code: internal_representation.event_string_code,

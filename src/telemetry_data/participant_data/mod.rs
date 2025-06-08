@@ -1,10 +1,11 @@
+//! Participant data from F1 games.
+//!
+//! This module contains structures for representing participant information in F1 games,
+//! including driver details, team affiliations, and nationality data.
+
 mod driver;
 mod nationality;
 mod packet;
-/// Participant data from F1 games.
-///
-/// This module contains structures for representing participant information in F1 games,
-/// including driver details, team affiliations, and nationality data.
 mod participant_data;
 mod team;
 

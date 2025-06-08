@@ -1,3 +1,5 @@
+//! Defines the `Penalty` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 use super::{infringement_type::InfringementType, penalty_type::PenaltyType};
@@ -21,7 +23,7 @@ pub struct Penalty {
     pub other_vehicle_index: usize,
 
     /// Time or other numeric value associated with the penalty
-    pub time: u8,
+    pub time: u8, // TODO: u8 as usize deserialisation?
 
     /// Lap number when the infringement occurred
     pub lap_number: u8,

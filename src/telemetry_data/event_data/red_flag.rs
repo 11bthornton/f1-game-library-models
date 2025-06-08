@@ -1,3 +1,5 @@
+//! Defines the `RedFlag` event data type.
+
 use serde::{Deserialize, Serialize};
 
 /// Indicates that a red flag has been shown.
