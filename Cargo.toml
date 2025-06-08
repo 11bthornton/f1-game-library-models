@@ -1,6 +1,6 @@
 [package]
 name         = "f1-game-library-models-25"
-version      = "0.2.1"
+version      = "0.2.2"
 edition      = "2024"
 authors      = ["Ben Thornton <11bthornton@gmail.com>"]
 description  = "Models associated with the F1 Video Game series for UDP Telemetry"
