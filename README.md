@@ -31,14 +31,13 @@ async fn main() {
         
         // Do cool stuff
         match packet {
-            F1Data::CarTelemetryData(data) => println!("Telemetry: {:?}", data),
+            F1Data::TelemetryData(data) => println!("Telemetry: {:?}", data),
             F1Data::LapData(data) => println!("Lap: {:?}", data),
             _ => {}
         }
     }
 }
 ```
-
 
 ## Contributing
 
