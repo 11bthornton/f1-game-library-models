@@ -39,7 +39,6 @@ async fn main() {
 }
 ```
 
-
 ## Contributing
 
 Feel free to submit a PR if something is wrong or you'd like to offer enhancements! See `CONTRIBUTING.md` for details.
