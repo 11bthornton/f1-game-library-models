@@ -11,8 +11,7 @@ pub struct Buttons {
     pub button_status: u32,
 }
 
-impl Buttons
-{
+impl Buttons {
     pub fn to_buttons(&self) -> Vec<Button> {
         unimplemented!()
     }

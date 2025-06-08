@@ -1,5 +1,5 @@
 //! Defines engine component wear data.
-//! 
+//!
 use serde::{Deserialize, Serialize};
 
 /// Engine component wear data.

@@ -1,5 +1,5 @@
 //! # Event Data Module
-//! 
+//!
 //! This module provides structures and functions for handling event data in F1 games.
 
 /// Event data from F1 games.
