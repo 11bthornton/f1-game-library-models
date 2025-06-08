@@ -1,3 +1,8 @@
+//! Defines historical data for a single tyre stint.
+//!
+//! Contains information about a tyre stint, including when it ended
+//! and which compounds were used
+
 use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::car_status_data;

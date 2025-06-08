@@ -1,3 +1,5 @@
+//! Defines the wheel data structure for telemetry.
+
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Default, Deserialize, Clone, Copy, Serialize)]

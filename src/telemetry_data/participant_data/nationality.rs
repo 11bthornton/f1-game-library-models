@@ -1,3 +1,5 @@
+//! Defines the `Nationality` enum representing all possible nationalities in the game.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible nationalities in the game

@@ -1,3 +1,5 @@
+//! Defines the `DriveThroughPenaltyServed` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Drive-through penalty served event.

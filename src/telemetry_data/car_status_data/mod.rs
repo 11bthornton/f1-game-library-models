@@ -1,7 +1,8 @@
-/// Car status data components for F1 games.
-///
-/// This module contains structures for representing status information components
-/// for cars in F1 games.
+//! Car status data from F1 games.
+//!
+//! This module contains structures for representing car status information in F1 games,
+//! including driver aids, tyre compounds, and vehicle flags.
+
 mod car_status_data;
 mod driver_aids;
 mod ers;

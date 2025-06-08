@@ -1,3 +1,5 @@
+//! Defines the Retirement event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Retirement event.

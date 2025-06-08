@@ -1,3 +1,9 @@
+//! Defines data for a single tyre set.
+//!
+//! This module contains the definition of the `TyreSetData` structure,
+//! which holds detailed information about a single tyre set,
+//! including compound type, wear, and availability.
+
 use serde::{Deserialize, Serialize};
 
 /// Data for a single tyre set.

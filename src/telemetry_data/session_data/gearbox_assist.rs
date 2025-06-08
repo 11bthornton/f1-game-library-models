@@ -1,3 +1,5 @@
+//! Defines the gearbox assist settings
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Gearbox assist settings

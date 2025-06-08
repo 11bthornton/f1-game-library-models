@@ -1,3 +1,10 @@
+//! Tyre compounds used in the game.
+//!
+//! There is a distinction between the visual tyre compounds
+//! (how they appear in the game) and the actual tyre compounds.
+//! Both types are represented here, allowing for accurate telemetry data
+//! and analysis of tyre performance.
+
 use serde::Serialize;
 use serde_repr::{Deserialize_repr, Serialize_repr};
 

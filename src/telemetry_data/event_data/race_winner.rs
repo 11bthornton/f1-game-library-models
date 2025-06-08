@@ -1,3 +1,5 @@
+//! Defines the `RaceWinner` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Race winner event.

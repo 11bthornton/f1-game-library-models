@@ -1,10 +1,11 @@
-use serde::Serialize;
-use serde_repr::Deserialize_repr;
+//! Defines the `ResultStatus` enum which represents the various result states possible for a car.
+
+use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Result status.
 ///
 /// These represent the various race result states a car can have.
-#[derive(Deserialize_repr, Debug, Default, Serialize, Clone, Copy, PartialEq)]
+#[derive(Deserialize_repr, Debug, Default, Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
 pub enum ResultStatus {
     /// Invalid result

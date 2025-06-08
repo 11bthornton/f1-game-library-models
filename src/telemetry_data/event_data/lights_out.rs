@@ -1,3 +1,5 @@
+//! Lights out event data for telemetry in racing games
+
 use serde::{Deserialize, Serialize};
 
 /// Lights out event.

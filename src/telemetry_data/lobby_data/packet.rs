@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::lobby_info_data::LobbyInfoData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing lobby information for all players.
 ///
@@ -19,5 +19,5 @@ pub struct PacketLobbyInfoData {
     /// Number of players in the lobby
     pub num_players: u8,
     /// Array of lobby information for each player (up to 22 players)
-    pub lobby_players: [LobbyInfoData; 22],
+    pub lobby_players: [LobbyInfoData; MAX_CARS_IN_SESSION],
 }

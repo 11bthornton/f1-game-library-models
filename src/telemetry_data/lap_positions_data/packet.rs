@@ -1,7 +1,9 @@
+//! Defines the structure for the Lap Positions Data packet in the telemetry data.
+
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
-use crate::telemetry_data::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::PacketHeader};
 
 pub const MAX_NUM_LAPS_IN_LAP_POSITIONS_HISTORY_PACKET: usize = 50;
 
@@ -17,7 +19,7 @@ pub struct PacketLapPositionsData {
 
     /// Array of lap positions for each car (up to 22 cars)
     #[serde(with = "BigArray")]
-    pub lap_positions: [CarLapHistory; 22],
+    pub lap_positions: [CarLapHistory; MAX_CARS_IN_SESSION],
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]

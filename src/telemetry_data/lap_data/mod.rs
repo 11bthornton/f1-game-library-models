@@ -1,8 +1,9 @@
+//! Lap data components for F1 games.
+//!
+//! This module contains structures for representing lap timing and position
+//! information components for cars in F1 games.
+//!
 mod driver_status;
-/// Lap data components for F1 games.
-///
-/// This module contains structures for representing lap timing and position
-/// information components for cars in F1 games.
 mod lap_data;
 mod packet;
 mod pit_status;

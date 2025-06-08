@@ -1,3 +1,10 @@
+//! Defines all possible game modes in the game.
+//!
+//! This module contains an enumeration `GameMode` which represents all the game modes
+//! available in the game. Each variant of the enum corresponds to a different game mode,
+//! with an associated numeric value. The enum derives serialization and deserialization
+//! traits to facilitate easy conversion to and from various data formats.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible game modes in the game

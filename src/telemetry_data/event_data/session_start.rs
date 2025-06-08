@@ -1,3 +1,5 @@
+//! Defines the `SessionStart` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Session start event.

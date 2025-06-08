@@ -1,3 +1,5 @@
+//! Defines the time trial data packet structure.
+
 use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::{

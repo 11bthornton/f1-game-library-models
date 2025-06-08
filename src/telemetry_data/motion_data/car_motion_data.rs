@@ -1,3 +1,5 @@
+//! Defines the `CarMotionData` struct which contains motion data for a single vehicle.
+
 use serde::{Deserialize, Serialize};
 
 /// Car motion data for a single vehicle.

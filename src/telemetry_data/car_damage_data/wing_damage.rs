@@ -1,3 +1,5 @@
+//! Defines wing damage data.
+
 use serde::{Deserialize, Serialize};
 
 /// Wing damage data.

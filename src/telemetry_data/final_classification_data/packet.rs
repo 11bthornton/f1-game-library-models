@@ -1,7 +1,9 @@
+//! Defines the structure for the final classification data packet in telemetry data.
+
 use serde::{Deserialize, Serialize};
 
 use super::final_classification_data::FinalClassificationData;
-use crate::telemetry_data::packet_header::PacketHeader;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing final classification data for all cars in the session.
 ///
@@ -20,5 +22,5 @@ pub struct PacketClassificationData {
     /// Number of cars in the final classification
     pub num_cars: u8,
     /// Array of classification data for each car (up to 22 cars)
-    pub classification_data: [FinalClassificationData; 22],
+    pub classification_data: [FinalClassificationData; MAX_CARS_IN_SESSION],
 }

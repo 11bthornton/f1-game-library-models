@@ -1,3 +1,5 @@
+//! Defines the `LapData` structure which contains detailed lap timing and position information
+
 use serde::{Deserialize, Serialize};
 
 use super::{
@@ -56,14 +58,12 @@ pub struct LapData {
     pub sector2_time_minutes: u8,
     /// Time delta to car in front in milliseconds
     pub delta_to_car_in_front_in_ms: u16,
-
+    /// Time delta to car in front in minutes part
     pub delta_to_car_in_front_minutes_part: u8,
-
     /// Time delta to race leader in milliseconds
     pub delta_to_race_leader_in_ms: u16,
-
+    /// Time to race leader in minutes part
     pub delta_to_race_leader_in_front_minutes_part: u8,
-
     /// Distance around current lap in meters (can be negative if line hasn't been crossed yet)
     pub lap_distance: f32,
     /// Total distance traveled in session in meters (can be negative if line hasn't been crossed
@@ -107,8 +107,8 @@ pub struct LapData {
     pub pit_stop_timer_in_ms: u16,
     /// Whether the car should serve a penalty at this stop (0 = no, 1 = yes)
     pub pit_stop_should_serve_pen: bool,
-
+    /// Fastest speed achieved in the speed trap
     pub speed_trap_fastest_speed: f32,
-
+    /// Lap number of the fastest speed trap
     pub speed_trap_fastest_lap: u8,
 }

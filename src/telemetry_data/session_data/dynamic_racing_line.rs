@@ -1,3 +1,5 @@
+//! Defines the dynamic racing line assist setting.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Dynamic racing line assist setting

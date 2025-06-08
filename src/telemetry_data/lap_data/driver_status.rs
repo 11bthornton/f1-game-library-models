@@ -1,3 +1,5 @@
+//! Defines the `DriverStatus` enum which represents the status of a driver during a session.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Driver status.

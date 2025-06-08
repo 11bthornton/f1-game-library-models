@@ -1,3 +1,5 @@
+//! Defines the `FinalClassificationData` structure for telemetry data.
+
 use serde::{Deserialize, Serialize};
 
 /// Final classification data for a single car.
@@ -32,7 +34,6 @@ pub struct FinalClassificationData {
     pub points: u8,
     /// Number of pit stops made during the race
     pub num_pitstops: u8,
-
     /// Best lap time in milliseconds
     pub best_lap_time_in_ms: u32,
     /// Total race time in milliseconds

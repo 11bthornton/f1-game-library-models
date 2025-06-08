@@ -1,3 +1,5 @@
+//! Defines the `TeamMateInPits` telemetry event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Teammate in pits event.

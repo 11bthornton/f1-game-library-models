@@ -1,3 +1,5 @@
+//! Defines the `ChequeredFlag` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Chequered flag event.

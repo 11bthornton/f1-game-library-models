@@ -8,7 +8,8 @@ pub(crate) use utils::u8_as_usize;
 
 pub use telemetry_data::deserialise_udp_packet_from_bytes;
 
-pub mod packet_sizes {
+pub mod constants {
+    pub const MAX_CARS_IN_SESSION: usize = 22;
     pub const PARTICIPANT_PACKET_SIZE: usize = 1284;
     pub const CAR_SETUP_PACKET_SIZE: usize = 1133;
     pub const CAR_STATUS_PACKET_SIZE: usize = 1239;

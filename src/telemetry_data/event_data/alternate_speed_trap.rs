@@ -1,3 +1,5 @@
+//! Defines the `AlternateSpeedTrap` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// Alternative speed trap event.

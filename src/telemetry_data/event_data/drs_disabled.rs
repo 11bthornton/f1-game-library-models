@@ -1,3 +1,5 @@
+//! Defines the `DrsDisabled` event data structure.
+
 use serde::{Deserialize, Serialize};
 
 /// DRS disabled event.

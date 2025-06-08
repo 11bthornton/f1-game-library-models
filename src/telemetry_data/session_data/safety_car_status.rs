@@ -1,3 +1,5 @@
+//! Defines the safety car status in the session.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Safety car status in the current session

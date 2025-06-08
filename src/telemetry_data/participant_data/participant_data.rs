@@ -1,4 +1,4 @@
-use std::str;
+//! Defines the ParticipantData struct and related functionality.
 
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
@@ -75,30 +75,4 @@ impl ParticipantData {
 
         res.to_string()
     }
-
-    // pub fn team_colour(&self) -> (u8, u8, u8)
-    // {
-    //     match &self.team_id {
-    //         Team::Mercedes => (108, 211, 191),
-    //         Team::Ferrari => (249, 21, 54),
-    //         Team::McLaren => (245, 128, 32),
-    //         Team::RedBullRacing => (54, 113, 198),
-    //         Team::Alpine => (34, 147, 209),
-    //         Team::AlphaTauri => (94, 143, 170),
-    //         Team::AstonMartin => (53, 140, 117),
-    //         Team::Williams => (55, 190, 221),
-    //         Team::AlfaRomeo => (201, 45, 75),
-    //         Team::Haas => (182, 186, 189),
-    //         // 1 => (220, 0, 0),
-    //         // 2 => (6, 0, 239),
-    //         // 3 => (0, 90, 255),
-    //         // 4 => (0, 111, 98),
-    //         // 5 => (0, 144, 255),
-    //         // 6 => (43, 69, 98),
-    //         // 7 => (255, 255, 255),
-    //         // 8 => (255, 235, 0),
-    //         // 9 => (144, 0, 0),
-    //         _ => (0, 0, 0),
-    //     }
-    // }
 }

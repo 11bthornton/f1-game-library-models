@@ -1,3 +1,5 @@
+//! Defines the FIA flag types shown to the driver.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// FIA flag types shown to the driver.
@@ -16,6 +18,6 @@ pub enum VehicleFiaFlags {
     Blue = 2,
     /// Yellow flag (danger on track)
     Yellow = 3,
-
+    /// Red flag (session stopped)
     Red = 4,
 }

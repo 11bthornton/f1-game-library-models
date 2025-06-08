@@ -1,8 +1,10 @@
+//! Defines the `Collision` event data structure.
+
 use serde::{Deserialize, Serialize};
 
-/// DRS disabled event.
+/// Collision event.
 ///
-/// This event occurs when DRS (Drag Reduction System) is disabled for the session.
+/// Occurs when two cars collide during a session.
 #[derive(Deserialize, Debug, Serialize, Default, Clone, Copy)]
 pub struct Collision {
     #[serde(with = "crate::utils::u8_as_usize")]
