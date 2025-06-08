@@ -1,3 +1,5 @@
+//! Defines the AssistToggle enum for toggling driving assists
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Toggle state for various driving assists

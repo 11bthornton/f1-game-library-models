@@ -1,3 +1,9 @@
+//! Defines status data for a single car.
+//!
+//! This module contains the `CarStatusData` structure, which holds detailed status
+//! information for a single car in the simulation. This includes data on driver aids,
+//! fuel status, ERS deployment, and tyre information.
+
 use serde::{Deserialize, Serialize};
 
 use super::{

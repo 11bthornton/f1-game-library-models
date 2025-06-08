@@ -1,3 +1,5 @@
+//! Defines the FIA flag types shown to the driver.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// FIA flag types shown to the driver.

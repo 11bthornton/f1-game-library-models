@@ -1,3 +1,5 @@
+//! Defines ERS settings and deployment data.
+
 use serde::{Deserialize, Serialize};
 
 /// ERS deployment modes.

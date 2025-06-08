@@ -1,3 +1,5 @@
+//! Defines track identifiers for circuits in F1 games.
+
 use std::fmt;
 
 use serde_repr::{Deserialize_repr, Serialize_repr};

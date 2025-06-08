@@ -1,3 +1,7 @@
+//! Defines a marshal zone on the track
+//!
+//! Marshal zones are sections of the track that can have different flag states
+
 use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::car_status_data::VehicleFiaFlags;

@@ -1,3 +1,5 @@
+//! Defines driver aids settings for cars.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Anti-lock brakes settings.

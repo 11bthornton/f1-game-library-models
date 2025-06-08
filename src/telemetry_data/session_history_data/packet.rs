@@ -1,3 +1,5 @@
+//! Defines the session history data packet structure.
+
 use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 

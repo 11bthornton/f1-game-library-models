@@ -1,3 +1,5 @@
+//! Defines the network game status.
+//! 
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Network game status

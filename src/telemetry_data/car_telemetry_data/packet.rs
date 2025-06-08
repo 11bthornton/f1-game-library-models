@@ -1,3 +1,5 @@
+//! Defines the `PacketCarTelemetryData` structure, which contains telemetry data for all cars in the session.
+
 use serde::{Deserialize, Serialize};
 
 use super::car_telemetry::CarTelemetryData;

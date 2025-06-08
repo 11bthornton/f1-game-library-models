@@ -1,3 +1,10 @@
+//! Defines the tyre set data packet structure.
+//!
+//! This module contains the definition of the `PacketTyreSetsData` structure, which
+//! represents a packet of tyre set data for a car in the telemetry system. The packet
+//! includes information about all tyre sets available to a car, such as the tyre set
+//! data, the index of the car, and the index of the currently fitted tyre set.
+
 use serde::{Deserialize, Serialize};
 
 use super::tyre_set::TyreSetData;

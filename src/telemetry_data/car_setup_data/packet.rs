@@ -1,3 +1,5 @@
+//! Defines the car setup data packet structure.
+
 use serde::{Deserialize, Serialize};
 
 use super::car_setup_data::CarSetupData;

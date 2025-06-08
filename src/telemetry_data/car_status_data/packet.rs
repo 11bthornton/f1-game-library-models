@@ -1,3 +1,5 @@
+//! Defines the `PacketCarStatusData` structure, which contains status data for all cars in the session.
+
 use serde::{Deserialize, Serialize};
 
 use super::car_status_data::CarStatusData;

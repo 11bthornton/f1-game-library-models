@@ -1,7 +1,8 @@
-/// Session data from F1 games.
-///
-/// This module contains structures for representing session information in F1 games,
-/// including weather conditions, track details, and game settings.
+//! Session data from F1 games.
+//!
+//! This module contains structures for representing session information in F1 games,
+//! including weather conditions, track details, and game settings.
+
 mod assist_toggle;
 mod dynamic_racing_line;
 mod dynamic_racing_line_type;

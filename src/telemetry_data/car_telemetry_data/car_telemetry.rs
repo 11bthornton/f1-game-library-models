@@ -1,3 +1,5 @@
+//! Defines the telemetry data structure for a single car in a racing simulation.
+
 use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;

@@ -1,3 +1,36 @@
+//! Defines setup data for a single car.
+//!
+//! This module contains the definition of the `CarSetupData` structure,
+//! which holds detailed setup information for a single car,
+//! including aerodynamic, suspension, brake, and tyre settings.
+//!
+//! # Structure: [`CarSetupData`](CarSetupData)
+//!
+//! This structure contains the following fields:
+//!
+//! * `front_wing` - Front wing aero setting
+//! * `rear_wing` - Rear wing aero setting
+//! * `on_throttle` - Differential adjustment on throttle (percentage)
+//! * `off_throttle` - Differential adjustment off throttle (percentage)
+//! * `front_camber` - Front camber angle (suspension geometry)
+//! * `rear_camber` - Rear camber angle (suspension geometry)
+//! * `front_toe` - Front toe angle (suspension geometry)
+//! * `rear_toe` - Rear toe angle (suspension geometry)
+//! * `front_suspension` - Front suspension stiffness
+//! * `rear_suspension` - Rear suspension stiffness
+//! * `front_anti_roll_bar` - Front anti-roll bar stiffness
+//! * `rear_anti_roll_bar` - Rear anti-roll bar stiffness
+//! * `front_suspension_height` - Front ride height
+//! * `rear_suspension_height` - Rear ride height
+//! * `brake_pressure` - Brake pressure (percentage)
+//! * `brake_bias` - Brake bias (percentage)
+//! * `rear_left_tyre_pressure` - Rear left tyre pressure (PSI)
+//! * `rear_right_tyre_pressure` - Rear right tyre pressure (PSI)
+//! * `front_left_tyre_pressure` - Front left tyre pressure (PSI)
+//! * `front_right_tyre_pressure` - Front right tyre pressure (PSI)
+//! * `ballast` - Ballast weight
+//! * `fuel_load` - Fuel load weight
+
 use serde::{Deserialize, Serialize};
 
 /// Setup data for a single car.

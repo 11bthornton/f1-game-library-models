@@ -1,3 +1,5 @@
+//! Defines the type of dynamic racing line display in the telemetry data.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Type of dynamic racing line display

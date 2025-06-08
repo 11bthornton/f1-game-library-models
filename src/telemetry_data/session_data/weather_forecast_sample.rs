@@ -1,3 +1,5 @@
+//! Defines weather forecast data for specific time points.
+
 use serde::{Deserialize, Serialize};
 
 use super::{session_type::SessionType, weather::Weather};

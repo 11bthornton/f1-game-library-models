@@ -1,3 +1,5 @@
+//! Defines the weather forecast accuracy level.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Weather forecast accuracy level

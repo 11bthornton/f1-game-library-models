@@ -1,3 +1,5 @@
+//! Defines the formula category for the current session.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Formula category for the current session

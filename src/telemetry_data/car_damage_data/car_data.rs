@@ -1,3 +1,5 @@
+//! Defines the `CarDamageData` structure, which contains detailed damage information for a single car in the telemetry data.
+
 use serde::{Deserialize, Serialize};
 
 use crate::telemetry_data::WheelData;

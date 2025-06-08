@@ -1,3 +1,10 @@
+//! Defines the car damage data packet structure.
+//!
+//! This module contains the definition of the `PacketCarDamageData` structure,
+//! which represents the damage data for all cars in a racing session. The packet
+//! includes a header and an array of damage data for each car, up to a maximum
+//! number of cars defined by `MAX_CARS_IN_SESSION`.
+
 use serde::{Deserialize, Serialize};
 
 use super::CarDamageData;

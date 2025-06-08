@@ -1,3 +1,9 @@
+//! Defines the rule sets available in the game.
+//!
+//! This module contains the `RuleSet` enum, which represents all possible rule sets
+//! in the game. Each variant of the enum corresponds to a different rule set that
+//! can be used in various game modes.
+
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible rule sets in the game

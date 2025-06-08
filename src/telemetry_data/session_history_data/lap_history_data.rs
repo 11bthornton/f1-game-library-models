@@ -1,3 +1,8 @@
+//! Defines historical data for a single lap.
+//!
+//! Contains timing information for a lap, including overall lap time
+//! and individual sector times
+
 use serde::{Deserialize, Serialize};
 
 /// Historical data for a single lap
