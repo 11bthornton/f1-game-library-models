@@ -4,7 +4,10 @@ use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
 use super::{
-    GameMode, RuleSet, assist_toggle::AssistToggle, dynamic_racing_line::DynamicRacingLine,
+    CarDamage, CarDamageRate, Collisions, CornerCuttingStringency, ExperienceMode,
+    FlashbackLimit, GameMode, LowFuelMode, PitStopExperience, RaceStarts, RecoveryMode,
+    RedFlagsSetting, RuleSet, SafetyCarSetting, SpeedUnits, SurfaceType, TempUnits,
+    TyreTemperatureMode, assist_toggle::AssistToggle, dynamic_racing_line::DynamicRacingLine,
     dynamic_racing_line_type::DynamicRacingLineType, forecast_accuracy::ForecastAccuracy,
     formula::Formula, gearbox_assist::GearboxAssist, marshal_zone::MarshalZone,
     network_game::NetworkGame, safety_car_status::SafetyCarStatus, session_type::SessionType,
@@ -147,17 +150,17 @@ pub struct PacketSessionData {
 
     pub session_length: u8,
 
-    /// Speed units for lead player (0=MPH, 1=KPH)
-    pub speed_units_lead_player: u8,
+    /// Speed units preference for lead player
+    pub speed_units_lead_player: SpeedUnits,
 
-    /// Temperature units for lead player (0=Celsius, 1=Fahrenheit)
-    pub temp_units_lead_player: u8,
+    /// Temperature units preference for lead player
+    pub temp_units_lead_player: TempUnits,
 
-    /// Speed units for secondary player
-    pub speed_units_secondary_player: u8,
+    /// Speed units preference for secondary player
+    pub speed_units_secondary_player: SpeedUnits,
 
-    /// Temperature units for secondary player
-    pub temp_units_secondary_player: u8,
+    /// Temperature units preference for secondary player
+    pub temp_units_secondary_player: TempUnits,
 
     /// Number of safety car periods in this session
     pub num_safety_car_periods: u8,
@@ -168,53 +171,77 @@ pub struct PacketSessionData {
     /// Number of red flag periods in this session
     pub num_red_flag_periods: u8,
 
-    pub equal_car_performance: u8, // 0 = Off, 1 = On
+    /// Whether equal car performance is enabled
+    pub equal_car_performance: bool,
 
-    pub recovery_mode: u8, // 0 = None, 1 = Flashbacks, 2 = Auto-recovery
+    /// Recovery mode setting for handling player mistakes
+    pub recovery_mode: RecoveryMode,
 
-    pub flashback_limit: u8, // 0 = Low, 1 = Medium, 2 = High, 3 = Unlimited
+    /// Flashback limit setting
+    pub flashback_limit: FlashbackLimit,
 
-    pub surface_type: u8, // 0 = Simplified, 1 = Realistic
+    /// Surface type simulation setting
+    pub surface_type: SurfaceType,
 
-    pub low_fuel_mode: u8, // 0 = Easy, 1 = Hard
+    /// Low fuel mode difficulty setting
+    pub low_fuel_mode: LowFuelMode,
 
-    pub race_starts: u8, // 0 = Manual, 1 = Assisted
+    /// Race starts assist setting
+    pub race_starts: RaceStarts,
 
-    pub tyre_temperature: u8, // 0 = Surface only, 1 = Surface & Carcass
+    /// Tyre temperature simulation mode
+    pub tyre_temperature: TyreTemperatureMode,
 
-    pub pit_lane_tyre_sim: u8, // 0 = On, 1 = Off
+    /// Whether pit lane tyre simulation is disabled (false = enabled, true = disabled)
+    pub pit_lane_tyre_sim_disabled: bool,
 
-    pub car_damage: u8, // 0 = Off, 1 = Reduced, 2 = Standard, 3 = Simulation
+    /// Car damage simulation level
+    pub car_damage: CarDamage,
 
-    pub car_damage_rate: u8, // 0 = Reduced, 1 = Standard, 2 = Simulation
+    /// Car damage accumulation rate
+    pub car_damage_rate: CarDamageRate,
 
-    pub collisions: u8, // 0 = Off, 1 = Player-to-Player Off, 2 = On
+    /// Collisions setting
+    pub collisions: Collisions,
 
-    pub collisions_off_for_first_lap_only: u8, // 0 = Disabled, 1 = Enabled
+    /// Whether collisions are only disabled for the first lap
+    pub collisions_off_for_first_lap_only: bool,
 
-    pub mp_unsafe_pit_release: u8, // 0 = On, 1 = Off (Multiplayer)
+    /// Whether multiplayer unsafe pit release is disabled (false = enabled, true = disabled)
+    pub mp_unsafe_pit_release_disabled: bool,
 
-    pub mp_off_for_griefing: u8, // 0 = Disabled, 1 = Enabled (Multiplayer)
+    /// Whether multiplayer off for griefing is enabled
+    pub mp_off_for_griefing: bool,
 
-    pub corner_cutting_stringency: u8, // 0 = Regular, 1 = Strict
+    /// Corner cutting stringency level
+    pub corner_cutting_stringency: CornerCuttingStringency,
 
-    pub parc_ferme_rules: u8, // 0 = Off, 1 = On
+    /// Whether parc fermé rules are enabled
+    pub parc_ferme_rules: bool,
 
-    pub pit_stop_experience: u8, // 0 = Automatic, 1 = Broadcast, 2 = Immersive
+    /// Pit stop experience presentation mode
+    pub pit_stop_experience: PitStopExperience,
 
-    pub safety_car: u8, // 0 = Off, 1 = Reduced, 2 = Standard, 3 = Increased
+    /// Safety car deployment frequency setting
+    pub safety_car: SafetyCarSetting,
 
-    pub safety_car_experience: u8, // 0 = Broadcast, 1 = Immersive
+    /// Safety car experience presentation mode
+    pub safety_car_experience: ExperienceMode,
 
-    pub formation_lap: u8, // 0 = Off, 1 = On
+    /// Whether formation lap is enabled
+    pub formation_lap: bool,
 
-    pub formation_lap_experience: u8, // 0 = Broadcast, 1 = Immersive
+    /// Formation lap experience presentation mode
+    pub formation_lap_experience: ExperienceMode,
 
-    pub red_flags: u8, // 0 = Off, 1 = Reduced, 2 = Standard, 3 = Increased
+    /// Red flags deployment frequency setting
+    pub red_flags: RedFlagsSetting,
 
-    pub affects_licence_level_solo: bool, // 0 = Off, 1 = On
+    /// Whether results affect licence level in solo play
+    pub affects_licence_level_solo: bool,
 
-    pub affects_licence_level_mp: bool, // 0 = Off, 1 = On
+    /// Whether results affect licence level in multiplayer
+    pub affects_licence_level_mp: bool,
 
     #[serde(with = "crate::utils::u8_as_usize")]
     pub num_sessions_in_weekend: usize, // Number of sessions in the following array
@@ -275,35 +302,35 @@ impl Default for PacketSessionData {
             rule_set: RuleSet::Race,
             time_of_day: 0,
             session_length: 0,
-            speed_units_lead_player: 1,
-            temp_units_lead_player: 0,
-            speed_units_secondary_player: 1,
-            temp_units_secondary_player: 0,
+            speed_units_lead_player: SpeedUnits::Kph,
+            temp_units_lead_player: TempUnits::Celsius,
+            speed_units_secondary_player: SpeedUnits::Kph,
+            temp_units_secondary_player: TempUnits::Celsius,
             num_safety_car_periods: 0,
             num_vsc_periods: 0,
             num_red_flag_periods: 0,
-            equal_car_performance: 0,
-            recovery_mode: 0,
-            flashback_limit: 0,
-            surface_type: 0,
-            low_fuel_mode: 0,
-            race_starts: 0,
-            tyre_temperature: 0,
-            pit_lane_tyre_sim: 0,
-            car_damage: 0,
-            car_damage_rate: 0,
-            collisions: 0,
-            collisions_off_for_first_lap_only: 0,
-            mp_unsafe_pit_release: 0,
-            mp_off_for_griefing: 0,
-            corner_cutting_stringency: 0,
-            parc_ferme_rules: 0,
-            pit_stop_experience: 0,
-            safety_car: 0,
-            safety_car_experience: 0,
-            formation_lap: 0,
-            formation_lap_experience: 0,
-            red_flags: 0,
+            equal_car_performance: false,
+            recovery_mode: RecoveryMode::None,
+            flashback_limit: FlashbackLimit::Low,
+            surface_type: SurfaceType::Simplified,
+            low_fuel_mode: LowFuelMode::Easy,
+            race_starts: RaceStarts::Manual,
+            tyre_temperature: TyreTemperatureMode::SurfaceOnly,
+            pit_lane_tyre_sim_disabled: false,
+            car_damage: CarDamage::Off,
+            car_damage_rate: CarDamageRate::Reduced,
+            collisions: Collisions::Off,
+            collisions_off_for_first_lap_only: false,
+            mp_unsafe_pit_release_disabled: false,
+            mp_off_for_griefing: false,
+            corner_cutting_stringency: CornerCuttingStringency::Regular,
+            parc_ferme_rules: false,
+            pit_stop_experience: PitStopExperience::Automatic,
+            safety_car: SafetyCarSetting::Off,
+            safety_car_experience: ExperienceMode::Broadcast,
+            formation_lap: false,
+            formation_lap_experience: ExperienceMode::Broadcast,
+            red_flags: RedFlagsSetting::Off,
             affects_licence_level_solo: false,
             affects_licence_level_mp: false,
             num_sessions_in_weekend: 0,
