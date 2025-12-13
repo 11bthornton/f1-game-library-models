@@ -20,7 +20,7 @@
 //! async fn main() -> anyhow::Result<()> {
 //!     // Implement your packet handler
 //!     struct MyHandler;
-//! 
+//!
 //!     impl HandlePacket for MyHandler {
 //!         async fn handle_lap_data(&mut self, data: PacketLapData) -> anyhow::Result<TelemetryControl> {
 //!             println!("Received lap data: {:?}", data);
