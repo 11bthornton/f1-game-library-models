@@ -47,8 +47,22 @@ use tokio::net::UdpSocket;
 
 const BUFFER_SIZE: usize = 2048;
 
+/// A client for receiving and handling F1 telemetry data over UDP.
+///
+/// `TelemetryClient` manages a UDP socket connection to listen for incoming telemetry packets
+/// from the F1 game. It provides asynchronous methods to receive, buffer, and dispatch packets
+/// to user-defined handlers implementing the [`HandlePacket`] trait.
+///
+/// The client is typically created using [`TelemetryClient::new_from_address`], specifying the
+/// address and port to bind to. Once created, call [`TelemetryClient::listen`] to start
+/// processing incoming packets.
+///
+/// # Example
+/// See the module-level documentation for a usage example.
 pub struct TelemetryClient {
+    /// The underlying UDP socket used to receive telemetry packets.
     _udp_listener: UdpSocket,
+    /// Buffer for storing incoming UDP packet data.
     _buffer: [u8; BUFFER_SIZE],
 }
 
