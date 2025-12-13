@@ -1,3 +1,27 @@
+//! Telemetry client for receiving and handling F1 telemetry data over UDP.
+//! This module provides a `TelemetryClient` that listens for UDP packets
+//! from the F1 game and dispatches them to user-defined handlers based on packet type.
+//! It supports asynchronous operation using Tokio.
+//! 
+//! The client can be configured to listen on a specified address and port,
+//! and users can implement the `HandlePacket` trait to define custom behavior
+//! for each type of telemetry data received.
+//! 
+//! This module needs to be enabled with the `client` feature flag.
+//! 
+//! # Example Usage
+//! ```no_run
+//! use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
+//! use f1_game_library_models_25::telemetry_data::PacketLapData;
+//! struct MyHandler;
+//! impl HandlePacket for MyHandler {
+//!    async fn handle_lap_data(&mut self, data: PacketLapData) -> anyhow::Result<TelemetryControl> {
+//!        println!("Received lap data: {:?}", data);
+//!        Ok(TelemetryControl::Continue)
+//!    }
+//! }
+//! ```
+
 use tokio::net::ToSocketAddrs;
 use tokio::net::UdpSocket;
 
@@ -54,6 +78,19 @@ macro_rules! define_packet_handlers {
             ),+ $(,)?
         }
     ) => {
+        /// # Example usage:
+        /// ```no_run
+        /// use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
+        /// use f1_game_library_models_25::telemetry_data::PacketLapData;
+        ///
+        /// struct MyHandler;
+        /// impl HandlePacket for MyHandler {
+        ///    async fn handle_lap_data(&mut self, data: PacketLapData) -> anyhow::Result<TelemetryControl> {
+        ///        println!("Received lap data: {:?}", data);
+        ///        Ok(TelemetryControl::Continue)
+        ///    }
+        /// }
+        /// ```
         pub trait $trait_name {
             $(
                 #[allow(unused_variables)]
