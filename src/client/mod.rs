@@ -2,13 +2,13 @@
 //! This module provides a `TelemetryClient` that listens for UDP packets
 //! from the F1 game and dispatches them to user-defined handlers based on packet type.
 //! It supports asynchronous operation using Tokio.
-//! 
+//!
 //! The client can be configured to listen on a specified address and port,
 //! and users can implement the `HandlePacket` trait to define custom behavior
 //! for each type of telemetry data received.
-//! 
+//!
 //! This module needs to be enabled with the `client` feature flag.
-//! 
+//!
 //! # Example Usage
 //! ```no_run
 //! use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
@@ -164,20 +164,22 @@ define_packet_handlers! {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::sync::Arc;
     use tokio::net::UdpSocket;
     use tokio::sync::Mutex;
-    use std::sync::Arc;
 
     struct TestHandler {
         called: Arc<Mutex<bool>>,
     }
 
     impl HandlePacket for TestHandler {
-        async fn handle_lap_data(&mut self, _data: crate::telemetry_data::PacketLapData) -> anyhow::Result<TelemetryControl> {
+        async fn handle_lap_data(
+            &mut self,
+            _data: crate::telemetry_data::PacketLapData,
+        ) -> anyhow::Result<TelemetryControl> {
             let mut called = self.called.lock().await;
             *called = true;
             Ok(TelemetryControl::Stop)
@@ -201,7 +203,9 @@ mod tests {
         let mut client = TelemetryClient::new_from_address(addr).await.unwrap();
 
         let called_flag = Arc::new(Mutex::new(false));
-        let mut handler = TestHandler { called: called_flag.clone() };
+        let mut handler = TestHandler {
+            called: called_flag.clone(),
+        };
 
         let socket = UdpSocket::bind("127.0.0.1:0").await.unwrap();
         let packet_bytes = crate::telemetry_data::PacketLapData::to_bytes();
