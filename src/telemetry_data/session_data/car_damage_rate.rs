@@ -13,4 +13,6 @@ pub enum CarDamageRate {
     Standard = 1,
     /// Simulation-level damage accumulation rate
     Simulation = 2,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

@@ -13,4 +13,6 @@ pub enum RecoveryMode {
     Flashbacks = 1,
     /// Automatic recovery to track after leaving
     AutoRecovery = 2,
+    // /// Unknown or not applicable
+    // Unknown = 255,
 }

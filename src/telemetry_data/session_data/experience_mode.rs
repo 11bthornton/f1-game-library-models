@@ -13,4 +13,6 @@ pub enum ExperienceMode {
     Broadcast = 0,
     /// Immersive presentation from the driver's perspective
     Immersive = 1,
+    /// Unknown or not applicable (feature is disabled)
+    Unknown = 255,
 }

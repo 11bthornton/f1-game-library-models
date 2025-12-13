@@ -11,4 +11,6 @@ pub enum TempUnits {
     Celsius = 0,
     /// Fahrenheit
     Fahrenheit = 1,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

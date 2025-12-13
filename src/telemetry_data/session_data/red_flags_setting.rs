@@ -15,4 +15,6 @@ pub enum RedFlagsSetting {
     Standard = 2,
     /// Increased red flag deployment frequency
     Increased = 3,
+    // /// Unknown or not applicable
+    // Unknown = 255,
 }

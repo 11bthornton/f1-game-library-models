@@ -15,4 +15,6 @@ pub enum CarDamage {
     Standard = 2,
     /// Full simulation-level car damage
     Simulation = 3,
+    // /// Unknown or not applicable
+    // Unknown = 255,
 }

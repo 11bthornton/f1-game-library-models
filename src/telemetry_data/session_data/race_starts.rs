@@ -11,4 +11,6 @@ pub enum RaceStarts {
     Manual = 0,
     /// Assisted race starts with automatic launch control
     Assisted = 1,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

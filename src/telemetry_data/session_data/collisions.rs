@@ -13,4 +13,6 @@ pub enum Collisions {
     PlayerToPlayerOff = 1,
     /// All collisions enabled
     On = 2,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

@@ -11,4 +11,6 @@ pub enum LowFuelMode {
     Easy = 0,
     /// Hard fuel management requiring careful conservation
     Hard = 1,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

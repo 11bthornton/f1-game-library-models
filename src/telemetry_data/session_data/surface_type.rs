@@ -11,4 +11,6 @@ pub enum SurfaceType {
     Simplified = 0,
     /// Realistic surface simulation with more grip variation
     Realistic = 1,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

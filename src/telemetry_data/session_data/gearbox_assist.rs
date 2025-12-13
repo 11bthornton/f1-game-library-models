@@ -13,4 +13,6 @@ pub enum GearboxAssist {
     SuggestedGear = 2,
     /// Fully automatic gearbox
     Automatic = 3,
+    // /// Unknown or not applicable value
+    // Unknown = 255,
 }

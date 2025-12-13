@@ -14,8 +14,8 @@ pub enum Toggle {
     Off = 0,
     /// Setting is enabled
     On = 1,
-    /// Setting is unknown or not applicable (value 255 from game)
-    Unknown = 255,
+    // / Setting is unknown or not applicable (value 255 from Game)
+    // Unknown = 255,
 }
 
 impl Toggle {
@@ -29,8 +29,8 @@ impl Toggle {
         matches!(self, Toggle::Off)
     }
 
-    /// Returns true if the toggle is unknown/not applicable
-    pub fn is_unknown(&self) -> bool {
-        matches!(self, Toggle::Unknown)
-    }
+    // Returns true if the toggle is unknown/not applicable
+//     pub fn is_unknown(&self) -> bool {
+//         // matches!(self, Toggle::Unknown)
+//     }
 }
