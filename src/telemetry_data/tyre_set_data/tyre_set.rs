@@ -22,7 +22,7 @@ use serde::{Deserialize, Serialize};
 /// * `usable_life` - Max number of laps recommended for this compound
 /// * `lap_delta_time` - Lap delta time in milliseconds compared to fitted set
 /// * `fitted` - Whether the set is fitted or not
-#[derive(Deserialize, Debug, Serialize, Copy, Clone)]
+#[derive(Deserialize, Debug, Default, Serialize, Copy, Clone)]
 pub struct TyreSetData {
     /// Actual tyre compound used
     pub actual_tyre_compound: crate::telemetry_data::car_status_data::ActualTyreCompound,

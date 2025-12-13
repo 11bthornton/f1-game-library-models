@@ -62,7 +62,7 @@ use serde::{Deserialize, Serialize};
 /// * `front_right_tyre_pressure` - Front right tyre pressure (PSI)
 /// * `ballast` - Ballast weight
 /// * `fuel_load` - Fuel load weight
-#[derive(Deserialize, Debug, Serialize, Clone, Copy)]
+#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy)]
 pub struct CarSetupData {
     /// Front wing aero setting
     pub front_wing: u8,
@@ -112,6 +112,7 @@ pub struct CarSetupData {
     /// Brake bias (percentage)
     pub brake_bias: u8,
 
+    /// Engine braking
     pub engine_braking: u8,
 
     /// Rear left tyre pressure (PSI)

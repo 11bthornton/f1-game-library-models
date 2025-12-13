@@ -20,3 +20,15 @@ pub struct PacketCarStatusData {
     /// Array of status data for each car (up to 22 cars)
     pub car_status_data: [CarStatusData; MAX_CARS_IN_SESSION],
 }
+
+impl Default for PacketCarStatusData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::packet_header::PacketId::CarStatusPacket,
+                ..Default::default()
+            },
+            car_status_data: [CarStatusData::default(); MAX_CARS_IN_SESSION],
+        }
+    }
+}

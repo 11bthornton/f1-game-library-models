@@ -212,15 +212,104 @@ pub struct PacketSessionData {
 
     pub red_flags: u8, // 0 = Off, 1 = Reduced, 2 = Standard, 3 = Increased
 
-    pub affects_licence_level_solo: u8, // 0 = Off, 1 = On
+    pub affects_licence_level_solo: bool, // 0 = Off, 1 = On
 
-    pub affects_licence_level_mp: u8, // 0 = Off, 1 = On
+    pub affects_licence_level_mp: bool, // 0 = Off, 1 = On
 
-    pub num_sessions_in_weekend: u8, // Number of sessions in the following array
+    #[serde(with = "crate::utils::u8_as_usize")]
+    pub num_sessions_in_weekend: usize, // Number of sessions in the following array
 
     pub weekend_structure: [u8; 12], // List of session types to show weekend structure
 
     pub sector2_lap_distance_start: f32, // Distance in meters where sector 2 starts
 
     pub sector3_lap_distance_start: f32, // Distance in meters where sector 3 starts
+}
+
+impl Default for PacketSessionData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::SessionPacket,
+                ..PacketHeader::default()
+            },
+            weather: Weather::Clear,
+            track_temperature: 0,
+            air_temperature: 0,
+            total_laps: 0,
+            track_length: 0,
+            session_type: SessionType::Unknown,
+            track: Track::Unknown,
+            formula: Formula::F1Modern,
+            session_time_left: 0,
+            session_duration: 0,
+            pit_speed_limit: 0,
+            game_paused: false,
+            is_spectating: false,
+            spectator_car_index: 0,
+            sli_pro_native_support: false,
+            num_marshall_zones: 0,
+            marshall_zones: [MarshalZone::default(); 21],
+            safety_car_status: SafetyCarStatus::NoSafetyCar,
+            network_game: NetworkGame::Offline,
+            num_weather_forecast_samples: 0,
+            weather_forecast_samples: [WeatherForecastSample::default(); WEATHER_FORECAST_SAMPLE_SIZE],
+            forecast_accuracy: ForecastAccuracy::Approximate,
+            ai_difficulty: 0,
+            season_link_identifier: 0,
+            weekend_link_identifier: 0,
+            session_link_identifier: 0,
+            pit_stop_window_ideal_lap: 0,
+            pit_stop_window_latest_lap: 0,
+            pit_stop_rejoin_position: 0,
+            steering_assist: AssistToggle::Off,
+            braking_assist: AssistToggle::Off,
+            gearbox_assist: GearboxAssist::Manual,
+            pit_assist: AssistToggle::Off,
+            pit_release_assist: AssistToggle::Off,
+            ers_assist: AssistToggle::Off,
+            drs_assist: AssistToggle::Off,
+            dynamic_racing_line: DynamicRacingLine::TwoD,
+            dynamic_racing_line_type: DynamicRacingLineType::Off,
+            game_mode: GameMode::GrandPrix,
+            rule_set: RuleSet::Race,
+            time_of_day: 0,
+            session_length: 0,
+            speed_units_lead_player: 1,
+            temp_units_lead_player: 0,
+            speed_units_secondary_player: 1,
+            temp_units_secondary_player: 0,
+            num_safety_car_periods: 0,
+            num_vsc_periods: 0,
+            num_red_flag_periods: 0,
+            equal_car_performance: 0,
+            recovery_mode: 0,
+            flashback_limit: 0,
+            surface_type: 0,
+            low_fuel_mode: 0,
+            race_starts: 0,
+            tyre_temperature: 0,
+            pit_lane_tyre_sim: 0,
+            car_damage: 0,
+            car_damage_rate: 0,
+            collisions: 0,
+            collisions_off_for_first_lap_only: 0,
+            mp_unsafe_pit_release: 0,
+            mp_off_for_griefing: 0,
+            corner_cutting_stringency: 0,
+            parc_ferme_rules: 0,
+            pit_stop_experience: 0,
+            safety_car: 0,
+            safety_car_experience: 0,
+            formation_lap: 0,
+            formation_lap_experience: 0,
+            red_flags: 0,
+            affects_licence_level_solo: false,
+            affects_licence_level_mp: false,
+            num_sessions_in_weekend: 0,
+            weekend_structure: [0; 12],
+            sector2_lap_distance_start: 0.0,
+            sector3_lap_distance_start: 0.0,
+        }
+    }
 }

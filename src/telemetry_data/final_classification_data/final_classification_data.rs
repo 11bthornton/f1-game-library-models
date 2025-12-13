@@ -22,7 +22,7 @@ use serde::{Deserialize, Serialize};
 /// * `tyre_stints_actual` - Actual tyre compounds used in each stint
 /// * `tyre_stints_visual` - Visual tyre compounds displayed in each stint
 /// * `tyre_stints_end_laps` - Lap numbers when each tyre stint ended
-#[derive(Deserialize, Debug, Serialize, Copy, Clone)]
+#[derive(Deserialize, Debug, Default, Serialize, Copy, Clone)]
 pub struct FinalClassificationData {
     /// Finishing position of the car
     pub position: u8,

@@ -7,4 +7,4 @@ mod packet;
 
 // Re-export the structs
 pub use car_motion_data::CarMotionData;
-pub use packet::PacketMotionData;
+pub use packet::PacketCarMotionData;

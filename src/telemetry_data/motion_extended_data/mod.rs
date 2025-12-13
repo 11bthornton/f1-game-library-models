@@ -5,4 +5,4 @@
 mod packet;
 
 // Re-export the structs
-pub use packet::PacketMotionExData;
+pub use packet::PacketCarMotionExData;

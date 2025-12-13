@@ -35,3 +35,26 @@ pub struct PacketTimeTrialData {
 
     pub valid: bool,
 }
+
+impl Default for PacketTimeTrialData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::packet_header::PacketId::TimeTrialPacket,
+                ..PacketHeader::default()
+            },
+            car_index: 0,
+            team: Team::Mercedes,
+            lap_time_in_ms: 0,
+            sector1_time_in_ms: 0,
+            sector2_time_in_ms: 0,
+            sector3_time_in_ms: 0,
+            traction_control: TractionControl::Off,
+            gearbox_assist: GearboxAssist::Manual,
+            anti_lock_brakes: AntiLockBrakes::Off,
+            equal_car_performance: 0,
+            custom_setup: false,
+            valid: false,
+        }
+    }
+}

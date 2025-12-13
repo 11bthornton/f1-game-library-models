@@ -59,7 +59,7 @@ pub struct PacketHeader {
 #[derive(Deserialize_repr, Debug, Default, Serialize_repr, Copy, Clone, PartialEq)]
 #[repr(u8)]
 pub enum PacketId {
-    MotionPacket = 0,
+    CarMotionPacket = 0,
     SessionPacket = 1,
     LapDataPacket = 2,
     EventPacket = 3,
@@ -72,9 +72,9 @@ pub enum PacketId {
     CarDamagePacket = 10,
     SessionHistoryPacket = 11,
     TyreSetsPacket = 12,
-    MotionExPacket = 13,
+    CarMotionExPacket = 13,
     TimeTrialPacket = 14,
-    LapPositionPacket = 15,
+    LapPositionsPacket = 15,
     #[default]
     #[serde(other)]
     PacketIdMax = 16,

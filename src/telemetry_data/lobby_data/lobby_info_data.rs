@@ -18,7 +18,7 @@ use crate::telemetry_data::participant_data::{Nationality, Team};
 /// * `name` - Name of the player
 /// * `car_number` - Car number selected by the player
 /// * `ready_status` - Readiness status of the player
-#[derive(Deserialize, Debug, Serialize, Clone, Copy)]
+#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy)]
 pub struct LobbyInfoData {
     /// Whether the player is AI (true) or Human (false) controlled
     pub ai_controlled: bool,

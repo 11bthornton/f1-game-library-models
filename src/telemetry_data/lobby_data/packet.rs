@@ -11,7 +11,7 @@ use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::Packe
 ///
 /// * `header` - Header information for the packet
 /// * `num_players` - Number of players in the lobby
-/// * `lobby_players` - Array of lobby information for each player (up to 22 players)
+/// * `lobby_info_data` - Array of lobby information for each player (up to 22 players)
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
 pub struct PacketLobbyInfoData {
     /// Header information for the packet
@@ -19,5 +19,20 @@ pub struct PacketLobbyInfoData {
     /// Number of players in the lobby
     pub num_players: u8,
     /// Array of lobby information for each player (up to 22 players)
-    pub lobby_players: [LobbyInfoData; MAX_CARS_IN_SESSION],
+    pub lobby_info_data: [LobbyInfoData; MAX_CARS_IN_SESSION],
+}
+
+impl Default for PacketLobbyInfoData {
+    fn default() -> Self {
+        let header = PacketHeader {
+            packet_id: crate::telemetry_data::packet_header::PacketId::LobbyInfoPacket,
+            ..Default::default()
+        };
+
+        Self {
+            header,
+            num_players: 0,
+            lobby_info_data: [LobbyInfoData::default(); MAX_CARS_IN_SESSION],
+        }
+    }
 }

@@ -37,7 +37,7 @@ use crate::telemetry_data::{WheelData, packet_header::PacketHeader};
 /// Note: All wheel arrays have the following order: RL (Rear Left), RR (Rear Right), FL (Front
 /// Left), FR (Front Right)
 #[derive(Debug, Deserialize, Serialize, Clone, Copy)]
-pub struct PacketMotionExData {
+pub struct PacketCarMotionExData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Suspension position for each wheel [RL, RR, FL, FR]
@@ -96,4 +96,43 @@ pub struct PacketMotionExData {
     pub wheel_camber: WheelData<f32>,
     /// Wheel camber gain for each wheel [RL, RR, FL, FR]
     pub wheel_camber_gain: WheelData<f32>,
+}
+
+impl Default for PacketCarMotionExData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::CarMotionExPacket,
+                ..PacketHeader::default()
+            },
+            suspension_position: WheelData::default(),
+            suspension_velocity: WheelData::default(),
+            suspension_acceleration: WheelData::default(),
+            wheel_speed: WheelData::default(),
+            wheel_slip_ratio: WheelData::default(),
+            wheel_slip_angle: WheelData::default(),
+            wheel_lat_force: WheelData::default(),
+            wheel_long_force: WheelData::default(),
+            height_of_cog_above_ground: 0.0,
+            local_velocity_x: 0.0,
+            local_velocity_y: 0.0,
+            local_velocity_z: 0.0,
+            angular_velocity_x: 0.0,
+            angular_velocity_y: 0.0,
+            angular_velocity_z: 0.0,
+            angular_acceleration_x: 0.0,
+            angular_acceleration_y: 0.0,
+            angular_acceleration_z: 0.0,
+            front_wheels_angle: 0.0,
+            wheel_vert_force: WheelData::default(),
+            front_aero_height: 0.0,
+            rear_aero_height: 0.0,
+            front_roll_angle: 0.0,
+            rear_roll_angle: 0.0,
+            chassis_yaw: 0.0,
+            chassis_pitch: 0.0,
+            wheel_camber: WheelData::default(),
+            wheel_camber_gain: WheelData::default(),
+        }
+    }
 }

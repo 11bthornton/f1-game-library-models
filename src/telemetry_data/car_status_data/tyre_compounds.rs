@@ -12,10 +12,11 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 ///
 /// These are the tyre compounds as they appear visually in the game,
 /// which can be different from the actual compound used.
-#[derive(Deserialize_repr, Debug, Serialize_repr, Clone, Copy, PartialEq)]
+#[derive(Deserialize_repr, Debug, Default,Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
 pub enum VisualTyreCompound {
     /// No tyre compound
+    #[default]
     None = 0,
 
     /// Soft compound (red)
@@ -71,10 +72,11 @@ pub enum VisualTyreCompound {
 ///
 /// These are the actual tyre compounds used by the car,
 /// which can be different from how they appear visually.
-#[derive(Deserialize_repr, Debug, Serialize, Clone, Copy)]
+#[derive(Deserialize_repr, Debug, Default, Serialize, Clone, Copy)]
 #[repr(u8)]
 pub enum ActualTyreCompound {
     /// No tyre compound (for non-player cars)
+    #[default]
     None = 0,
     /// C5 compound (softest)
     C5 = 16,

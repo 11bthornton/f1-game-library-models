@@ -8,7 +8,7 @@ use super::{Driver, Team};
 /// Represents data for a single participant in the session
 ///
 /// Contains information about the driver, their team, and other identifying details
-#[derive(Deserialize, Debug, Serialize, Copy, Clone, PartialEq)]
+#[derive(Deserialize, Debug, Default, Serialize, Copy, Clone, PartialEq)]
 pub struct ParticipantData {
     /// Whether the vehicle is AI (1) or Human (0) controlled
     pub ai_controlled: bool,
@@ -51,7 +51,7 @@ pub struct ParticipantData {
     pub livery_colours: [LiveryColour; 4],
 }
 
-#[derive(Deserialize, Debug, Serialize, Copy, Clone, PartialEq)]
+#[derive(Deserialize, Debug, Default, Serialize, Copy, Clone, PartialEq)]
 pub struct LiveryColour {
     /// Red component of the colour (0-255)
     pub red: u8,

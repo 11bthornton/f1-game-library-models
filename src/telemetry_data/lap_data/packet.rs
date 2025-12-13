@@ -17,12 +17,14 @@ use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::Packe
 pub struct PacketLapData {
     /// Header information for the packet
     pub header: PacketHeader,
+
     /// Array of lap data for each car (up to 22 cars)
     pub lap_data: [LapData; MAX_CARS_IN_SESSION],
 
     /// Index of personal best car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]
     pub time_trial_pb_car_idx: usize,
+    
     /// Index of rival car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]
     pub m_time_trial_rival_car_idx: usize,
