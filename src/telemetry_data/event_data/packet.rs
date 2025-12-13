@@ -35,7 +35,7 @@ impl Default for PacketEventData {
                 ..PacketHeader::default()
             },
             event_string_code: [0; 4],
-            r#type: Event::SessionStart(SessionStart::default()),
+            r#type: Event::SessionStart(SessionStart),
         }
     }
 }
