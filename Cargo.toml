@@ -1,6 +1,6 @@
 [package]
 name         = "f1-game-library-models-25"
-version      = "0.2.3"
+version      = "0.3.0"
 edition      = "2024"
 authors      = ["Ben Thornton <11bthornton@gmail.com>"]
 description  = "Models associated with the F1 Video Game series for UDP Telemetry"
@@ -14,10 +14,16 @@ homepage     = "https://github.com/11bthornton/f1-game-library-models"
 allow-branch = ["main"]
 
 [dependencies]
+anyhow = "1.0.100"
 bincode = "1.3.1"
 serde              = { version = "1.0.144", features = ["derive"] }
 serde-big-array    = "0.5.1"
 serde_repr         = "0.1.20"
+tokio = { version = "1.45.1", optional = true, features = ["net"] }
 
 [dev-dependencies]
 tokio = { version = "1.45.1", features = ["full"] }
+
+[features]
+default = ["client"]
+client = ["dep:tokio"]

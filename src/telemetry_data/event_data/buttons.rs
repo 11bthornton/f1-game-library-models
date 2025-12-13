@@ -11,12 +11,7 @@ pub struct Buttons {
     pub button_status: u32,
 }
 
-impl Buttons {
-    pub fn to_buttons(&self) -> Vec<Button> {
-        unimplemented!()
-    }
-}
-
+#[allow(dead_code)]
 pub enum Button {
     CrossOrA,
     TriangleOrY,

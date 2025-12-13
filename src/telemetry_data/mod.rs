@@ -104,9 +104,7 @@ macro_rules! deserialise_packet_type {
         match $header.packet_id {
             $(
                 $pid => {
-                    bincode::deserialize::<$ty>($bytes)
-                        .map(F1Data::$variant)
-                        .map_err(|e| Box::new(e) as Box<dyn std::error::Error>)
+                    bincode::deserialize::<$ty>($bytes).map(F1Data::$variant)
                 }
             )*
             PacketId::PacketIdMax => unreachable!(
@@ -119,21 +117,16 @@ macro_rules! deserialise_packet_type {
     };
 }
 
-pub fn deserialise_udp_packet_from_bytes(
-    bytes: &[u8],
-) -> Result<F1Data, Box<dyn std::error::Error>> {
+pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<F1Data> {
     // Deserialize header only (don't use reader)
-    let header: PacketHeader = bincode::deserialize(bytes).map_err(|e| {
-        println!("Failed to deserialize PacketHeader: {}", e);
-        Box::new(e) as Box<dyn std::error::Error>
-    })?;
+    let header: PacketHeader = bincode::deserialize(bytes)?;
 
     if header.packet_id == PacketId::EventPacket {
         Ok(F1Data::EventData(deserialise_event_packet_from_bytes(
             bytes,
         )?))
     } else {
-        deserialise_packet_type!(
+        Ok(deserialise_packet_type!(
             header, bytes,
             PacketId::CarDamagePacket => CarDamageData(PacketCarDamageData),
             PacketId::CarSetupsPacket => CarSetupData(PacketCarSetupData),
@@ -150,6 +143,6 @@ pub fn deserialise_udp_packet_from_bytes(
             PacketId::TimeTrialPacket => TimeTrialData(PacketTimeTrialData),
             PacketId::LapPositionPacket => LapPositionsData(PacketLapPositionsData),
             PacketId::TyreSetsPacket => TyreSetData(PacketTyreSetsData),
-        )
+        )?)
     }
 }

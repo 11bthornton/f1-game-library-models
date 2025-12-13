@@ -35,7 +35,6 @@ macro_rules! deserialise_event_type {
                 $event_code => {
                     bincode::deserialize::<$ty>(&$internal_repr.remaining_data)
                         .map(EventType::$variant)
-                        .map_err(|e| Box::new(e) as Box<dyn std::error::Error>)
                 }
             )*
             _ => unreachable!(
@@ -47,13 +46,10 @@ macro_rules! deserialise_event_type {
 }
 
 /// Use this function to deserialize a byte slice into a `PacketEventData` structure.
-pub fn deserialise_event_packet_from_bytes(
-    bytes: &[u8],
-) -> Result<PacketEventData, Box<dyn std::error::Error>> {
+pub fn deserialise_event_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<PacketEventData> {
     // Deserialise to an intermediate representation
     // to figure out which event type it is.
-    let internal_representation: InternalPacketEventData =
-        bincode::deserialize(bytes).map_err(|e| e.to_string())?;
+    let internal_representation: InternalPacketEventData = bincode::deserialize(bytes)?;
 
     // Then match against the event string code
     // to determine the specific event type and produce the final structure.
