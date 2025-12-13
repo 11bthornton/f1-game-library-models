@@ -15,6 +15,4 @@ pub enum BrakingAssist {
     Medium = 2,
     /// High braking assist
     High = 3,
-    // /// Unknown or not applicable value
-    // Unknown = 255,
 }

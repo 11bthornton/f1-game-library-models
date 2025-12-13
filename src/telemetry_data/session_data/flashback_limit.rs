@@ -15,6 +15,4 @@ pub enum FlashbackLimit {
     High = 2,
     /// Unlimited flashbacks available
     Unlimited = 3,
-    // /// Unknown or not applicable
-    // Unknown = 255,
 }

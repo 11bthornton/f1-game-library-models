@@ -11,6 +11,4 @@ pub enum TyreTemperatureMode {
     SurfaceOnly = 0,
     /// Both surface and carcass temperatures are simulated
     SurfaceAndCarcass = 1,
-    // /// Unknown or not applicable value
-    // Unknown = 255,
 }

@@ -166,7 +166,7 @@ mod tests {
         let _ = PacketCarMotionData::default();
         let _ = PacketCarMotionExData::default();
         let _ = PacketParticipantData::default();
-        // let _ = PacketSessionData::default();
+        let _ = PacketSessionData::default();
         let _ = PacketSessionHistoryData::default();
         let _ = PacketTimeTrialData::default();
         let _ = PacketTyreSetsData::default();

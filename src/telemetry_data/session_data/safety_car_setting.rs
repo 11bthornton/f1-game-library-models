@@ -15,6 +15,4 @@ pub enum SafetyCarSetting {
     Standard = 2,
     /// Increased safety car deployment frequency
     Increased = 3,
-    // /// Unknown or not applicable
-    // Unknown = 255,
 }

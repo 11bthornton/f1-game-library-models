@@ -6,16 +6,17 @@ use serde_big_array::BigArray;
 use super::{
     braking_assist::BrakingAssist, car_damage::CarDamage, car_damage_rate::CarDamageRate,
     collisions::Collisions, corner_cutting_stringency::CornerCuttingStringency,
-    experience_mode::ExperienceMode, flashback_limit::FlashbackLimit,
-    gearbox_assist::GearboxAssist, low_fuel_mode::LowFuelMode, marshal_zone::MarshalZone,
-    pit_stop_experience::PitStopExperience, race_starts::RaceStarts, recovery_mode::RecoveryMode,
-    red_flags_setting::RedFlagsSetting, safety_car_setting::SafetyCarSetting,
-    speed_units::SpeedUnits, surface_type::SurfaceType, temp_units::TempUnits, toggle::Toggle,
-    tyre_temperature_mode::TyreTemperatureMode, weather_forecast_sample::WeatherForecastSample,
+    experience_mode::ExperienceMode, flashback_limit::FlashbackLimit, low_fuel_mode::LowFuelMode,
+    marshal_zone::MarshalZone, pit_stop_experience::PitStopExperience, race_starts::RaceStarts,
+    recovery_mode::RecoveryMode, red_flags_setting::RedFlagsSetting,
+    safety_car_setting::SafetyCarSetting, speed_units::SpeedUnits, surface_type::SurfaceType,
+    temp_units::TempUnits, toggle::Toggle, tyre_temperature_mode::TyreTemperatureMode,
+    weather_forecast_sample::WeatherForecastSample,
 };
 use crate::telemetry_data::{
-    DynamicRacingLine, DynamicRacingLineType, Formula, GameMode, NetworkGame, RuleSet,
-    SafetyCarStatus, SessionType, Track, Weather, packet_header::PacketHeader,
+    AssistToggle, DynamicRacingLine, DynamicRacingLineType, ForecastAccuracy, Formula, GameMode,
+    NetworkGame, RuleSet, SafetyCarStatus, SessionType, Track, Weather,
+    packet_header::PacketHeader,
 };
 
 const WEATHER_FORECAST_SAMPLE_SIZE: usize = 64;
@@ -31,7 +32,7 @@ pub struct PacketSessionData {
     /// Header information for the packet
     pub header: PacketHeader,
 
-    /// Weather - 0 = clear, 1 = light cloud, 2 = overcast, 3 = light rain, 4 = heavy rain, 5 = storm
+    /// Current weather conditions
     pub weather: Weather,
 
     /// Track temp in degrees Celsius
@@ -46,13 +47,13 @@ pub struct PacketSessionData {
     /// Track length in metres
     pub track_length: u16,
 
-    /// 0 = unknown, see appendix
+    /// Type of session (practice, qualifying, race, etc.)
     pub session_type: SessionType,
 
-    /// -1 for unknown, see appendix
+    /// Track identifier
     pub track_id: Track,
 
-    /// Formula, 0 = F1 Modern, 1 = F1 Classic, 2 = F2, 3 = F1 Generic, 4 = Beta, 6 = Esports, 8 = F1 World, 9 = F1 Elimination
+    /// Formula category being used
     pub formula: Formula,
 
     /// Time left in session in seconds
@@ -74,7 +75,7 @@ pub struct PacketSessionData {
     #[serde(with = "crate::utils::u8_as_usize")]
     pub spectator_car_index: usize,
 
-    /// SLI Pro support, 0 = inactive, 1 = active
+    /// Whether SLI Pro native support is active
     pub sli_pro_native_support: u8,
 
     /// Number of marshal zones to follow
@@ -83,10 +84,10 @@ pub struct PacketSessionData {
     /// List of marshal zones - max 21
     pub marshal_zones: [MarshalZone; 21],
 
-    /// 0 = no safety car, 1 = full, 2 = virtual, 3 = formation lap
+    /// Current safety car status
     pub safety_car_status: SafetyCarStatus,
 
-    /// 0 = offline, 1 = online
+    /// Whether this is a network game
     pub network_game: NetworkGame,
 
     /// Number of weather samples to follow
@@ -96,8 +97,8 @@ pub struct PacketSessionData {
     #[serde(with = "BigArray")]
     pub weather_forecast_samples: [WeatherForecastSample; WEATHER_FORECAST_SAMPLE_SIZE],
 
-    /// 0 = Perfect, 1 = Approximate
-    pub forecast_accuracy: u8,
+    /// Weather forecast accuracy level
+    pub forecast_accuracy: ForecastAccuracy,
 
     /// AI difficulty - 0-110
     pub ai_difficulty: u8,
@@ -120,43 +121,43 @@ pub struct PacketSessionData {
     /// Predicted position to rejoin at (player)
     pub pit_stop_rejoin_position: u8,
 
-    /// 0 = off, 1 = on
-    pub steering_assist: Toggle,
+    /// Whether steering assist is enabled
+    pub steering_assist: AssistToggle,
 
     /// Braking assist level
     pub braking_assist: BrakingAssist,
 
     /// Gearbox assist setting
-    pub gearbox_assist: GearboxAssist,
+    pub gearbox_assist: AssistToggle,
 
-    /// 0 = off, 1 = on
-    pub pit_assist: Toggle,
+    /// Whether pit assist is enabled
+    pub pit_assist: AssistToggle,
 
-    /// 0 = off, 1 = on
-    pub pit_release_assist: Toggle,
+    /// Whether pit release assist is enabled
+    pub pit_release_assist: AssistToggle,
 
-    /// 0 = off, 1 = on
-    pub ers_assist: Toggle,
+    /// Whether ERS assist is enabled
+    pub ers_assist: AssistToggle,
 
-    /// 0 = off, 1 = on
-    pub drs_assist: Toggle,
+    /// Whether DRS assist is enabled
+    pub drs_assist: AssistToggle,
 
-    /// 0 = off, 1 = corners only, 2 = full
+    /// Dynamic racing line visibility setting
     pub dynamic_racing_line: DynamicRacingLine,
 
-    /// 0 = 2D, 1 = 3D
+    /// Dynamic racing line display type
     pub dynamic_racing_line_type: DynamicRacingLineType,
 
-    /// Game mode id - see appendix
+    /// Game mode identifier
     pub game_mode: GameMode,
 
-    /// Ruleset - see appendix
+    /// Ruleset being used
     pub rule_set: RuleSet,
 
     /// Local time of day - minutes since midnight
     pub time_of_day: u32,
 
-    /// 0 = None, 2 = Very Short, 3 = Short, 4 = Medium, 5 = Medium Long, 6 = Long, 7 = Full
+    /// Session length setting
     pub session_length: u8,
 
     /// Speed units preference for lead player
@@ -201,7 +202,7 @@ pub struct PacketSessionData {
     /// Tyre temperature simulation mode
     pub tyre_temperature: TyreTemperatureMode,
 
-    /// Whether pit lane tyre simulation is disabled (0 = On, 1 = Off)
+    /// Whether pit lane tyre simulation is enabled
     pub pit_lane_tyre_sim: Toggle,
 
     /// Car damage setting
@@ -216,7 +217,7 @@ pub struct PacketSessionData {
     /// Whether collisions off applies to first lap only
     pub collisions_off_for_first_lap_only: Toggle,
 
-    /// Whether unsafe pit release is enabled in multiplayer (0 = On, 1 = Off)
+    /// Whether unsafe pit release is enabled in multiplayer
     pub mp_unsafe_pit_release: Toggle,
 
     /// Whether collisions off for griefing is enabled in multiplayer
@@ -263,4 +264,93 @@ pub struct PacketSessionData {
 
     /// Distance in m around track where sector 3 starts
     pub sector3_lap_distance_start: f32,
+}
+
+impl Default for PacketSessionData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::SessionPacket,
+                ..PacketHeader::default()
+            },
+            weather: Weather::Clear,
+            track_temperature: 0,
+            air_temperature: 0,
+            total_laps: 0,
+            track_length: 0,
+            session_type: SessionType::Unknown,
+            track_id: Track::Unknown,
+            formula: Formula::F1Modern,
+            session_time_left: 0,
+            session_duration: 0,
+            pit_speed_limit: 0,
+            game_paused: false,
+            is_spectating: false,
+            spectator_car_index: 0,
+            sli_pro_native_support: 0,
+            num_marshal_zones: 0,
+            marshal_zones: [MarshalZone::default(); 21],
+            safety_car_status: SafetyCarStatus::NoSafetyCar,
+            network_game: NetworkGame::Offline,
+            num_weather_forecast_samples: 0,
+            weather_forecast_samples: [WeatherForecastSample::default();
+                WEATHER_FORECAST_SAMPLE_SIZE],
+            forecast_accuracy: ForecastAccuracy::Approximate,
+            ai_difficulty: 0,
+            season_link_identifier: 0,
+            weekend_link_identifier: 0,
+            session_link_identifier: 0,
+            pit_stop_window_ideal_lap: 0,
+            pit_stop_window_latest_lap: 0,
+            pit_stop_rejoin_position: 0,
+            steering_assist: AssistToggle::Off,
+            braking_assist: BrakingAssist::default(),
+            gearbox_assist: AssistToggle::Off,
+            pit_assist: AssistToggle::Off,
+            pit_release_assist: AssistToggle::Off,
+            ers_assist: AssistToggle::Off,
+            drs_assist: AssistToggle::Off,
+            dynamic_racing_line: DynamicRacingLine::ThreeD,
+            dynamic_racing_line_type: DynamicRacingLineType::CornersOnly,
+            game_mode: GameMode::GrandPrix,
+            rule_set: RuleSet::Race,
+            time_of_day: 0,
+            session_length: 0,
+            speed_units_lead_player: SpeedUnits::Kph,
+            temperature_units_lead_player: TempUnits::Celsius,
+            speed_units_secondary_player: SpeedUnits::Kph,
+            temperature_units_secondary_player: TempUnits::Celsius,
+            num_safety_car_periods: 0,
+            num_virtual_safety_car_periods: 0,
+            num_red_flag_periods: 0,
+            equal_car_performance: Toggle::Off,
+            recovery_mode: RecoveryMode::AutoRecovery,
+            flashback_limit: FlashbackLimit::High,
+            surface_type: SurfaceType::Simplified,
+            low_fuel_mode: LowFuelMode::Easy,
+            race_starts: RaceStarts::Manual,
+            tyre_temperature: TyreTemperatureMode::SurfaceOnly,
+            pit_lane_tyre_sim: Toggle::Off,
+            car_damage: CarDamage::Off,
+            car_damage_rate: CarDamageRate::Reduced,
+            collisions: Collisions::Off,
+            collisions_off_for_first_lap_only: Toggle::Off,
+            mp_unsafe_pit_release: Toggle::Off,
+            mp_off_for_griefing: Toggle::Off,
+            corner_cutting_stringency: CornerCuttingStringency::Regular,
+            parc_ferme_rules: Toggle::Off,
+            pit_stop_experience: PitStopExperience::Immersive,
+            safety_car: SafetyCarSetting::Standard,
+            safety_car_experience: ExperienceMode::Unknown,
+            formation_lap: Toggle::Off,
+            formation_lap_experience: ExperienceMode::Unknown,
+            red_flags: RedFlagsSetting::Standard,
+            affects_licence_level_solo: Toggle::Off,
+            affects_licence_level_mp: Toggle::Off,
+            num_sessions_in_weekend: 0,
+            weekend_structure: [SessionType::Unknown; 12],
+            sector2_lap_distance_start: 0.0,
+            sector3_lap_distance_start: 0.0,
+        }
+    }
 }

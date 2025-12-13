@@ -11,6 +11,4 @@ pub enum CornerCuttingStringency {
     Regular = 0,
     /// Strict track limit enforcement
     Strict = 1,
-    // /// Unknown or not applicable value
-    // Unknown = 255,
 }

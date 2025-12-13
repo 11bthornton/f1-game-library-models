@@ -11,6 +11,4 @@ pub enum SpeedUnits {
     /// Kilometres per hour
     #[default]
     Kph = 1,
-    // /// Unknown or not applicable value
-    // Unknown = 255,
 }
