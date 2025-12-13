@@ -11,7 +11,7 @@ use serde::{Deserialize, Serialize};
 /// * `front_left` - Front left wing damage percentage
 /// * `front_right` - Front right wing damage percentage
 /// * `rear` - Rear wing damage percentage
-#[derive(Deserialize, Debug, Serialize, Clone, Copy)]
+#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy)]
 pub struct WingDamage {
     /// Front left wing damage percentage
     pub front_left: u8,

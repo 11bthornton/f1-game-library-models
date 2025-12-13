@@ -3,14 +3,14 @@
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Gearbox assist settings
-#[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy, PartialEq)]
+#[derive(Serialize_repr, Deserialize_repr, Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]
 #[repr(u8)]
 pub enum GearboxAssist {
     /// Manual gearbox (no assist)
-    Manual,
+    #[default]
+    Manual = 1,
     /// Manual gearbox with suggested gear indicators
-    #[serde(rename = "Suggested Gear")]
-    SuggestedGear,
+    SuggestedGear = 2,
     /// Fully automatic gearbox
-    Automatic,
+    Automatic = 3,
 }

@@ -26,16 +26,20 @@ pub struct PacketSessionHistoryData {
     pub num_tyre_stints: u8,
 
     /// Lap number that achieved the best lap time
-    pub best_lap_time_num: u8,
+    #[serde(with = "crate::utils::u8_as_usize")]
+    pub best_lap_time_num: usize,
 
     /// Lap number that achieved the best sector 1 time
-    pub best_sector_1_lap_num: u8,
+    #[serde(with = "crate::utils::u8_as_usize")]
+    pub best_sector_1_lap_num: usize,
 
     /// Lap number that achieved the best sector 2 time
-    pub best_sector_2_lap_num: u8,
+    #[serde(with = "crate::utils::u8_as_usize")]
+    pub best_sector_2_lap_num: usize,
 
     /// Lap number that achieved the best sector 3 time
-    pub best_sector_3_lap_num: u8,
+    #[serde(with = "crate::utils::u8_as_usize")]
+    pub best_sector_3_lap_num: usize,
 
     /// Historical lap data for all laps completed
     #[serde(with = "BigArray")]
@@ -43,4 +47,24 @@ pub struct PacketSessionHistoryData {
 
     /// Historical tyre stint data (up to 8 stints)
     pub tyre_stints_history_data: [TyreStintHistoryData; 8],
+}
+
+impl Default for PacketSessionHistoryData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::packet_header::PacketId::SessionHistoryPacket,
+                ..PacketHeader::default()
+            },
+            car_index: 0,
+            num_laps: 0,
+            num_tyre_stints: 0,
+            best_lap_time_num: 0,
+            best_sector_1_lap_num: 0,
+            best_sector_2_lap_num: 0,
+            best_sector_3_lap_num: 0,
+            lap_history_data: [LapHistoryData::default(); 100],
+            tyre_stints_history_data: [TyreStintHistoryData::default(); 8],
+        }
+    }
 }

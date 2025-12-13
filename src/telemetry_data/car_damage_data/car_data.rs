@@ -31,7 +31,7 @@ use super::{EngineWear, WingDamage};
 /// * `mgu_k_damage` - MGU-K damage percentage (F1 2024+)
 /// * `mgu_h_damage` - MGU-H damage percentage (F1 2024+)
 /// * `active_aero_damage` - Active aero damage percentage (F1 2025+)
-#[derive(Deserialize, Debug, Serialize, Clone, Copy)]
+#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy)]
 pub struct CarDamageData {
     /// Tyre wear data
     pub tyre_wear: WheelData<f32>,

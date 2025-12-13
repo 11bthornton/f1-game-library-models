@@ -4,12 +4,13 @@ use serde_repr::Deserialize_repr;
 /// Gaming platforms.
 ///
 /// These represent the various gaming platforms that players can use.
-#[derive(Debug, Deserialize_repr, Serialize, Clone, Copy, PartialEq)]
+#[derive(Debug, Default, Deserialize_repr, Serialize, Clone, Copy, PartialEq)]
 #[repr(u8)]
 pub enum Platform {
     /// Unknown platform (value 0)
     #[serde(rename = "Unknown")]
-    SuperUnknown = 0,
+    #[default]
+    Default = 0,
     /// Steam platform
     Steam = 1,
     /// PlayStation platform

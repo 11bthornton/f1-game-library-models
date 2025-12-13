@@ -11,6 +11,7 @@ pub const MAX_NUM_LAPS_IN_LAP_POSITIONS_HISTORY_PACKET: usize = 50;
 pub struct PacketLapPositionsData {
     /// Header information for the packet
     pub header: PacketHeader,
+
     /// Number of laps in the data
     pub num_laps: u8,
 
@@ -19,7 +20,7 @@ pub struct PacketLapPositionsData {
 
     /// Array of lap positions for each car (up to 22 cars)
     #[serde(with = "BigArray")]
-    pub lap_positions: [CarLapHistory; MAX_CARS_IN_SESSION],
+    pub lap_positions_data: [CarLapHistory; MAX_CARS_IN_SESSION],
 }
 
 #[derive(Deserialize, Debug, Serialize, Clone, Copy)]
@@ -27,4 +28,26 @@ pub struct CarLapHistory {
     /// Array of lap positions for each car (up to 50 laps)
     #[serde(with = "BigArray")]
     pub lap_positions: [u8; MAX_NUM_LAPS_IN_LAP_POSITIONS_HISTORY_PACKET],
+}
+
+impl Default for PacketLapPositionsData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::LapPositionsPacket,
+                ..PacketHeader::default()
+            },
+            num_laps: 0,
+            lap_start: 0,
+            lap_positions_data: [CarLapHistory::default(); MAX_CARS_IN_SESSION],
+        }
+    }
+}
+
+impl Default for CarLapHistory {
+    fn default() -> Self {
+        Self {
+            lap_positions: [0; MAX_NUM_LAPS_IN_LAP_POSITIONS_HISTORY_PACKET],
+        }
+    }
 }

@@ -3,6 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 use super::final_classification_data::FinalClassificationData;
+use crate::utils::u8_as_usize;
 use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing final classification data for all cars in the session.
@@ -20,7 +21,22 @@ pub struct PacketClassificationData {
     /// Header information for the packet
     pub header: PacketHeader,
     /// Number of cars in the final classification
-    pub num_cars: u8,
+    #[serde(with = "u8_as_usize")]
+    pub num_cars: usize,
+
     /// Array of classification data for each car (up to 22 cars)
     pub classification_data: [FinalClassificationData; MAX_CARS_IN_SESSION],
+}
+
+impl Default for PacketClassificationData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::FinalClassificationPacket,
+                ..PacketHeader::default()
+            },
+            num_cars: 0,
+            classification_data: [FinalClassificationData::default(); MAX_CARS_IN_SESSION],
+        }
+    }
 }

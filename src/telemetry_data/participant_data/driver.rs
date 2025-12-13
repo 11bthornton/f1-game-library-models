@@ -3,7 +3,7 @@
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible drivers in the game
-#[derive(Deserialize_repr, Debug, Serialize_repr, Copy, Clone, PartialEq)]
+#[derive(Deserialize_repr, Debug, Default, Serialize_repr, Copy, Clone, PartialEq)]
 #[repr(u8)]
 pub enum Driver {
     /// Driver: Carlos Sainz
@@ -537,6 +537,7 @@ pub enum Driver {
     LucasBlakeley = 159,
 
     #[serde(other)]
+    #[default]
     Unknown = 255,
 
     /// Driver: Joshua Durksen

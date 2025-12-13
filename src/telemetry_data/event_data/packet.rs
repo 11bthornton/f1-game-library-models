@@ -2,7 +2,7 @@
 
 use serde::Serialize;
 
-use super::event_type::EventType;
+use super::event_type::Event;
 use crate::telemetry_data::{
     Buttons, ChequeredFlag, Collision, DriveThroughPenaltyServed, DrsDisabled, DrsEnabled,
     FastestLap, FlashBack, InternalPacketEventData, LightsOut, Overtake, Penalty, RaceWinner,
@@ -14,16 +14,30 @@ use crate::telemetry_data::{
 ///
 /// This structure contains the decoded event data with the specific
 /// event type information properly structured.
-#[derive(Debug, Serialize, Default, Clone, Copy)]
+#[derive(Debug, Serialize, Clone, Copy)]
 pub struct PacketEventData {
     /// Header information for the packet
-    pub m_header: PacketHeader,
+    pub header: PacketHeader,
 
-    /// Event string code (4 characters) identifying the event type
-    pub event_string_code: [u8; 4],
+    // Event string code (4 characters) identifying the event type
+    // hidden from end user as it's mainly for internal use
+    event_string_code: [u8; 4],
 
     /// The specific event type and its associated data
-    pub r#type: EventType,
+    pub r#type: Event,
+}
+
+impl Default for PacketEventData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::PacketId::EventPacket,
+                ..PacketHeader::default()
+            },
+            event_string_code: [0; 4],
+            r#type: Event::SessionStart(SessionStart),
+        }
+    }
 }
 
 // Helper macro,
@@ -34,7 +48,7 @@ macro_rules! deserialise_event_type {
             $(
                 $event_code => {
                     bincode::deserialize::<$ty>(&$internal_repr.remaining_data)
-                        .map(EventType::$variant)
+                        .map(Event::$variant)
                 }
             )*
             _ => unreachable!(
@@ -54,7 +68,7 @@ pub fn deserialise_event_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<Packe
     // Then match against the event string code
     // to determine the specific event type and produce the final structure.
     Ok(PacketEventData {
-        m_header: internal_representation.m_header,
+        header: internal_representation.header,
         event_string_code: internal_representation.event_string_code,
         r#type: deserialise_event_type!(
             internal_representation,

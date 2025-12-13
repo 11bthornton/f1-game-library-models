@@ -43,7 +43,7 @@ pub use collision::Collision;
 pub use drive_through_penalty_served::DriveThroughPenaltyServed;
 pub use drs_disabled::DrsDisabled;
 pub use drs_enabled::DrsEnabled;
-pub use event_type::EventType;
+pub use event_type::Event;
 pub use fastest_lap::FastestLap;
 pub use flash_back::FlashBack;
 pub use infringement_type::InfringementType;

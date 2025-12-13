@@ -25,3 +25,15 @@ pub struct PacketCarDamageData {
     /// Array of damage data for each car (up to 22 cars)
     pub car_damage_data: [CarDamageData; MAX_CARS_IN_SESSION],
 }
+
+impl Default for PacketCarDamageData {
+    fn default() -> Self {
+        Self {
+            header: PacketHeader {
+                packet_id: crate::telemetry_data::packet_header::PacketId::CarDamagePacket,
+                ..PacketHeader::default()
+            },
+            car_damage_data: [CarDamageData::default(); MAX_CARS_IN_SESSION],
+        }
+    }
+}

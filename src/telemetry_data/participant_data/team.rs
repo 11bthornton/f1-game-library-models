@@ -3,9 +3,10 @@
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
 /// Enum representing all possible teams in the game
-#[derive(Debug, Copy, Clone, PartialEq, Deserialize_repr, Serialize_repr)]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Deserialize_repr, Serialize_repr)]
 #[repr(u8)]
 pub enum Team {
+    #[default]
     Mercedes = 0,
 
     Ferrari = 1,
@@ -18,13 +19,13 @@ pub enum Team {
 
     Alpine = 5,
 
-    RB = 6, // Updated from AlphaTauri to RB
+    RB = 6,
 
     Haas = 7,
 
     McLaren = 8,
 
-    Sauber = 9, // Updated from AlfaRomeo to Sauber
+    Sauber = 9,
 
     Mercedes2020 = 85,
 

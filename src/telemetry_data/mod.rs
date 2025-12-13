@@ -61,7 +61,7 @@ pub enum F1Data {
     LapData(PacketLapData),
 
     /// Car motion data
-    CarMotionData(PacketMotionData),
+    CarMotionData(PacketCarMotionData),
 
     /// Session participant information
     ParticipantData(PacketParticipantData),
@@ -85,7 +85,7 @@ pub enum F1Data {
     LobbyData(PacketLobbyInfoData),
 
     /// Extended motion data
-    ExtendedMotionData(PacketMotionExData),
+    ExtendedMotionData(PacketCarMotionExData),
 
     /// Tyre set information
     TyreSetData(PacketTyreSetsData),
@@ -130,7 +130,7 @@ pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<F1Data>
             header, bytes,
             PacketId::CarDamagePacket => CarDamageData(PacketCarDamageData),
             PacketId::CarSetupsPacket => CarSetupData(PacketCarSetupData),
-            PacketId::MotionPacket => CarMotionData(PacketMotionData),
+            PacketId::CarMotionPacket => CarMotionData(PacketCarMotionData),
             PacketId::SessionPacket => SessionData(PacketSessionData),
             PacketId::LapDataPacket => LapData(PacketLapData),
             PacketId::ParticipantsPacket => ParticipantData(PacketParticipantData),
@@ -139,10 +139,36 @@ pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<F1Data>
             PacketId::FinalClassificationPacket => ClassificationData(PacketClassificationData),
             PacketId::LobbyInfoPacket => LobbyData(PacketLobbyInfoData),
             PacketId::SessionHistoryPacket => SessionHistoryData(PacketSessionHistoryData),
-            PacketId::MotionExPacket => ExtendedMotionData(PacketMotionExData),
+            PacketId::CarMotionExPacket => ExtendedMotionData(PacketCarMotionExData),
             PacketId::TimeTrialPacket => TimeTrialData(PacketTimeTrialData),
-            PacketId::LapPositionPacket => LapPositionsData(PacketLapPositionsData),
+            PacketId::LapPositionsPacket => LapPositionsData(PacketLapPositionsData),
             PacketId::TyreSetsPacket => TyreSetData(PacketTyreSetsData),
         )?)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_all_packets_implement_default() {
+        // Ensure all packet types implement Default
+        let _ = PacketCarDamageData::default();
+        let _ = PacketCarSetupData::default();
+        let _ = PacketCarStatusData::default();
+        let _ = PacketCarTelemetryData::default();
+        let _ = PacketEventData::default();
+        let _ = PacketClassificationData::default();
+        let _ = PacketLapData::default();
+        let _ = PacketLapPositionsData::default();
+        let _ = PacketLobbyInfoData::default();
+        let _ = PacketCarMotionData::default();
+        let _ = PacketCarMotionExData::default();
+        let _ = PacketParticipantData::default();
+        let _ = PacketSessionData::default();
+        let _ = PacketSessionHistoryData::default();
+        let _ = PacketTimeTrialData::default();
+        let _ = PacketTyreSetsData::default();
     }
 }

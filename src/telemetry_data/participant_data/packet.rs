@@ -14,5 +14,20 @@ pub struct PacketParticipantData {
     pub num_active_cars: u8,
 
     /// Array of participant data for all cars
-    pub participants: [ParticipantData; MAX_CARS_IN_SESSION],
+    pub participant_data: [ParticipantData; MAX_CARS_IN_SESSION],
+}
+
+impl Default for PacketParticipantData {
+    fn default() -> Self {
+        let header = PacketHeader {
+            packet_id: crate::telemetry_data::packet_header::PacketId::ParticipantsPacket,
+            ..Default::default()
+        };
+
+        Self {
+            header,
+            num_active_cars: 0,
+            participant_data: [ParticipantData::default(); MAX_CARS_IN_SESSION],
+        }
+    }
 }
