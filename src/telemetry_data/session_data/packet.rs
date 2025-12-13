@@ -70,10 +70,10 @@ pub struct PacketSessionData {
     pub sli_pro_native_support: bool,
 
     /// Number of marshal zones on track
-    pub num_marshall_zones: u8,
+    pub num_marshal_zones: u8,
 
     /// List of marshal zones (max 21)
-    pub marshall_zones: [MarshalZone; 21],
+    pub marshal_zones: [MarshalZone; 21],
 
     /// Current safety car status
     pub safety_car_status: SafetyCarStatus,
@@ -248,8 +248,8 @@ impl Default for PacketSessionData {
             is_spectating: false,
             spectator_car_index: 0,
             sli_pro_native_support: false,
-            num_marshall_zones: 0,
-            marshall_zones: [MarshalZone::default(); 21],
+            num_marshal_zones: 0,
+            marshal_zones: [MarshalZone::default(); 21],
             safety_car_status: SafetyCarStatus::NoSafetyCar,
             network_game: NetworkGame::Offline,
             num_weather_forecast_samples: 0,

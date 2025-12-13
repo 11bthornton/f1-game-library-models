@@ -13,6 +13,7 @@ pub struct PacketCarSetupData {
     /// Array of setup data for each car (up to 22 cars)
     pub car_setups: [CarSetupData; MAX_CARS_IN_SESSION],
 
+    /// Next front wing value to be applied
     pub next_front_wing_value: f32,
 }
 

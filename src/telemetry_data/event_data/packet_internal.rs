@@ -8,7 +8,7 @@ use crate::telemetry_data::packet_header::PacketHeader;
 /// It is then converted into the `PacketEventData` struct which is exposed.
 #[derive(Debug, Deserialize)]
 pub struct InternalPacketEventData {
-    pub m_header: PacketHeader,
+    pub header: PacketHeader,
 
     pub event_string_code: [u8; 4],
 

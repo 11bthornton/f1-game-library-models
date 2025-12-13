@@ -90,9 +90,9 @@ pub struct PacketCarMotionExData {
     pub rear_roll_angle: f32,
     /// Chassis yaw in radians
     pub chassis_yaw: f32,
-    /// Chassis roll in radians
-    pub chassis_pitch: f32,
     /// Chassis pitch in radians
+    pub chassis_pitch: f32,
+    /// Wheel camber for each wheel [RL, RR, FL, FR]
     pub wheel_camber: WheelData<f32>,
     /// Wheel camber gain for each wheel [RL, RR, FL, FR]
     pub wheel_camber_gain: WheelData<f32>,

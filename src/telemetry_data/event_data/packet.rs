@@ -68,7 +68,7 @@ pub fn deserialise_event_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<Packe
     // Then match against the event string code
     // to determine the specific event type and produce the final structure.
     Ok(PacketEventData {
-        header: internal_representation.m_header,
+        header: internal_representation.header,
         event_string_code: internal_representation.event_string_code,
         r#type: deserialise_event_type!(
             internal_representation,

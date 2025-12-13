@@ -12,7 +12,8 @@ use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::Packe
 /// for the player's car.
 #[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 pub struct PacketCarMotionData {
-    pub packet_header: PacketHeader,
+    /// Header information for the packet
+    pub header: PacketHeader,
 
     /// Motion data for all cars on track
     pub car_motion_data: [CarMotionData; MAX_CARS_IN_SESSION],
@@ -21,7 +22,7 @@ pub struct PacketCarMotionData {
 impl Default for PacketCarMotionData {
     fn default() -> Self {
         Self {
-            packet_header: PacketHeader {
+            header: PacketHeader {
                 packet_id: crate::telemetry_data::PacketId::CarMotionPacket,
                 ..PacketHeader::default()
             },

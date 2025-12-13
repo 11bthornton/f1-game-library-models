@@ -12,8 +12,8 @@ use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::Packe
 ///
 /// # Fields
 ///
-/// * `m_header` - Header information for the packet
-/// * `telemetry_data` - Array of telemetry data for each car (up to 22 cars)
+/// * `header` - Header information for the packet
+/// * `car_telemetry_data` - Array of telemetry data for each car (up to 22 cars)
 /// * `mfd_panel_index` - Index of the MFD panel being displayed
 /// * `mfd_panel_index_secondary_player` - Index of the MFD panel for the secondary player
 /// * `suggested_gear` - Suggested gear for the player (-1 if no suggestion)
