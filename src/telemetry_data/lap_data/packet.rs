@@ -13,7 +13,7 @@ use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::Packe
 /// * `lap_data` - Array of lap data for each car (up to 22 cars)
 /// * `time_trial_pb_car_idx` - Index of personal best car in time trial
 /// * `m_time_trial_rival_car_idx` - Index of rival car in time trial
-#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy, PartialEq)]
+#[derive(Deserialize, Debug, Serialize, Clone, Copy, PartialEq)]
 pub struct PacketLapData {
     /// Header information for the packet
     pub header: PacketHeader,
@@ -26,4 +26,20 @@ pub struct PacketLapData {
     /// Index of rival car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]
     pub m_time_trial_rival_car_idx: usize,
+}
+
+impl Default for PacketLapData {
+    fn default() -> Self {
+        let header = PacketHeader {
+            packet_id: crate::telemetry_data::packet_header::PacketId::LapDataPacket,
+            ..Default::default()
+        };
+
+        Self {
+            header,
+            lap_data: [LapData::default(); MAX_CARS_IN_SESSION],
+            time_trial_pb_car_idx: 0,
+            m_time_trial_rival_car_idx: 0,
+        }
+    }
 }

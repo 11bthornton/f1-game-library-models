@@ -52,7 +52,12 @@
 //!
 //! Their use in this project is purely informational and does not imply any endorsement or ownership. If you are a rights holder and have concerns, please contact the maintainer.
 
+// #![no_std]
+
 pub mod telemetry_data;
+
+#[cfg(feature = "client")]
+pub mod client;
 
 pub(crate) mod utils;
 
