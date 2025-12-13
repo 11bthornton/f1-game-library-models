@@ -24,7 +24,7 @@ pub struct PacketLapData {
     /// Index of personal best car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]
     pub time_trial_pb_car_idx: usize,
-    
+
     /// Index of rival car in time trial
     #[serde(with = "crate::utils::u8_as_usize")]
     pub time_trial_rival_car_idx: usize,

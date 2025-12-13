@@ -30,7 +30,7 @@ impl Toggle {
     }
 
     // Returns true if the toggle is unknown/not applicable
-//     pub fn is_unknown(&self) -> bool {
-//         // matches!(self, Toggle::Unknown)
-//     }
+    //     pub fn is_unknown(&self) -> bool {
+    //         // matches!(self, Toggle::Unknown)
+    //     }
 }

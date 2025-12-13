@@ -35,7 +35,7 @@ pub enum FuelMix {
 /// Traction control settings.
 ///
 /// These settings control the level of traction control assistance.
-#[derive(Deserialize_repr, Debug, Default,Serialize_repr, Clone, Copy, PartialEq)]
+#[derive(Deserialize_repr, Debug, Default, Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
 pub enum TractionControl {
     /// Traction control is disabled

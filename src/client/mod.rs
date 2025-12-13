@@ -83,7 +83,7 @@ impl TelemetryClient {
     {
         loop {
             let (len, _) = self._udp_listener.recv_from(&mut self._buffer).await?;
-            
+
             let packet = crate::deserialise_udp_packet_from_bytes(&self._buffer[..len])?;
 
             if len == 753 {

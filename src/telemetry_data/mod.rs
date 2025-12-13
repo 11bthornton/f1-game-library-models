@@ -150,7 +150,7 @@ pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<F1Data>
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_all_packets_implement_default() {
         // Ensure all packet types implement Default

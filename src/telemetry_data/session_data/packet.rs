@@ -4,29 +4,19 @@ use serde::{Deserialize, Serialize};
 use serde_big_array::BigArray;
 
 use super::{
-    braking_assist::BrakingAssist,
-    car_damage::CarDamage,
-    car_damage_rate::CarDamageRate,
-    collisions::Collisions,
-    corner_cutting_stringency::CornerCuttingStringency,
-    experience_mode::ExperienceMode,
-    flashback_limit::FlashbackLimit,
-    gearbox_assist::GearboxAssist,
-    low_fuel_mode::LowFuelMode,
-    marshal_zone::MarshalZone,
-    pit_stop_experience::PitStopExperience,
-    race_starts::RaceStarts,
-    recovery_mode::RecoveryMode,
-    red_flags_setting::RedFlagsSetting,
-    safety_car_setting::SafetyCarSetting,
-    speed_units::SpeedUnits,
-    surface_type::SurfaceType,
-    temp_units::TempUnits,
-    toggle::Toggle,
-    tyre_temperature_mode::TyreTemperatureMode,
-    weather_forecast_sample::WeatherForecastSample,
+    braking_assist::BrakingAssist, car_damage::CarDamage, car_damage_rate::CarDamageRate,
+    collisions::Collisions, corner_cutting_stringency::CornerCuttingStringency,
+    experience_mode::ExperienceMode, flashback_limit::FlashbackLimit,
+    gearbox_assist::GearboxAssist, low_fuel_mode::LowFuelMode, marshal_zone::MarshalZone,
+    pit_stop_experience::PitStopExperience, race_starts::RaceStarts, recovery_mode::RecoveryMode,
+    red_flags_setting::RedFlagsSetting, safety_car_setting::SafetyCarSetting,
+    speed_units::SpeedUnits, surface_type::SurfaceType, temp_units::TempUnits, toggle::Toggle,
+    tyre_temperature_mode::TyreTemperatureMode, weather_forecast_sample::WeatherForecastSample,
 };
-use crate::telemetry_data::{DynamicRacingLine, DynamicRacingLineType, Formula, GameMode, NetworkGame, RuleSet, SafetyCarStatus, SessionType, Track, Weather, packet_header::PacketHeader};
+use crate::telemetry_data::{
+    DynamicRacingLine, DynamicRacingLineType, Formula, GameMode, NetworkGame, RuleSet,
+    SafetyCarStatus, SessionType, Track, Weather, packet_header::PacketHeader,
+};
 
 const WEATHER_FORECAST_SAMPLE_SIZE: usize = 64;
 

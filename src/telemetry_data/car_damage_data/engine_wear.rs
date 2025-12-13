@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 /// * `ice` - Internal Combustion Engine wear percentage
 /// * `mguk` - MGU-K wear percentage
 /// * `tc` - Turbocharger wear percentage
-#[derive(Deserialize, Debug, Default,Serialize, Clone, Copy)]
+#[derive(Deserialize, Debug, Default, Serialize, Clone, Copy)]
 pub struct EngineWear {
     /// MGU-H wear percentage
     pub mguh: u8,

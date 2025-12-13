@@ -12,7 +12,7 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 ///
 /// These are the tyre compounds as they appear visually in the game,
 /// which can be different from the actual compound used.
-#[derive(Deserialize_repr, Debug, Default,Serialize_repr, Clone, Copy, PartialEq)]
+#[derive(Deserialize_repr, Debug, Default, Serialize_repr, Clone, Copy, PartialEq)]
 #[repr(u8)]
 pub enum VisualTyreCompound {
     /// No tyre compound

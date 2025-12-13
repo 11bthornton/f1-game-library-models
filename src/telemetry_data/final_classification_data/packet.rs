@@ -3,8 +3,8 @@
 use serde::{Deserialize, Serialize};
 
 use super::final_classification_data::FinalClassificationData;
-use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 use crate::utils::u8_as_usize;
+use crate::{constants::MAX_CARS_IN_SESSION, telemetry_data::packet_header::PacketHeader};
 
 /// Packet containing final classification data for all cars in the session.
 ///
