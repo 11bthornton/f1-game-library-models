@@ -93,8 +93,22 @@ impl TelemetryClient {
     }
 }
 
+/// Control flow for telemetry packet processing.
+///
+/// This enum is returned from packet handler methods to indicate whether the
+/// `TelemetryClient` should continue processing incoming packets or stop listening.
+///
+/// # When to use each variant
+/// - [`Continue`]: Return this to keep the client listening for more packets.
+/// - [`Stop`]: Return this to stop the client and break out of the listening loop.
 pub enum TelemetryControl {
+    /// Continue processing and listening for more telemetry packets.
+    ///
+    /// Return this from a packet handler when you want the client to keep running.
     Continue,
+    /// Stop processing and exit the telemetry listening loop.
+    ///
+    /// Return this from a packet handler when you want to terminate the client.
     Stop,
 }
 
