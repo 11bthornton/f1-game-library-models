@@ -4,6 +4,7 @@
 //! including weather conditions, track details, and game settings.
 
 mod assist_toggle;
+mod braking_assist;
 mod car_damage;
 mod car_damage_rate;
 mod collisions;
@@ -31,6 +32,7 @@ mod session_type;
 mod speed_units;
 mod surface_type;
 mod temp_units;
+mod toggle;
 mod track;
 mod tyre_temperature_mode;
 mod weather;
@@ -38,6 +40,7 @@ mod weather_forecast_sample;
 
 // Re-export the structs and enums
 pub use assist_toggle::AssistToggle;
+pub use braking_assist::BrakingAssist;
 pub use car_damage::CarDamage;
 pub use car_damage_rate::CarDamageRate;
 pub use collisions::Collisions;
@@ -65,6 +68,7 @@ pub use session_type::SessionType;
 pub use speed_units::SpeedUnits;
 pub use surface_type::SurfaceType;
 pub use temp_units::TempUnits;
+pub use toggle::Toggle;
 pub use track::Track;
 pub use tyre_temperature_mode::TyreTemperatureMode;
 pub use weather::Weather;
