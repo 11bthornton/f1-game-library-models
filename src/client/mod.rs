@@ -13,12 +13,32 @@
 //! ```no_run
 //! use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
 //! use f1_game_library_models_25::telemetry_data::PacketLapData;
+//!
 //! struct MyHandler;
-//! impl HandlePacket for MyHandler {
-//!    async fn handle_lap_data(&mut self, data: PacketLapData) -> anyhow::Result<TelemetryControl> {
-//!        println!("Received lap data: {:?}", data);
-//!        Ok(TelemetryControl::Continue)
-//!    }
+//!
+//! #[tokio::main]
+//! async fn main() -> anyhow::Result<()> {
+//!     // Implement your packet handler
+//!     struct MyHandler;
+//!     #[async_trait::async_trait]
+//!     impl HandlePacket for MyHandler {
+//!         async fn handle_lap_data(&mut self, data: PacketLapData) -> anyhow::Result<TelemetryControl> {
+//!             println!("Received lap data: {:?}", data);
+//!             Ok(TelemetryControl::Continue)
+//!         }
+//!         // Implement other required methods...
+//!     }
+//!
+//!     // Instantiate the handler
+//!     let mut handler = MyHandler;
+//!
+//!     // Create the telemetry client, binding to the desired address and port
+//!     let mut client = TelemetryClient::new_from_address("0.0.0.0:20777").await?;
+//!
+//!     // Start listening for packets
+//!     client.listen(&mut handler).await?;
+//!
+//!     Ok(())
 //! }
 //! ```
 
