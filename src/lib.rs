@@ -60,7 +60,10 @@ pub(crate) use utils::u8_as_usize;
 
 pub use telemetry_data::deserialise_udp_packet_from_bytes;
 
+use crate::telemetry_data::PacketHeader;
+
 pub mod constants {
+    pub const HEADER_SIZE: usize = 29;
     pub const MAX_CARS_IN_SESSION: usize = 22;
     pub const PARTICIPANT_PACKET_SIZE: usize = 1284;
     pub const CAR_SETUP_PACKET_SIZE: usize = 1133;
@@ -78,4 +81,33 @@ pub mod constants {
     pub const TYRE_SETS_DATA_PACKET_SIZE: usize = 231;
     pub const TIME_TRIAL_DATA_PACKET_SIZE: usize = 101;
     pub const LAP_POSITIONS_DATA_PACKET_SIZE: usize = 1131;
+}
+
+unsafe trait Pod {}
+
+trait FormulaOnePacket: Sized + Pod + Copy {
+    const PACKET_SIZE: usize;
+
+    fn fix_endianness(&mut self);
+
+    fn from_bytes(bytes: &[u8]) -> anyhow::Result<Self> {
+        if bytes.len() < Self::PACKET_SIZE {
+            anyhow::bail!(
+                "Insufficient bytes: expected {}, got {}",
+                Self::PACKET_SIZE,
+                bytes.len()
+            );
+        }
+
+        // SAFETY:
+        // - We have already checked that bytes has at least PACKET_SIZE bytes
+        // - The type is marked as Pod, so it is safe to interpret the bytes as Self
+        // - We copy so we can safely take reference to the resulting value
+        let mut data = unsafe {
+            std::ptr::read_unaligned(bytes.as_ptr() as *const Self)
+        };
+
+        data.fix_endianness();
+        Ok(data)
+    }
 }

@@ -9,5 +9,5 @@ mod wing_damage;
 
 pub use car_data::CarDamageData;
 pub use engine_wear::EngineWear;
-pub use packet::PacketCarDamageData;
+pub use packet::CarDamageArray;
 pub use wing_damage::WingDamage;

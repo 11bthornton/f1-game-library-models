@@ -12,4 +12,4 @@ pub struct StopGoPenaltyServed {
     pub vehicle_index: usize,
 
     pub stop_time: f32,
-}
+} 

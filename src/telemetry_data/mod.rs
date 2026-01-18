@@ -6,7 +6,7 @@
 ///
 /// The main entry point for working with telemetry data is the `F1Data` enum,
 /// which encapsulates all possible telemetry packet types.
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 pub mod car_damage_data;
 pub mod car_setup_data;
@@ -46,13 +46,15 @@ pub use time_trial_data::*;
 pub use tyre_set_data::*;
 pub use utility::*;
 
+use crate::{FormulaOnePacket, constants::HEADER_SIZE};
+
 #[derive(Serialize, Debug, Copy, Clone)]
 pub enum F1Data {
     /// Car damage information
-    CarDamageData(PacketCarDamageData),
+    CarDamageData(Packet<CarDamageArray>),
 
     /// Car setup information
-    CarSetupData(PacketCarSetupData),
+    CarSetupData(Packet<CarSetupArray>),
 
     /// Car status information
     CarStatusData(PacketCarStatusData),
@@ -101,55 +103,45 @@ pub enum F1Data {
 
 macro_rules! deserialise_packet_type {
     ($header:expr, $bytes:expr, $($pid:pat => $variant:ident($ty:ty)),* $(,)?) => {
-        match $header.packet_id {
+        match $header.packet_id() {
             $(
                 $pid => {
-                    bincode::deserialize::<$ty>($bytes)
-                        .map(F1Data::$variant)
-                        .map_err(|e| Box::new(e) as Box<dyn std::error::Error>)
+                    let data = Packet {
+                        header: $header,
+                        data_raw: <$ty>::from_bytes($bytes)?,
+                    };
+                    F1Data::$variant(data)
                 }
             )*
-            PacketId::PacketIdMax => unreachable!(
-                "PacketId::PacketIdMax should not be encountered in deserialise_udp_packet_from_bytes"
+            PacketId::None => unreachable!(
+                "PacketId::None should not be encountered in deserialise_udp_packet_from_bytes"
             ),
             PacketId::EventPacket => unreachable!(
                 "EventPacket should be handled separately in deserialise_event_packet_from_bytes"
             ),
+            _ => unreachable!()
         }
     };
 }
 
-pub fn deserialise_udp_packet_from_bytes(
-    bytes: &[u8],
-) -> Result<F1Data, Box<dyn std::error::Error>> {
-    // Deserialize header only (don't use reader)
-    let header: PacketHeader = bincode::deserialize(bytes).map_err(|e| {
-        println!("Failed to deserialize PacketHeader: {}", e);
-        Box::new(e) as Box<dyn std::error::Error>
-    })?;
+pub fn deserialise_udp_packet_from_bytes(bytes: &[u8]) -> anyhow::Result<F1Data> {
+    let header: PacketHeader = PacketHeader::from_bytes(bytes)?;
 
-    if header.packet_id == PacketId::EventPacket {
-        Ok(F1Data::EventData(deserialise_event_packet_from_bytes(
-            bytes,
-        )?))
-    } else {
-        deserialise_packet_type!(
-            header, bytes,
-            PacketId::CarDamagePacket => CarDamageData(PacketCarDamageData),
-            PacketId::CarSetupsPacket => CarSetupData(PacketCarSetupData),
-            PacketId::MotionPacket => CarMotionData(PacketMotionData),
-            PacketId::SessionPacket => SessionData(PacketSessionData),
-            PacketId::LapDataPacket => LapData(PacketLapData),
-            PacketId::ParticipantsPacket => ParticipantData(PacketParticipantData),
-            PacketId::CarTelemetryPacket => TelemetryData(PacketCarTelemetryData),
-            PacketId::CarStatusPacket => CarStatusData(PacketCarStatusData),
-            PacketId::FinalClassificationPacket => ClassificationData(PacketClassificationData),
-            PacketId::LobbyInfoPacket => LobbyData(PacketLobbyInfoData),
-            PacketId::SessionHistoryPacket => SessionHistoryData(PacketSessionHistoryData),
-            PacketId::MotionExPacket => ExtendedMotionData(PacketMotionExData),
-            PacketId::TimeTrialPacket => TimeTrialData(PacketTimeTrialData),
-            PacketId::LapPositionPacket => LapPositionsData(PacketLapPositionsData),
-            PacketId::TyreSetsPacket => TyreSetData(PacketTyreSetsData),
-        )
-    }
+    let variant = deserialise_packet_type!(header, &bytes[HEADER_SIZE..],
+        PacketId::CarDamagePacket => CarDamageData(CarDamageArray),
+
+    );
+
+    Ok(variant)
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
+pub struct Packet<T>
+{
+    pub header: PacketHeader,
+    pub data_raw: T,
+}
+
+trait FixEndianness {
+    fn fix_endianness(&mut self);
 }
