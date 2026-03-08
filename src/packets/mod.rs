@@ -1,0 +1,16 @@
+pub mod car_damage;
+pub mod car_setups;
+pub mod car_status;
+pub mod car_telemetry;
+pub mod event;
+pub mod final_classification;
+pub mod lap_data;
+pub mod lap_positions;
+pub mod lobby_info;
+pub mod motion;
+pub mod motion_ex;
+pub mod participants;
+pub mod session;
+pub mod session_history;
+pub mod time_trial;
+pub mod tyre_sets;

@@ -15,14 +15,12 @@ allow-branch = ["main"]
 
 [dependencies]
 anyhow = "1.0.100"
-bincode = "1.3.1"
-serde              = { version = "1.0.144", features = ["derive"] }
-serde-big-array    = "0.5.1"
-serde_repr         = "0.1.20"
+num_enum = "0.7"
+paste = "1"
 tokio = { version = "1.45.1", optional = true, features = ["net"] }
 
 [dev-dependencies]
-tokio = { version = "1.45.1", features = ["full"] }
+tokio = { version = "1.45.1", features = ["rt", "net", "macros"] }
 
 [features]
 default = ["client"]
