@@ -10,7 +10,7 @@
 //! use f1_game_library_models_25::parse;
 //!
 //! fn handle(buf: &[u8]) {
-//!     match parse(buf) {
+//!     match parse::parse(buf) {
 //!         Ok(packet) => println!("{packet:?}"),
 //!         Err(e) => eprintln!("parse error: {e}"),
 //!     }
