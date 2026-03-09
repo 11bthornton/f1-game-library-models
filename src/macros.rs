@@ -6,7 +6,7 @@
 ///   no validation. Defined behaviour, just permissive.
 macro_rules! wire_flag_accessors {
     ($($field:ident),* $(,)?) => {
-        paste::paste! {
+        pastey::paste! {
             $(
                 pub fn [<is_ $field>](self) -> Option<bool> {
                     match self.$field {
@@ -34,7 +34,7 @@ macro_rules! wire_flag_accessors {
 ///   Only use when you are certain the source is trusted.
 macro_rules! wire_enum_accessors {
     ($($field:ident => $enum:ty),* $(,)?) => {
-        paste::paste! {
+        pastey::paste! {
             $(
                 pub fn $field(self) -> Result<$enum, u8> {
                     <$enum>::try_from(self.$field).map_err(|_| self.$field)
@@ -95,7 +95,7 @@ macro_rules! define_packets {
 /// Returns `Err(i8)` when the raw byte does not match a known variant.
 macro_rules! wire_i8_enum_accessors {
     ($($field:ident => $enum:ty),* $(,)?) => {
-        paste::paste! {
+        pastey::paste! {
             $(
                 pub fn $field(self) -> Result<$enum, i8> {
                     <$enum>::try_from(self.$field).map_err(|_| self.$field)
