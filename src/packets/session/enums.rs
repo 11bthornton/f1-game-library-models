@@ -166,3 +166,73 @@ pub enum IncidentFrequency {
     Standard = 2,
     Increased = 3,
 }
+
+/// Temperature trend in a weather forecast sample.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[repr(i8)]
+pub enum TemperatureChange {
+    Up = 0,
+    Down = 1,
+    NoChange = 2,
+}
+
+/// Surface physics simulation fidelity.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[repr(u8)]
+pub enum SurfaceSimulation {
+    Simplified = 0,
+    Realistic = 1,
+}
+
+/// Session type.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[repr(u8)]
+pub enum SessionType {
+    Unknown = 0,
+    Practice1 = 1,
+    Practice2 = 2,
+    Practice3 = 3,
+    ShortPractice = 4,
+    Qualifying1 = 5,
+    Qualifying2 = 6,
+    Qualifying3 = 7,
+    ShortQualifying = 8,
+    OneShotQualifying = 9,
+    SprintShootout1 = 10,
+    SprintShootout2 = 11,
+    SprintShootout3 = 12,
+    ShortSprintShootout = 13,
+    OneShotSprintShootout = 14,
+    Race = 15,
+    Race2 = 16,
+    Race3 = 17,
+    TimeTrial = 18,
+}
+
+/// Game mode.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[repr(u8)]
+pub enum GameMode {
+    GrandPrix = 4,
+    TimeTrial = 5,
+    Splitscreen = 6,
+    OnlineCustom = 7,
+    OnlineWeeklyEvent = 15,
+    StoryModeBrakingPoint = 17,
+    MyTeamCareer = 27,
+    DriverCareer = 28,
+    CareerOnline = 29,
+    ChallengeCareer = 30,
+    StoryModeApxgp = 75,
+    Benchmark = 127,
+}
+
+/// Ruleset in use for the session.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[repr(u8)]
+pub enum Ruleset {
+    PracticeAndQualifying = 0,
+    Race = 1,
+    TimeTrial = 2,
+    Elimination = 12,
+}

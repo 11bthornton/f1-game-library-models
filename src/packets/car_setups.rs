@@ -10,7 +10,7 @@ use std::mem::size_of;
 
 use crate::constants::{CAR_SETUP_PACKET_SIZE, MAX_CARS_IN_SESSION, PACKET_HEADER_SIZE};
 
-use super::super::{Packet, WheelData, endian::FixEndianness};
+use super::super::{Packet, WheelData, endian::FixEndianness, macros::wire_field_accessors};
 
 /// Wire-format setup data for a single car.
 #[derive(Debug, Clone, Copy)]
@@ -22,10 +22,10 @@ pub struct CarSetupData {
     pub on_throttle: u8,
     /// Differential adjustment off throttle (percentage).
     pub off_throttle: u8,
-    pub front_camber: f32,
-    pub rear_camber: f32,
-    pub front_toe: f32,
-    pub rear_toe: f32,
+    front_camber: f32,
+    rear_camber: f32,
+    front_toe: f32,
+    rear_toe: f32,
     pub front_suspension: u8,
     pub rear_suspension: u8,
     pub front_anti_roll_bar: u8,
@@ -36,9 +36,20 @@ pub struct CarSetupData {
     pub brake_bias: u8,
     pub engine_braking: u8,
     /// Tyre pressures in PSI — wire order: RL, RR, FL, FR.
-    pub tyre_pressure: WheelData<f32>,
+    tyre_pressure: WheelData<f32>,
     pub ballast: u8,
-    pub fuel_load: f32,
+    fuel_load: f32,
+}
+
+impl CarSetupData {
+    wire_field_accessors!(
+        front_camber: f32,
+        rear_camber: f32,
+        front_toe: f32,
+        rear_toe: f32,
+        tyre_pressure: WheelData<f32>,
+        fuel_load: f32,
+    );
 }
 
 const _: () = assert!(
@@ -66,7 +77,11 @@ impl FixEndianness for CarSetupData {
 pub struct CarSetupPayload {
     pub car_setups: [CarSetupData; MAX_CARS_IN_SESSION],
     /// Front wing value after next pit stop (player car only).
-    pub next_front_wing_value: f32,
+    next_front_wing_value: f32,
+}
+
+impl CarSetupPayload {
+    wire_field_accessors!(next_front_wing_value: f32);
 }
 
 const _: () = assert!(size_of::<CarSetupPayload>() == CAR_SETUP_PACKET_SIZE - PACKET_HEADER_SIZE);

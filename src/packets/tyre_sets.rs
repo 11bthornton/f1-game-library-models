@@ -12,8 +12,9 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::{ActualTyreCompound, VisualTyreCompound},
-    macros::{wire_enum_accessors, wire_flag_accessors, wire_index_accessors},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_index_accessors},
 };
+use super::session::enums::SessionType;
 
 /// Wire-format data for a single tyre set.
 #[derive(Debug, Clone, Copy)]
@@ -23,14 +24,13 @@ pub struct TyreSetData {
     visual_tyre_compound: u8,
     pub wear: u8,
     available: u8,
-    /// Recommended session for this tyre set (session type id).
-    pub recommended_session: u8,
+    recommended_session: u8,
     /// Laps remaining in this tyre set.
     pub life_span: u8,
     /// Maximum recommended laps for this compound.
     pub usable_life: u8,
     /// Lap delta time in milliseconds vs the currently fitted set.
-    pub lap_delta_time: i16,
+    lap_delta_time: i16,
     fitted: u8,
 }
 
@@ -40,8 +40,10 @@ impl TyreSetData {
     wire_enum_accessors!(
         actual_tyre_compound => ActualTyreCompound,
         visual_tyre_compound => VisualTyreCompound,
+        recommended_session  => SessionType,
     );
     wire_flag_accessors!(available, fitted);
+    wire_field_accessors!(lap_delta_time: i16);
 }
 
 impl FixEndianness for TyreSetData {

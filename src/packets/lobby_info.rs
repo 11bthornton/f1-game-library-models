@@ -11,8 +11,8 @@ use crate::constants::{LOBBY_INFO_DATA_PACKET_SIZE, MAX_CARS_IN_SESSION, PACKET_
 use super::super::{
     Packet,
     endian::FixEndianness,
-    enums::{Platform, Team},
-    macros::{wire_enum_accessors, wire_flag_accessors},
+    enums::{Nationality, Platform, Team},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors},
 };
 
 /// Ready status of a lobby participant.
@@ -30,8 +30,7 @@ pub enum ReadyStatus {
 pub struct LobbyInfoData {
     ai_controlled: u8,
     team_id: u8,
-    /// Nationality of the driver.
-    pub nationality: u8,
+    nationality: u8,
     platform: u8,
     name: [u8; 32],
     /// Car number of the player.
@@ -39,7 +38,7 @@ pub struct LobbyInfoData {
     your_telemetry: u8,
     show_online_names: u8,
     /// F1 World tech level.
-    pub tech_level: u16,
+    tech_level: u16,
     ready_status: u8,
 }
 
@@ -51,8 +50,11 @@ impl LobbyInfoData {
     wire_enum_accessors!(
         team_id      => Team,
         platform     => Platform,
+        nationality  => Nationality,
         ready_status => ReadyStatus,
     );
+
+    wire_field_accessors!(tech_level: u16);
 
     /// Participant name as a UTF-8 string slice.
     ///

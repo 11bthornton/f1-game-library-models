@@ -8,14 +8,15 @@
 //!
 //! # Example
 //! ```no_run
-//! use f1_game_library_models_25::v2::client::{TelemetryClient, HandlePacket, TelemetryControl};
-//! use f1_game_library_models_25::v2::packets::lap_data::PacketLapData;
+//! use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
+//! use f1_game_library_models_25::packets::lap_data::PacketLapData;
 //!
 //! struct MyHandler;
 //!
 //! impl HandlePacket for MyHandler {
 //!     async fn handle_lap_data(&mut self, packet: PacketLapData) -> anyhow::Result<TelemetryControl> {
-//!         println!("lap data: {:?}", packet.header.session_uid);
+//!         let uid = packet.header.session_uid();
+//!         println!("lap data session={uid}");
 //!         Ok(TelemetryControl::Continue)
 //!     }
 //! }

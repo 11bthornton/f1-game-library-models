@@ -89,7 +89,47 @@ macro_rules! define_packets {
     };
 }
 
+/// Generate checked and unchecked accessors for wire signed-enum (`i8`) fields.
+///
+/// Identical to [`wire_enum_accessors`] but for `i8`-backed fields and enums.
+/// Returns `Err(i8)` when the raw byte does not match a known variant.
+macro_rules! wire_i8_enum_accessors {
+    ($($field:ident => $enum:ty),* $(,)?) => {
+        paste::paste! {
+            $(
+                pub fn $field(self) -> Result<$enum, i8> {
+                    <$enum>::try_from(self.$field).map_err(|_| self.$field)
+                }
+
+                /// # Safety
+                /// The raw byte must be a valid discriminant of `$enum`.
+                /// Calling this with an out-of-range value is undefined behaviour.
+                pub unsafe fn [<$field _unchecked>](self) -> $enum {
+                    unsafe { std::mem::transmute(self.$field) }
+                }
+            )*
+        }
+    };
+}
+
+/// Generate copy-by-value accessors for wire fields.
+///
+/// For each `field: Type` pair, generates:
+/// - `pub fn field(self) -> Type` — copies the value out of the packed struct,
+///   avoiding any reference to a potentially-unaligned field.
+macro_rules! wire_field_accessors {
+    ($($field:ident : $ty:ty),* $(,)?) => {
+        $(
+            pub fn $field(self) -> $ty {
+                self.$field
+            }
+        )*
+    };
+}
+
 pub(crate) use define_packets;
 pub(crate) use wire_enum_accessors;
+pub(crate) use wire_field_accessors;
 pub(crate) use wire_flag_accessors;
+pub(crate) use wire_i8_enum_accessors;
 pub(crate) use wire_index_accessors;

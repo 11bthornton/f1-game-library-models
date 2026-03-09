@@ -20,7 +20,7 @@ paste = "1"
 tokio = { version = "1.45.1", optional = true, features = ["net"] }
 
 [dev-dependencies]
-tokio = { version = "1.45.1", features = ["rt", "net", "macros"] }
+tokio = { version = "1.45.1", features = ["rt", "rt-multi-thread", "net", "macros"] }
 
 [features]
 default = ["client"]

@@ -11,8 +11,8 @@ use crate::constants::{MAX_CARS_IN_SESSION, PACKET_HEADER_SIZE, PARTICIPANT_PACK
 use super::super::{
     Packet,
     endian::FixEndianness,
-    enums::{Platform, Team},
-    macros::{wire_enum_accessors, wire_flag_accessors},
+    enums::{Nationality, Platform, Team},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors},
 };
 
 /// RGB livery colour.
@@ -46,13 +46,12 @@ pub struct ParticipantData {
     my_team: u8,
     /// Race number of the car.
     pub race_number: u8,
-    /// Nationality of the driver.
-    pub nationality: u8,
+    nationality: u8,
     name: [u8; 32],
     your_telemetry: u8,
     show_online_names: u8,
     /// F1 World tech level.
-    pub tech_level: u16,
+    tech_level: u16,
     platform: u8,
     /// Number of valid livery colours for this car.
     pub num_colours: u8,
@@ -65,9 +64,12 @@ impl ParticipantData {
     wire_flag_accessors!(ai_controlled, my_team, your_telemetry, show_online_names);
 
     wire_enum_accessors!(
-        team_id  => Team,
-        platform => Platform,
+        team_id     => Team,
+        platform    => Platform,
+        nationality => Nationality,
     );
+
+    wire_field_accessors!(tech_level: u16);
 
     /// Participant name as a UTF-8 string slice.
     ///

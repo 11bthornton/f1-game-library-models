@@ -15,7 +15,7 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::{ActualTyreCompound, VisualTyreCompound},
-    macros::{wire_enum_accessors, wire_index_accessors},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_index_accessors},
 };
 
 const MAX_LAPS_IN_HISTORY: usize = 100;
@@ -25,12 +25,12 @@ const MAX_TYRE_STINTS: usize = 8;
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct LapHistoryData {
-    pub lap_time_in_ms: u32,
-    pub sector1_time_ms_part: u16,
+    lap_time_in_ms: u32,
+    sector1_time_ms_part: u16,
     pub sector1_time_minutes_part: u8,
-    pub sector2_time_ms_part: u16,
+    sector2_time_ms_part: u16,
     pub sector2_time_minutes_part: u8,
-    pub sector3_time_ms_part: u16,
+    sector3_time_ms_part: u16,
     pub sector3_time_minutes_part: u8,
     /// Bitmask: 0x01 lap valid, 0x02 sector 1 valid, 0x04 sector 2 valid, 0x08 sector 3 valid.
     lap_valid_bit_flags: u8,
@@ -39,6 +39,13 @@ pub struct LapHistoryData {
 const _: () = assert!(size_of::<LapHistoryData>() == 14);
 
 impl LapHistoryData {
+    wire_field_accessors!(
+        lap_time_in_ms: u32,
+        sector1_time_ms_part: u16,
+        sector2_time_ms_part: u16,
+        sector3_time_ms_part: u16,
+    );
+
     pub fn is_lap_valid(self) -> bool {
         self.lap_valid_bit_flags & 0x01 != 0
     }

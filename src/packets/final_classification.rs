@@ -13,7 +13,7 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::{ActualTyreCompound, ResultReason, ResultStatus, VisualTyreCompound},
-    macros::wire_enum_accessors,
+    macros::{wire_enum_accessors, wire_field_accessors},
 };
 
 const MAX_TYRE_STINTS: usize = 8;
@@ -35,9 +35,9 @@ pub struct FinalClassificationData {
     result_status: u8,
     result_reason: u8,
     /// Best lap time of the session in milliseconds.
-    pub best_lap_time_in_ms: u32,
+    best_lap_time_in_ms: u32,
     /// Total race time in seconds (excluding penalties).
-    pub total_race_time: f64,
+    total_race_time: f64,
     /// Total penalty time accumulated in seconds.
     pub penalties_time: u8,
     /// Number of penalties applied.
@@ -56,6 +56,11 @@ impl FinalClassificationData {
     wire_enum_accessors!(
         result_status => ResultStatus,
         result_reason => ResultReason,
+    );
+
+    wire_field_accessors!(
+        best_lap_time_in_ms: u32,
+        total_race_time: f64,
     );
 
     /// Actual tyre compound used in each stint.

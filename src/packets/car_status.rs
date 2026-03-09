@@ -10,8 +10,8 @@ use crate::constants::{CAR_STATUS_PACKET_SIZE, MAX_CARS_IN_SESSION, PACKET_HEADE
 use super::super::{
     Packet,
     endian::FixEndianness,
-    enums::{ActualTyreCompound, TractionControl, VisualTyreCompound},
-    macros::{wire_enum_accessors, wire_flag_accessors},
+    enums::{ActualTyreCompound, FiaFlag, TractionControl, VisualTyreCompound},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_i8_enum_accessors},
 };
 
 /// ERS energy deployment mode.
@@ -45,39 +45,38 @@ pub struct CarStatusData {
     pub front_brake_bias: u8,
     pit_limiter_status: u8,
     /// Current fuel mass.
-    pub fuel_in_tank: f32,
+    fuel_in_tank: f32,
     /// Fuel capacity.
-    pub fuel_capacity: f32,
+    fuel_capacity: f32,
     /// Fuel remaining in terms of laps (MFD value).
-    pub fuel_remaining_laps: f32,
+    fuel_remaining_laps: f32,
     /// Rev limiter RPM.
-    pub max_rpm: u16,
+    max_rpm: u16,
     /// Idle RPM.
-    pub idle_rpm: u16,
+    idle_rpm: u16,
     /// Maximum number of gears.
     pub max_gears: u8,
     drs_allowed: u8,
     /// Distance at which DRS becomes available (metres). `0` = not available.
-    pub drs_activation_distance: u16,
+    drs_activation_distance: u16,
     actual_tyre_compound: u8,
     visual_tyre_compound: u8,
     /// Age of the current tyre set in laps.
     pub tyres_age_laps: u8,
-    /// FIA flag shown to this car: -1 = invalid, 0 = none, 1 = green, 2 = blue, 3 = yellow.
-    pub vehicle_fia_flags: i8,
+    vehicle_fia_flags: i8,
     /// Engine power output of ICE (W).
-    pub engine_power_ice: f32,
+    engine_power_ice: f32,
     /// Engine power output of MGU-K (W).
-    pub engine_power_mguk: f32,
+    engine_power_mguk: f32,
     /// ERS energy store (Joules).
-    pub ers_store_energy: f32,
+    ers_store_energy: f32,
     ers_deploy_mode: u8,
     /// ERS energy harvested this lap by MGU-K (Joules).
-    pub ers_harvested_this_lap_mguk: f32,
+    ers_harvested_this_lap_mguk: f32,
     /// ERS energy harvested this lap by MGU-H (Joules).
-    pub ers_harvested_this_lap_mguh: f32,
+    ers_harvested_this_lap_mguh: f32,
     /// ERS energy deployed this lap (Joules).
-    pub ers_deployed_this_lap: f32,
+    ers_deployed_this_lap: f32,
     network_paused: u8,
 }
 
@@ -85,6 +84,7 @@ const _: () = assert!(size_of::<CarStatusData>() == 55);
 
 impl CarStatusData {
     wire_flag_accessors!(anti_lock_brakes, pit_limiter_status, drs_allowed, network_paused);
+    wire_i8_enum_accessors!(vehicle_fia_flags => FiaFlag);
 
     wire_enum_accessors!(
         traction_control      => TractionControl,
@@ -92,6 +92,21 @@ impl CarStatusData {
         actual_tyre_compound  => ActualTyreCompound,
         visual_tyre_compound  => VisualTyreCompound,
         ers_deploy_mode       => ErsDeployMode,
+    );
+
+    wire_field_accessors!(
+        fuel_in_tank: f32,
+        fuel_capacity: f32,
+        fuel_remaining_laps: f32,
+        max_rpm: u16,
+        idle_rpm: u16,
+        drs_activation_distance: u16,
+        engine_power_ice: f32,
+        engine_power_mguk: f32,
+        ers_store_energy: f32,
+        ers_harvested_this_lap_mguk: f32,
+        ers_harvested_this_lap_mguh: f32,
+        ers_deployed_this_lap: f32,
     );
 }
 

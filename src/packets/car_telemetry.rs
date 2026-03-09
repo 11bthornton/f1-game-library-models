@@ -7,41 +7,41 @@ use std::mem::size_of;
 
 use crate::constants::{MAX_CARS_IN_SESSION, PACKET_HEADER_SIZE, TELEMETRY_DATA_PACKET_SIZE};
 
-use super::super::{Packet, WheelData, endian::FixEndianness, enums::SurfaceType, macros::wire_flag_accessors};
+use super::super::{Packet, WheelData, endian::FixEndianness, enums::SurfaceType, macros::{wire_field_accessors, wire_flag_accessors}};
 
 /// Wire-format telemetry data for a single car.
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct CarTelemetryData {
     /// Speed of car in kilometres per hour.
-    pub speed: u16,
+    speed: u16,
     /// Throttle application (0.0 to 1.0).
-    pub throttle: f32,
+    throttle: f32,
     /// Steering (-1.0 full lock left to 1.0 full lock right).
-    pub steer: f32,
+    steer: f32,
     /// Brake application (0.0 to 1.0).
-    pub brake: f32,
+    brake: f32,
     /// Clutch application (0 to 100).
     pub clutch: u8,
     /// Gear selected (1–8, N=0, R=−1).
     pub gear: i8,
     /// Engine RPM.
-    pub engine_rpm: u16,
+    engine_rpm: u16,
     drs: u8,
     /// Rev lights indicator (percentage).
     pub rev_lights_percent: u8,
     /// Rev lights as a bitfield (bit 0 = leftmost LED, bit 14 = rightmost LED).
-    pub rev_lights_bit_value: u16,
+    rev_lights_bit_value: u16,
     /// Brake temperatures per wheel (Celsius). Wheel order: RL, RR, FL, FR.
-    pub brakes_temperature: WheelData<u16>,
+    brakes_temperature: WheelData<u16>,
     /// Tyre surface temperatures per wheel (Celsius).
     pub tyres_surface_temperature: WheelData<u8>,
     /// Tyre inner temperatures per wheel (Celsius).
     pub tyres_inner_temperature: WheelData<u8>,
     /// Engine temperature (Celsius).
-    pub engine_temperature: u16,
+    engine_temperature: u16,
     /// Tyre pressures per wheel (PSI).
-    pub tyres_pressure: WheelData<f32>,
+    tyres_pressure: WheelData<f32>,
     surface_type_raw: WheelData<u8>,
 }
 
@@ -49,6 +49,18 @@ const _: () = assert!(size_of::<CarTelemetryData>() == 60);
 
 impl CarTelemetryData {
     wire_flag_accessors!(drs);
+
+    wire_field_accessors!(
+        speed: u16,
+        throttle: f32,
+        steer: f32,
+        brake: f32,
+        engine_rpm: u16,
+        rev_lights_bit_value: u16,
+        brakes_temperature: WheelData<u16>,
+        engine_temperature: u16,
+        tyres_pressure: WheelData<f32>,
+    );
 
     /// Driving surface under each wheel. `Err(raw)` if the value is unrecognised.
     /// Wheel order: RL, RR, FL, FR.

@@ -74,13 +74,13 @@ fn save_fixture(path: &Path, bytes: &[u8]) {
 /// Return (type_name, frame_id, short notes string) for display.
 fn summarise(packet: &V2Packet) -> (&'static str, u32, String) {
     match packet {
-        V2Packet::Motion(p) => ("Motion", p.header.frame_identifier, String::new()),
+        V2Packet::Motion(p) => ("Motion", p.header.frame_identifier(), String::new()),
         V2Packet::Session(p) => (
             "Session",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!(
-                "track={} laps={} type={}",
-                p.payload.track_id, p.payload.total_laps, p.payload.session_type,
+                "track={:?} laps={} type={:?}",
+                p.payload.track_id(), p.payload.total_laps, p.payload.session_type(),
             ),
         ),
         V2Packet::LapData(p) => {
@@ -88,58 +88,58 @@ fn summarise(packet: &V2Packet) -> (&'static str, u32, String) {
             let ld = &p.payload.lap_data[car];
             (
                 "LapData",
-                p.header.frame_identifier,
+                p.header.frame_identifier(),
                 format!("lap={} pos={}", ld.current_lap_num, ld.car_position),
             )
         }
         V2Packet::Event(p) => (
             "Event",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("code={}", String::from_utf8_lossy(&p.payload.event_string_code)),
         ),
         V2Packet::Participants(p) => (
             "Participants",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("num_active={}", p.payload.num_active_cars),
         ),
-        V2Packet::CarSetups(p) => ("CarSetups", p.header.frame_identifier, String::new()),
+        V2Packet::CarSetups(p) => ("CarSetups", p.header.frame_identifier(), String::new()),
         V2Packet::CarTelemetry(p) => {
             let car = p.header.player_car_index();
             let ct = p.payload.car_telemetry_data[car];
-            let (speed, gear, throttle) = (ct.speed, ct.gear, ct.throttle);
+            let (speed, gear, throttle) = (ct.speed(), ct.gear, ct.throttle());
             (
                 "CarTelemetry",
-                p.header.frame_identifier,
+                p.header.frame_identifier(),
                 format!("speed={speed} gear={gear} throttle={throttle:.2}"),
             )
         }
-        V2Packet::CarStatus(p) => ("CarStatus", p.header.frame_identifier, String::new()),
+        V2Packet::CarStatus(p) => ("CarStatus", p.header.frame_identifier(), String::new()),
         V2Packet::FinalClassification(p) => (
             "FinalClassification",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("num_cars={}", p.payload.num_cars),
         ),
         V2Packet::LobbyInfo(p) => (
             "LobbyInfo",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("num_players={}", p.payload.num_players),
         ),
-        V2Packet::CarDamage(p) => ("CarDamage", p.header.frame_identifier, String::new()),
+        V2Packet::CarDamage(p) => ("CarDamage", p.header.frame_identifier(), String::new()),
         V2Packet::SessionHistory(p) => (
             "SessionHistory",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("car={} laps={}", p.payload.car_idx(), p.payload.num_laps),
         ),
         V2Packet::TyreSets(p) => (
             "TyreSets",
-            p.header.frame_identifier,
+            p.header.frame_identifier(),
             format!("car={} fitted={}", p.payload.car_idx(), p.payload.fitted_idx()),
         ),
-        V2Packet::CarMotionEx(p) => ("CarMotionEx", p.header.frame_identifier, String::new()),
+        V2Packet::CarMotionEx(p) => ("CarMotionEx", p.header.frame_identifier(), String::new()),
         V2Packet::TimeTrial(p) => {
-            let best_lap = p.payload.player_session_best.lap_time_in_ms;
-            ("TimeTrial", p.header.frame_identifier, format!("best_lap={best_lap}ms"))
+            let best_lap = p.payload.player_session_best.lap_time_in_ms();
+            ("TimeTrial", p.header.frame_identifier(), format!("best_lap={best_lap}ms"))
         }
-        V2Packet::LapPositions(p) => ("LapPositions", p.header.frame_identifier, String::new()),
+        V2Packet::LapPositions(p) => ("LapPositions", p.header.frame_identifier(), String::new()),
     }
 }

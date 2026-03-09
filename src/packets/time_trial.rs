@@ -14,7 +14,7 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::Team,
-    macros::{wire_enum_accessors, wire_flag_accessors, wire_index_accessors},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_index_accessors},
 };
 
 /// Data for a single time trial entry (session best, personal best, or rival).
@@ -23,10 +23,10 @@ use super::super::{
 pub struct TimeTrialDataSet {
     car_idx: u8,
     team_id: u8,
-    pub lap_time_in_ms: u32,
-    pub sector1_time_in_ms: u32,
-    pub sector2_time_in_ms: u32,
-    pub sector3_time_in_ms: u32,
+    lap_time_in_ms: u32,
+    sector1_time_in_ms: u32,
+    sector2_time_in_ms: u32,
+    sector3_time_in_ms: u32,
     traction_control: u8,
     gearbox_assist: u8,
     anti_lock_brakes: u8,
@@ -41,6 +41,12 @@ const _: () = assert!(size_of::<TimeTrialDataSet>() == 24);
 impl TimeTrialDataSet {
     wire_index_accessors!(car_idx);
     wire_enum_accessors!(team_id => Team);
+    wire_field_accessors!(
+        lap_time_in_ms: u32,
+        sector1_time_in_ms: u32,
+        sector2_time_in_ms: u32,
+        sector3_time_in_ms: u32,
+    );
     wire_flag_accessors!(
         traction_control,
         gearbox_assist,

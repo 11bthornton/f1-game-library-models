@@ -27,12 +27,13 @@
 //!
 //! impl HandlePacket for MyHandler {
 //!     async fn handle_lap_data(&mut self, p: PacketLapData) -> anyhow::Result<TelemetryControl> {
-//!         println!("lap data frame {}", p.header.frame_identifier);
+//!         let frame = p.header.frame_identifier();
+//!         println!("lap data frame {frame}");
 //!         Ok(TelemetryControl::Continue)
 //!     }
 //! }
 //!
-//! #[tokio::main]
+//! #[tokio::main(flavor = "current_thread")]
 //! async fn main() -> anyhow::Result<()> {
 //!     TelemetryClient::new("0.0.0.0:20777").await?.listen(&mut MyHandler).await
 //! }
@@ -61,7 +62,7 @@ pub use wheel_data::WheelData;
 use std::mem::size_of;
 
 use crate::constants::PACKET_HEADER_SIZE;
-use macros::wire_index_accessors;
+use macros::{wire_field_accessors, wire_index_accessors};
 
 /// Wire-format packet header — the 29-byte prefix common to every packet.
 ///
@@ -70,17 +71,17 @@ use macros::wire_index_accessors;
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct PacketHeader {
-    pub packet_format: u16,
-    pub game_year: u8,
-    pub game_major_version: u8,
-    pub game_minor_version: u8,
-    pub packet_version: u8,
+    packet_format: u16,
+    game_year: u8,
+    game_major_version: u8,
+    game_minor_version: u8,
+    packet_version: u8,
     /// Raw packet-id discriminant. See [`packet_id::PacketId`] for values.
     packet_id: u8,
-    pub session_uid: u64,
-    pub session_time: f32,
-    pub frame_identifier: u32,
-    pub overall_frame_identifier: u32,
+    session_uid: u64,
+    session_time: f32,
+    frame_identifier: u32,
+    overall_frame_identifier: u32,
     player_car_index: u8,
     /// `255` if no second player (split-screen).
     secondary_player_car_index: u8,
@@ -108,6 +109,18 @@ impl PacketHeader {
     }
 
     wire_index_accessors!(player_car_index, secondary_player_car_index);
+
+    wire_field_accessors!(
+        packet_format: u16,
+        game_year: u8,
+        game_major_version: u8,
+        game_minor_version: u8,
+        packet_version: u8,
+        session_uid: u64,
+        session_time: f32,
+        frame_identifier: u32,
+        overall_frame_identifier: u32,
+    );
 }
 
 impl FixEndianness for PacketHeader {

@@ -11,26 +11,26 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::{DriverStatus, PitStatus, ResultStatus, Sector},
-    macros::{wire_enum_accessors, wire_flag_accessors, wire_index_accessors},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_index_accessors},
 };
 
 /// Wire-format lap data for a single car.
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct LapData {
-    pub last_lap_time_in_ms: u32,
-    pub current_lap_time_in_ms: u32,
-    pub sector1_time_in_ms: u16,
+    last_lap_time_in_ms: u32,
+    current_lap_time_in_ms: u32,
+    sector1_time_in_ms: u16,
     pub sector1_time_minutes: u8,
-    pub sector2_time_in_ms: u16,
+    sector2_time_in_ms: u16,
     pub sector2_time_minutes: u8,
-    pub delta_to_car_in_front_in_ms: u16,
+    delta_to_car_in_front_in_ms: u16,
     pub delta_to_car_in_front_minutes: u8,
-    pub delta_to_race_leader_in_ms: u16,
+    delta_to_race_leader_in_ms: u16,
     pub delta_to_race_leader_minutes: u8,
-    pub lap_distance: f32,
-    pub total_distance: f32,
-    pub safety_car_delta: f32,
+    lap_distance: f32,
+    total_distance: f32,
+    safety_car_delta: f32,
     pub car_position: u8,
     pub current_lap_num: u8,
     pit_status: u8,
@@ -46,10 +46,10 @@ pub struct LapData {
     driver_status: u8,
     result_status: u8,
     pit_lane_timer_active: u8,
-    pub pit_lane_time_in_lane_in_ms: u16,
-    pub pit_stop_timer_in_ms: u16,
+    pit_lane_time_in_lane_in_ms: u16,
+    pit_stop_timer_in_ms: u16,
     pit_stop_should_serve_pen: u8,
-    pub speed_trap_fastest_speed: f32,
+    speed_trap_fastest_speed: f32,
     pub speed_trap_fastest_lap: u8,
 }
 
@@ -63,6 +63,20 @@ impl LapData {
         result_status => ResultStatus,
     );
     wire_flag_accessors!(current_lap_invalid, pit_lane_timer_active, pit_stop_should_serve_pen);
+    wire_field_accessors!(
+        last_lap_time_in_ms: u32,
+        current_lap_time_in_ms: u32,
+        sector1_time_in_ms: u16,
+        sector2_time_in_ms: u16,
+        delta_to_car_in_front_in_ms: u16,
+        delta_to_race_leader_in_ms: u16,
+        lap_distance: f32,
+        total_distance: f32,
+        safety_car_delta: f32,
+        pit_lane_time_in_lane_in_ms: u16,
+        pit_stop_timer_in_ms: u16,
+        speed_trap_fastest_speed: f32,
+    );
 }
 
 impl FixEndianness for LapData {

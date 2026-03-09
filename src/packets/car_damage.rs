@@ -10,7 +10,7 @@ use std::mem::size_of;
 
 use crate::constants::{CAR_DAMAGE_DATA_PACKET_SIZE, MAX_CARS_IN_SESSION};
 
-use super::super::{Packet, WheelData, endian::FixEndianness, macros::wire_flag_accessors};
+use super::super::{Packet, WheelData, endian::FixEndianness, macros::{wire_field_accessors, wire_flag_accessors}};
 
 /// Wire-format damage data for a single car.
 ///
@@ -46,7 +46,7 @@ use super::super::{Packet, WheelData, endian::FixEndianness, macros::wire_flag_a
 #[repr(C, packed)]
 pub struct CarDamageData {
     /// Tyre wear percentage per wheel.
-    pub tyre_wear: WheelData<f32>,
+    tyre_wear: WheelData<f32>,
     /// Tyre damage percentage per wheel.
     pub tyre_damage: WheelData<u8>,
     /// Brake damage percentage per wheel.
@@ -79,6 +79,7 @@ pub struct CarDamageData {
 
 impl CarDamageData {
     wire_flag_accessors!(drs_fault, ers_fault, engine_blown, engine_seized);
+    wire_field_accessors!(tyre_wear: WheelData<f32>);
 }
 
 const _: () = assert!(

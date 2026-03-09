@@ -7,31 +7,54 @@ use std::mem::size_of;
 
 use crate::constants::{MAX_CARS_IN_SESSION, MOTION_DATA_PACKET_SIZE, PACKET_HEADER_SIZE};
 
-use super::super::{Packet, endian::FixEndianness};
+use super::super::{Packet, endian::FixEndianness, macros::wire_field_accessors};
 
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct CarMotionData {
-    pub world_position_x: f32,
-    pub world_position_y: f32,
-    pub world_position_z: f32,
-    pub world_velocity_x: f32,
-    pub world_velocity_y: f32,
-    pub world_velocity_z: f32,
+    world_position_x: f32,
+    world_position_y: f32,
+    world_position_z: f32,
+    world_velocity_x: f32,
+    world_velocity_y: f32,
+    world_velocity_z: f32,
     /// World space forward direction (normalised), X component.
-    pub world_forward_dir_x: i16,
-    pub world_forward_dir_y: i16,
-    pub world_forward_dir_z: i16,
+    world_forward_dir_x: i16,
+    world_forward_dir_y: i16,
+    world_forward_dir_z: i16,
     /// World space right direction (normalised), X component.
-    pub world_right_dir_x: i16,
-    pub world_right_dir_y: i16,
-    pub world_right_dir_z: i16,
-    pub g_force_lateral: f32,
-    pub g_force_longitudinal: f32,
-    pub g_force_vertical: f32,
-    pub yaw: f32,
-    pub pitch: f32,
-    pub roll: f32,
+    world_right_dir_x: i16,
+    world_right_dir_y: i16,
+    world_right_dir_z: i16,
+    g_force_lateral: f32,
+    g_force_longitudinal: f32,
+    g_force_vertical: f32,
+    yaw: f32,
+    pitch: f32,
+    roll: f32,
+}
+
+impl CarMotionData {
+    wire_field_accessors!(
+        world_position_x: f32,
+        world_position_y: f32,
+        world_position_z: f32,
+        world_velocity_x: f32,
+        world_velocity_y: f32,
+        world_velocity_z: f32,
+        world_forward_dir_x: i16,
+        world_forward_dir_y: i16,
+        world_forward_dir_z: i16,
+        world_right_dir_x: i16,
+        world_right_dir_y: i16,
+        world_right_dir_z: i16,
+        g_force_lateral: f32,
+        g_force_longitudinal: f32,
+        g_force_vertical: f32,
+        yaw: f32,
+        pitch: f32,
+        roll: f32,
+    );
 }
 
 const _: () =

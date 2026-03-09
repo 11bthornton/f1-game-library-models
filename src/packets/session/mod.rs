@@ -12,8 +12,8 @@ use crate::constants::{PACKET_HEADER_SIZE, SESSION_DATA_PACKET_SIZE};
 use super::super::{
     Packet,
     endian::FixEndianness,
-    enums::SafetyCarType,
-    macros::{wire_enum_accessors, wire_flag_accessors, wire_index_accessors},
+    enums::{FiaFlag, SafetyCarType, Track},
+    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_i8_enum_accessors, wire_index_accessors},
 };
 use enums::*;
 
@@ -26,12 +26,16 @@ const MAX_SESSIONS_IN_WEEKEND: usize = 12;
 #[repr(C, packed)]
 pub struct MarshalZone {
     /// Fraction (0.0–1.0) of the way through the lap where this zone starts.
-    pub zone_start: f32,
-    /// Flag shown in this zone: -1 = invalid, 0 = none, 1 = green, 2 = blue, 3 = yellow.
-    pub zone_flag: i8,
+    zone_start: f32,
+    zone_flag: i8,
 }
 
 const _: () = assert!(size_of::<MarshalZone>() == 5);
+
+impl MarshalZone {
+    wire_field_accessors!(zone_start: f32);
+    wire_i8_enum_accessors!(zone_flag => FiaFlag);
+}
 
 impl FixEndianness for MarshalZone {
     fn fix_endianness(self) -> Self {
@@ -46,19 +50,16 @@ impl FixEndianness for MarshalZone {
 #[derive(Debug, Clone, Copy)]
 #[repr(C, packed)]
 pub struct WeatherForecastSample {
-    /// Session type this forecast applies to (see appendix).
-    pub session_type: u8,
+    session_type: u8,
     /// Minutes into the future this forecast is for.
     pub time_offset: u8,
     weather: u8,
     /// Forecast track temperature (Celsius).
     pub track_temperature: i8,
-    /// Track temperature trend: 0 = up, 1 = down, 2 = no change.
-    pub track_temperature_change: i8,
+    track_temperature_change: i8,
     /// Forecast air temperature (Celsius).
     pub air_temperature: i8,
-    /// Air temperature trend: 0 = up, 1 = down, 2 = no change.
-    pub air_temperature_change: i8,
+    air_temperature_change: i8,
     /// Rain probability (0–100).
     pub rain_percentage: u8,
 }
@@ -66,7 +67,14 @@ pub struct WeatherForecastSample {
 const _: () = assert!(size_of::<WeatherForecastSample>() == 8);
 
 impl WeatherForecastSample {
-    wire_enum_accessors!(weather => Weather);
+    wire_enum_accessors!(
+        weather      => Weather,
+        session_type => SessionType,
+    );
+    wire_i8_enum_accessors!(
+        track_temperature_change => TemperatureChange,
+        air_temperature_change   => TemperatureChange,
+    );
 }
 
 impl FixEndianness for WeatherForecastSample {
@@ -88,16 +96,14 @@ pub struct SessionData {
     /// Total number of laps in the race.
     pub total_laps: u8,
     /// Track length in metres.
-    pub track_length: u16,
-    /// Session type (see appendix). `0` = unknown.
-    pub session_type: u8,
-    /// Track id (see appendix). `-1` = unknown.
-    pub track_id: i8,
+    track_length: u16,
+    session_type: u8,
+    track_id: i8,
     formula: u8,
     /// Time remaining in the session (seconds).
-    pub session_time_left: u16,
+    session_time_left: u16,
     /// Total session duration (seconds).
-    pub session_duration: u16,
+    session_duration: u16,
     /// Pit lane speed limit (km/h).
     pub pit_speed_limit: u8,
     game_paused: u8,
@@ -117,11 +123,11 @@ pub struct SessionData {
     /// AI difficulty (0–110).
     pub ai_difficulty: u8,
     /// Season link identifier (persists across saves).
-    pub season_link_identifier: u32,
+    season_link_identifier: u32,
     /// Weekend link identifier (persists across saves).
-    pub weekend_link_identifier: u32,
+    weekend_link_identifier: u32,
     /// Session link identifier (persists across saves).
-    pub session_link_identifier: u32,
+    session_link_identifier: u32,
     /// Ideal lap to pit on for current strategy (player).
     pub pit_stop_window_ideal_lap: u8,
     /// Latest lap to pit on for current strategy (player).
@@ -137,12 +143,10 @@ pub struct SessionData {
     drs_assist: u8,
     dynamic_racing_line: u8,
     dynamic_racing_line_type: u8,
-    /// Game mode id (see appendix).
-    pub game_mode: u8,
-    /// Ruleset id (see appendix).
-    pub rule_set: u8,
+    game_mode: u8,
+    rule_set: u8,
     /// Local time of day in minutes since midnight.
-    pub time_of_day: u32,
+    time_of_day: u32,
     session_length: u8,
     speed_units_lead_player: u8,
     temperature_units_lead_player: u8,
@@ -157,8 +161,7 @@ pub struct SessionData {
     equal_car_performance: u8,
     recovery_mode: u8,
     flashback_limit: u8,
-    /// Surface simulation setting (0 = Simplified, 1 = Realistic).
-    pub surface_type: u8,
+    surface_type: u8,
     low_fuel_mode: u8,
     race_starts: u8,
     tyre_temperature: u8,
@@ -184,15 +187,27 @@ pub struct SessionData {
     /// Weekend session schedule (see appendix for session type values).
     pub weekend_structure: [u8; MAX_SESSIONS_IN_WEEKEND],
     /// Distance around the lap where sector 2 starts (metres).
-    pub sector2_lap_distance_start: f32,
+    sector2_lap_distance_start: f32,
     /// Distance around the lap where sector 3 starts (metres).
-    pub sector3_lap_distance_start: f32,
+    sector3_lap_distance_start: f32,
 }
 
 const _: () = assert!(size_of::<SessionData>() == SESSION_DATA_PACKET_SIZE - PACKET_HEADER_SIZE);
 
 impl SessionData {
     wire_index_accessors!(spectator_car_index);
+
+    wire_field_accessors!(
+        track_length: u16,
+        session_time_left: u16,
+        session_duration: u16,
+        season_link_identifier: u32,
+        weekend_link_identifier: u32,
+        session_link_identifier: u32,
+        time_of_day: u32,
+        sector2_lap_distance_start: f32,
+        sector3_lap_distance_start: f32,
+    );
 
     wire_flag_accessors!(
         game_paused,
@@ -243,6 +258,14 @@ impl SessionData {
         pit_stop_experience                => PitStopExperience,
         safety_car                         => IncidentFrequency,
         red_flags                          => IncidentFrequency,
+        session_type                       => SessionType,
+        game_mode                          => GameMode,
+        rule_set                           => Ruleset,
+        surface_type                       => SurfaceSimulation,
+    );
+
+    wire_i8_enum_accessors!(
+        track_id => Track,
     );
 }
 
