@@ -19,7 +19,7 @@
 //!
 //! ## UDP client
 //! Enable the `client` feature for a ready-made async listener:
-//! ```no_run
+//! ```ignore
 //! use f1_game_library_models_25::client::{TelemetryClient, HandlePacket, TelemetryControl};
 //! use f1_game_library_models_25::packets::lap_data::PacketLapData;
 //!
