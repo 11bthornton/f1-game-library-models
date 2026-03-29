@@ -19,32 +19,56 @@ impl FixEndianness for u8 {
 impl FixEndianness for i16 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { i16::from_le(self) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            i16::from_le(self)
+        }
     }
 }
 
 impl FixEndianness for u16 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { u16::from_le(self) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            u16::from_le(self)
+        }
     }
 }
 
 impl FixEndianness for u32 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { u32::from_le(self) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            u32::from_le(self)
+        }
     }
 }
 
 impl FixEndianness for u64 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { u64::from_le(self) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            u64::from_le(self)
+        }
     }
 }
 
@@ -58,23 +82,41 @@ impl FixEndianness for i8 {
 impl FixEndianness for f32 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { f32::from_bits(u32::from_le(self.to_bits())) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            f32::from_bits(u32::from_le(self.to_bits()))
+        }
     }
 }
 
 impl FixEndianness for f64 {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { f64::from_bits(u64::from_le(self.to_bits())) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            f64::from_bits(u64::from_le(self.to_bits()))
+        }
     }
 }
 
 impl<T: FixEndianness + Copy, const N: usize> FixEndianness for [T; N] {
     #[inline(always)]
     fn fix_endianness(self) -> Self {
-        #[cfg(target_endian = "little")] { self }
-        #[cfg(not(target_endian = "little"))] { self.map(T::fix_endianness) }
+        #[cfg(target_endian = "little")]
+        {
+            self
+        }
+        #[cfg(not(target_endian = "little"))]
+        {
+            self.map(T::fix_endianness)
+        }
     }
 }

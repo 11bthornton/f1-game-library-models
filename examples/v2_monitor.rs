@@ -80,7 +80,9 @@ fn summarise(packet: &V2Packet) -> (&'static str, u32, String) {
             p.header.frame_identifier(),
             format!(
                 "track={:?} laps={} type={:?}",
-                p.payload.track_id(), p.payload.total_laps, p.payload.session_type(),
+                p.payload.track_id(),
+                p.payload.total_laps,
+                p.payload.session_type(),
             ),
         ),
         V2Packet::LapData(p) => {
@@ -138,7 +140,11 @@ fn summarise(packet: &V2Packet) -> (&'static str, u32, String) {
         V2Packet::CarMotionEx(p) => ("CarMotionEx", p.header.frame_identifier(), String::new()),
         V2Packet::TimeTrial(p) => {
             let best_lap = p.payload.player_session_best.lap_time_in_ms();
-            ("TimeTrial", p.header.frame_identifier(), format!("best_lap={best_lap}ms"))
+            (
+                "TimeTrial",
+                p.header.frame_identifier(),
+                format!("best_lap={best_lap}ms"),
+            )
         }
         V2Packet::LapPositions(p) => ("LapPositions", p.header.frame_identifier(), String::new()),
     }

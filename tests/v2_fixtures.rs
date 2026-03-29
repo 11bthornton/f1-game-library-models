@@ -52,12 +52,27 @@ fn session() {
     println!("  braking_assist:              {:?}", s.braking_assist().unwrap());
     println!("  gearbox_assist:              {:?}", s.gearbox_assist().unwrap());
     println!("  dynamic_racing_line:         {:?}", s.dynamic_racing_line().unwrap());
-    println!("  dynamic_racing_line_type:    {:?}", s.dynamic_racing_line_type().unwrap());
+    println!(
+        "  dynamic_racing_line_type:    {:?}",
+        s.dynamic_racing_line_type().unwrap()
+    );
     println!("  session_length:              {:?}", s.session_length().unwrap());
-    println!("  speed_units_lead:            {:?}", s.speed_units_lead_player().unwrap());
-    println!("  temperature_units_lead:      {:?}", s.temperature_units_lead_player().unwrap());
-    println!("  speed_units_secondary:       {:?}", s.speed_units_secondary_player().unwrap());
-    println!("  temperature_units_secondary: {:?}", s.temperature_units_secondary_player().unwrap());
+    println!(
+        "  speed_units_lead:            {:?}",
+        s.speed_units_lead_player().unwrap()
+    );
+    println!(
+        "  temperature_units_lead:      {:?}",
+        s.temperature_units_lead_player().unwrap()
+    );
+    println!(
+        "  speed_units_secondary:       {:?}",
+        s.speed_units_secondary_player().unwrap()
+    );
+    println!(
+        "  temperature_units_secondary: {:?}",
+        s.temperature_units_secondary_player().unwrap()
+    );
     println!("  recovery_mode:               {:?}", s.recovery_mode().unwrap());
     println!("  flashback_limit:             {:?}", s.flashback_limit().unwrap());
     println!("  car_damage:                  {:?}", s.car_damage().unwrap());
@@ -76,7 +91,10 @@ fn session() {
     }
 
     println!("  weather forecast samples ({}):", s.num_weather_forecast_samples);
-    for (i, sample) in s.weather_forecast_samples[..s.num_weather_forecast_samples as usize].iter().enumerate() {
+    for (i, sample) in s.weather_forecast_samples[..s.num_weather_forecast_samples as usize]
+        .iter()
+        .enumerate()
+    {
         println!(
             "    [{}] session: {:?}, weather: {:?}, track_temp_change: {:?}, air_temp_change: {:?}",
             i,
@@ -284,7 +302,10 @@ fn session_history() {
         panic!("expected SessionHistory variant");
     };
     let num_stints = p.payload.num_tyre_stints as usize;
-    println!("[SessionHistory] num_laps={}, num_stints={num_stints}", p.payload.num_laps);
+    println!(
+        "[SessionHistory] num_laps={}, num_stints={num_stints}",
+        p.payload.num_laps
+    );
     for (i, stint) in p.payload.tyre_stints_history_data[..num_stints].iter().enumerate() {
         println!(
             "  [{}] actual: {:?}, visual: {:?}",

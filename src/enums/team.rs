@@ -1,6 +1,8 @@
 use num_enum::TryFromPrimitive;
+use std::fmt;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum Team {
     Mercedes = 0,
@@ -105,4 +107,24 @@ pub enum Team {
     McLaren24 = 193,
     Sauber24 = 194,
     None = 255,
+}
+
+impl fmt::Display for Team {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let name = match self {
+            Team::Mercedes => "Mercedes",
+            Team::Ferrari => "Ferrari",
+            Team::RedBullRacing => "Red Bull Racing",
+            Team::Williams => "Williams",
+            Team::AstonMartin => "Aston Martin",
+            Team::Alpine => "Alpine",
+            Team::RB => "RB",
+            Team::Haas => "Haas",
+            Team::McLaren => "McLaren",
+            Team::Sauber => "Sauber",
+            Team::None => "None",
+            _ => "Other",
+        };
+        f.write_str(name)
+    }
 }

@@ -3,6 +3,7 @@
 use num_enum::TryFromPrimitive;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum PitStatus {
     None = 0,
@@ -11,6 +12,7 @@ pub enum PitStatus {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum Sector {
     SectorOne = 0,
@@ -19,6 +21,7 @@ pub enum Sector {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum DriverStatus {
     InGarage = 0,
@@ -30,6 +33,7 @@ pub enum DriverStatus {
 
 /// Reason a driver's race ended. Used in Final Classification and Retirement events.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum ResultReason {
     Invalid = 0,
@@ -46,6 +50,7 @@ pub enum ResultReason {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum ResultStatus {
     Invalid = 0,

@@ -10,7 +10,11 @@ use std::mem::size_of;
 
 use crate::constants::{CAR_DAMAGE_DATA_PACKET_SIZE, MAX_CARS_IN_SESSION};
 
-use super::super::{Packet, WheelData, endian::FixEndianness, macros::{wire_field_accessors, wire_flag_accessors}};
+use super::super::{
+    Packet, WheelData,
+    endian::FixEndianness,
+    macros::{wire_field_accessors, wire_flag_accessors},
+};
 
 /// Wire-format damage data for a single car.
 ///

@@ -17,6 +17,8 @@ allow-branch = ["main"]
 anyhow = "1.0.100"
 num_enum = "0.7"
 pastey = "0.2"
+serde = { version = "1", features = ["derive"], optional = true }
+serde_repr = { version = "0.1", optional = true }
 tokio = { version = "1.45.1", optional = true, features = ["net"] }
 
 [dev-dependencies]
@@ -33,3 +35,4 @@ harness = false
 [features]
 default = ["client"]
 client = ["dep:tokio"]
+serde = ["dep:serde", "dep:serde_repr"]

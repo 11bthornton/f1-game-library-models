@@ -107,11 +107,26 @@ struct BincodePacketLapData {
 // --- CarTelemetry (1352 bytes) ----------------------------------------------
 
 #[derive(Deserialize)]
-struct BincodeWheelDataU16 { rear_left: u16, rear_right: u16, front_left: u16, front_right: u16 }
+struct BincodeWheelDataU16 {
+    rear_left: u16,
+    rear_right: u16,
+    front_left: u16,
+    front_right: u16,
+}
 #[derive(Deserialize)]
-struct BincodeWheelDataU8  { rear_left: u8,  rear_right: u8,  front_left: u8,  front_right: u8  }
+struct BincodeWheelDataU8 {
+    rear_left: u8,
+    rear_right: u8,
+    front_left: u8,
+    front_right: u8,
+}
 #[derive(Deserialize)]
-struct BincodeWheelDataF32 { rear_left: f32, rear_right: f32, front_left: f32, front_right: f32 }
+struct BincodeWheelDataF32 {
+    rear_left: f32,
+    rear_right: f32,
+    front_left: f32,
+    front_right: f32,
+}
 
 #[derive(Deserialize)]
 struct BincodeCarTelemetryData {
@@ -248,13 +263,28 @@ struct BmPacketLapData {
 
 #[derive(Clone, Copy, Zeroable, Pod)]
 #[repr(C, packed)]
-struct BmWheelDataU16 { rear_left: u16, rear_right: u16, front_left: u16, front_right: u16 }
+struct BmWheelDataU16 {
+    rear_left: u16,
+    rear_right: u16,
+    front_left: u16,
+    front_right: u16,
+}
 #[derive(Clone, Copy, Zeroable, Pod)]
 #[repr(C, packed)]
-struct BmWheelDataU8  { rear_left: u8,  rear_right: u8,  front_left: u8,  front_right: u8  }
+struct BmWheelDataU8 {
+    rear_left: u8,
+    rear_right: u8,
+    front_left: u8,
+    front_right: u8,
+}
 #[derive(Clone, Copy, Zeroable, Pod)]
 #[repr(C, packed)]
-struct BmWheelDataF32 { rear_left: f32, rear_right: f32, front_left: f32, front_right: f32 }
+struct BmWheelDataF32 {
+    rear_left: f32,
+    rear_right: f32,
+    front_left: f32,
+    front_right: f32,
+}
 
 #[derive(Clone, Copy, Zeroable, Pod)]
 #[repr(C, packed)]
@@ -308,9 +338,7 @@ where
     group.bench_function(format!("{name}/bytemuck"), |b| {
         b.iter(|| bytemuck::pod_read_unaligned::<Bm>(black_box(&buf[..size_of::<Bm>()])))
     });
-    group.bench_function(format!("{name}/bincode"), |b| {
-        b.iter(|| bincode_fn(black_box(buf)))
-    });
+    group.bench_function(format!("{name}/bincode"), |b| b.iter(|| bincode_fn(black_box(buf))));
 }
 
 // ---------------------------------------------------------------------------
@@ -318,22 +346,22 @@ where
 // ---------------------------------------------------------------------------
 
 fn bench_parse(c: &mut Criterion) {
-    let time_trial    = make_buf(14, 101);
-    let lap_data      = make_buf(2, 1285);
+    let time_trial = make_buf(14, 101);
+    let lap_data = make_buf(2, 1285);
     let car_telemetry = make_buf(6, 1352);
 
     let mut g = c.benchmark_group("parse");
 
-    add_triple::<BmPacketTimeTrial, BincodePacketTimeTrial, _>(
-        &mut g, "time_trial_101b", &time_trial,
-        |b| bincode::deserialize(b),
-    );
-    add_triple::<BmPacketLapData, BincodePacketLapData, _>(
-        &mut g, "lap_data_1285b", &lap_data,
-        |b| bincode::deserialize(b),
-    );
+    add_triple::<BmPacketTimeTrial, BincodePacketTimeTrial, _>(&mut g, "time_trial_101b", &time_trial, |b| {
+        bincode::deserialize(b)
+    });
+    add_triple::<BmPacketLapData, BincodePacketLapData, _>(&mut g, "lap_data_1285b", &lap_data, |b| {
+        bincode::deserialize(b)
+    });
     add_triple::<BmPacketCarTelemetry, BincodePacketCarTelemetry, _>(
-        &mut g, "car_telemetry_1352b", &car_telemetry,
+        &mut g,
+        "car_telemetry_1352b",
+        &car_telemetry,
         |b| bincode::deserialize(b),
     );
 

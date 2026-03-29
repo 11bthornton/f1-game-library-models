@@ -2,6 +2,7 @@ use num_enum::TryFromPrimitive;
 
 /// Actual tyre compound — the physical compound fitted to the car.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum ActualTyreCompound {
     None = 0,
@@ -25,6 +26,7 @@ pub enum ActualTyreCompound {
 
 /// Visual tyre compound — how the tyre appears in-game (may differ from actual).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum VisualTyreCompound {
     None = 0,

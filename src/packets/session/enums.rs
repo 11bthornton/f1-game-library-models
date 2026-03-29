@@ -1,9 +1,11 @@
 //! Session-specific enums.
 
 use num_enum::TryFromPrimitive;
+use std::fmt;
 
 /// Current weather conditions.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum Weather {
     Clear = 0,
@@ -16,6 +18,7 @@ pub enum Weather {
 
 /// Formula class running in this session.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum Formula {
     F1Modern = 0,
@@ -30,6 +33,7 @@ pub enum Formula {
 
 /// How accurately the weather forecast is modelled.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum ForecastAccuracy {
     Perfect = 0,
@@ -38,6 +42,7 @@ pub enum ForecastAccuracy {
 
 /// Braking assist level.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum BrakingAssist {
     Off = 0,
@@ -48,6 +53,7 @@ pub enum BrakingAssist {
 
 /// Gearbox assist level.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum GearboxAssist {
     Manual = 1,
@@ -57,6 +63,7 @@ pub enum GearboxAssist {
 
 /// Dynamic racing line display mode.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum DynamicRacingLine {
     Off = 0,
@@ -66,6 +73,7 @@ pub enum DynamicRacingLine {
 
 /// Session length multiplier.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum SessionLength {
     None = 0,
@@ -79,6 +87,7 @@ pub enum SessionLength {
 
 /// Speed display unit.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum SpeedUnits {
     Mph = 0,
@@ -87,6 +96,7 @@ pub enum SpeedUnits {
 
 /// Temperature display unit.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum TemperatureUnits {
     Celsius = 0,
@@ -95,6 +105,7 @@ pub enum TemperatureUnits {
 
 /// Flashback allowance setting.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum FlashbackLimit {
     Low = 0,
@@ -105,6 +116,7 @@ pub enum FlashbackLimit {
 
 /// Recovery mode setting.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum RecoveryMode {
     None = 0,
@@ -114,6 +126,7 @@ pub enum RecoveryMode {
 
 /// Car damage simulation level.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum CarDamageLevel {
     Off = 0,
@@ -124,6 +137,7 @@ pub enum CarDamageLevel {
 
 /// Car damage accumulation rate.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum CarDamageRate {
     Reduced = 0,
@@ -133,6 +147,7 @@ pub enum CarDamageRate {
 
 /// Collision simulation setting.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum CollisionSetting {
     Off = 0,
@@ -142,6 +157,7 @@ pub enum CollisionSetting {
 
 /// Racing line display dimensionality.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum DynamicRacingLineType {
     TwoD = 0,
@@ -150,6 +166,7 @@ pub enum DynamicRacingLineType {
 
 /// Pit stop experience level.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum PitStopExperience {
     Automatic = 0,
@@ -159,6 +176,7 @@ pub enum PitStopExperience {
 
 /// Safety car / red flag frequency setting.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum IncidentFrequency {
     Off = 0,
@@ -169,6 +187,7 @@ pub enum IncidentFrequency {
 
 /// Temperature trend in a weather forecast sample.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(i8)]
 pub enum TemperatureChange {
     Up = 0,
@@ -178,6 +197,7 @@ pub enum TemperatureChange {
 
 /// Surface physics simulation fidelity.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum SurfaceSimulation {
     Simplified = 0,
@@ -186,6 +206,7 @@ pub enum SurfaceSimulation {
 
 /// Session type.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum SessionType {
     Unknown = 0,
@@ -211,6 +232,7 @@ pub enum SessionType {
 
 /// Game mode.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum GameMode {
     GrandPrix = 4,
@@ -229,10 +251,38 @@ pub enum GameMode {
 
 /// Ruleset in use for the session.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, TryFromPrimitive)]
+#[cfg_attr(feature = "serde", derive(serde_repr::Serialize_repr, serde_repr::Deserialize_repr))]
 #[repr(u8)]
 pub enum Ruleset {
     PracticeAndQualifying = 0,
     Race = 1,
     TimeTrial = 2,
     Elimination = 12,
+}
+
+impl fmt::Display for SessionType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let name = match self {
+            SessionType::Unknown => "Unknown",
+            SessionType::Practice1 => "Practice 1",
+            SessionType::Practice2 => "Practice 2",
+            SessionType::Practice3 => "Practice 3",
+            SessionType::ShortPractice => "Short Practice",
+            SessionType::Qualifying1 => "Qualifying 1",
+            SessionType::Qualifying2 => "Qualifying 2",
+            SessionType::Qualifying3 => "Qualifying 3",
+            SessionType::ShortQualifying => "Short Qualifying",
+            SessionType::OneShotQualifying => "One Shot Qualifying",
+            SessionType::SprintShootout1 => "Sprint Shootout 1",
+            SessionType::SprintShootout2 => "Sprint Shootout 2",
+            SessionType::SprintShootout3 => "Sprint Shootout 3",
+            SessionType::ShortSprintShootout => "Short Sprint Shootout",
+            SessionType::OneShotSprintShootout => "One Shot Sprint Shootout",
+            SessionType::Race => "Race",
+            SessionType::Race2 => "Race 2",
+            SessionType::Race3 => "Race 3",
+            SessionType::TimeTrial => "Time Trial",
+        };
+        f.write_str(name)
+    }
 }

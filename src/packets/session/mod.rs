@@ -13,7 +13,9 @@ use super::super::{
     Packet,
     endian::FixEndianness,
     enums::{FiaFlag, SafetyCarType, Track},
-    macros::{wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_i8_enum_accessors, wire_index_accessors},
+    macros::{
+        wire_enum_accessors, wire_field_accessors, wire_flag_accessors, wire_i8_enum_accessors, wire_index_accessors,
+    },
 };
 use enums::*;
 

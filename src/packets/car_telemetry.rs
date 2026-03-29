@@ -7,7 +7,12 @@ use std::mem::size_of;
 
 use crate::constants::{MAX_CARS_IN_SESSION, PACKET_HEADER_SIZE, TELEMETRY_DATA_PACKET_SIZE};
 
-use super::super::{Packet, WheelData, endian::FixEndianness, enums::SurfaceType, macros::{wire_field_accessors, wire_flag_accessors}};
+use super::super::{
+    Packet, WheelData,
+    endian::FixEndianness,
+    enums::SurfaceType,
+    macros::{wire_field_accessors, wire_flag_accessors},
+};
 
 /// Wire-format telemetry data for a single car.
 #[derive(Debug, Clone, Copy)]
