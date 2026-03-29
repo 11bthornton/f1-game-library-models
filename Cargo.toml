@@ -21,6 +21,14 @@ tokio = { version = "1.45.1", optional = true, features = ["net"] }
 
 [dev-dependencies]
 tokio = { version = "1.45.1", features = ["rt", "rt-multi-thread", "net", "macros"] }
+criterion = { version = "0.5", features = ["html_reports"] }
+bincode = "1.3"
+serde = { version = "1", features = ["derive"] }
+bytemuck = { version = "1", features = ["derive"] }
+
+[[bench]]
+name = "parse"
+harness = false
 
 [features]
 default = ["client"]
