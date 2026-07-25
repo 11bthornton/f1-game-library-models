@@ -77,9 +77,18 @@ fn motion() {
     let g_lat = player.g_force_lateral();
     let g_lon = player.g_force_longitudinal();
     let g_vert = player.g_force_vertical();
-    assert!(g_lat.is_finite() && g_lat.abs() <= 10.0, "g_force_lateral out of range: {g_lat}");
-    assert!(g_lon.is_finite() && g_lon.abs() <= 10.0, "g_force_longitudinal out of range: {g_lon}");
-    assert!(g_vert.is_finite() && g_vert.abs() <= 10.0, "g_force_vertical out of range: {g_vert}");
+    assert!(
+        g_lat.is_finite() && g_lat.abs() <= 10.0,
+        "g_force_lateral out of range: {g_lat}"
+    );
+    assert!(
+        g_lon.is_finite() && g_lon.abs() <= 10.0,
+        "g_force_longitudinal out of range: {g_lon}"
+    );
+    assert!(
+        g_vert.is_finite() && g_vert.abs() <= 10.0,
+        "g_force_vertical out of range: {g_vert}"
+    );
 
     assert!(player.yaw().is_finite(), "yaw not finite");
     assert!(player.pitch().is_finite(), "pitch not finite");
