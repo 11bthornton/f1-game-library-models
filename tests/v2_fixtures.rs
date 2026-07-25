@@ -4,17 +4,46 @@
 //! succeeds and returns the expected variant, then unwraps every enum accessor
 //! to confirm no garbage values are present in the captured data.
 //!
+//! ## Correctness net
+//!
+//! Tests assert:
+//! 1. Header `packet_id` matches the expected id for that file.
+//! 2. Header `packet_format == 2025`.
+//! 3. Field sanity bounds on the highest-signal packets (CarTelemetry, LapData,
+//!    Motion) — these catch **offset / misalignment drift strongly** (misread
+//!    bytes produce NaN floats, huge ints that blow past any sane range) but
+//!    catch **same-size adjacent-field swaps weakly** (e.g. two adjacent f32s
+//!    swapped would both still be in-range). This is a gross-error net, not
+//!    proof of field-level correctness.
+//!
 //! Run with `-- --nocapture` to see the parsed values:
 //!   cargo test -- --nocapture
 //!
 //! Run the monitor first to populate the fixture files:
 //!   cargo run --example v2_monitor
 
+use f1_game_library_models_25::packet_id::PacketId;
 use f1_game_library_models_25::parse::{self, V2Packet};
 
 fn load(name: &str) -> Option<Vec<u8>> {
     let path = format!("test_packets/{name}.bin");
     std::fs::read(&path).ok()
+}
+
+/// Assert common header invariants: packet_format is 2025 and packet_id matches.
+fn assert_header(header: f1_game_library_models_25::PacketHeader, expected_id: PacketId) {
+    assert_eq!(
+        header.packet_format(),
+        2025,
+        "expected packet_format 2025, got {}",
+        header.packet_format()
+    );
+    assert_eq!(
+        header.packet_id().unwrap(),
+        expected_id,
+        "expected packet_id {expected_id:?}, got {:?}",
+        header.packet_id()
+    );
 }
 
 // ── Motion ────────────────────────────────────────────────────────────────────
@@ -25,7 +54,46 @@ fn motion() {
         eprintln!("skipping Motion: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::Motion(_)));
+    let V2Packet::Motion(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected Motion variant");
+    };
+
+    assert_header(p.header, PacketId::Motion);
+
+    // Sanity bounds: positional floats must be finite (not NaN/inf), g-force
+    // within a plausible band. A misaligned read would produce garbage floats.
+    let player = p.payload[p.header.player_car_index()];
+
+    assert!(player.world_position_x().is_finite(), "position x not finite");
+    assert!(player.world_position_y().is_finite(), "position y not finite");
+    assert!(player.world_position_z().is_finite(), "position z not finite");
+    assert!(player.world_velocity_x().is_finite(), "velocity x not finite");
+    assert!(player.world_velocity_y().is_finite(), "velocity y not finite");
+    assert!(player.world_velocity_z().is_finite(), "velocity z not finite");
+
+    // G-force: even under extreme braking/cornering, values beyond ±10g are
+    // implausible for an F1 car. A byte-offset error would typically produce
+    // values in the thousands or NaN.
+    let g_lat = player.g_force_lateral();
+    let g_lon = player.g_force_longitudinal();
+    let g_vert = player.g_force_vertical();
+    assert!(
+        g_lat.is_finite() && g_lat.abs() <= 10.0,
+        "g_force_lateral out of range: {g_lat}"
+    );
+    assert!(
+        g_lon.is_finite() && g_lon.abs() <= 10.0,
+        "g_force_longitudinal out of range: {g_lon}"
+    );
+    assert!(
+        g_vert.is_finite() && g_vert.abs() <= 10.0,
+        "g_force_vertical out of range: {g_vert}"
+    );
+
+    assert!(player.yaw().is_finite(), "yaw not finite");
+    assert!(player.pitch().is_finite(), "pitch not finite");
+    assert!(player.roll().is_finite(), "roll not finite");
+
     println!("[Motion] parsed ok ({} bytes)", bytes.len());
 }
 
@@ -40,6 +108,9 @@ fn session() {
     let V2Packet::Session(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected Session variant");
     };
+
+    assert_header(p.header, PacketId::Session);
+
     let s = p.payload;
 
     println!("[Session]");
@@ -117,17 +188,35 @@ fn lap_data() {
     let V2Packet::LapData(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected LapData variant");
     };
-    println!("[LapData]");
+
+    assert_header(p.header, PacketId::LapData);
+
+    // Sanity bounds on each car's lap data.
     for (i, lap) in p.payload.lap_data.iter().enumerate() {
-        println!(
-            "  [{}] pit_status: {:?}, sector: {:?}, driver_status: {:?}, result_status: {:?}",
-            i,
-            lap.pit_status().unwrap(),
-            lap.sector().unwrap(),
-            lap.driver_status().unwrap(),
-            lap.result_status().unwrap(),
+        // car_position is 0 for inactive cars, 1..=22 for active ones.
+        assert!(
+            lap.car_position <= 22,
+            "car[{i}] car_position out of range: {}",
+            lap.car_position
         );
+
+        // lap_distance can be negative briefly (behind the start line), but
+        // total_distance is cumulative and non-negative in a valid session.
+        // A misaligned read would produce values like 1e38 or NaN.
+        let total = lap.total_distance();
+        assert!(total.is_finite(), "car[{i}] total_distance not finite: {total}");
+
+        let lap_dist = lap.lap_distance();
+        assert!(lap_dist.is_finite(), "car[{i}] lap_distance not finite: {lap_dist}");
+
+        // Enum accessors must resolve for every car slot.
+        lap.pit_status().unwrap();
+        lap.sector().unwrap();
+        lap.driver_status().unwrap();
+        lap.result_status().unwrap();
     }
+
+    println!("[LapData] parsed ok ({} bytes)", bytes.len());
 }
 
 // ── Event ─────────────────────────────────────────────────────────────────────
@@ -138,7 +227,10 @@ fn event() {
         eprintln!("skipping Event: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::Event(_)));
+    let V2Packet::Event(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected Event variant");
+    };
+    assert_header(p.header, PacketId::Event);
     println!("[Event] parsed ok ({} bytes)", bytes.len());
 }
 
@@ -153,6 +245,9 @@ fn participants() {
     let V2Packet::Participants(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected Participants variant");
     };
+
+    assert_header(p.header, PacketId::Participants);
+
     let active = p.payload.num_active_cars as usize;
     println!("[Participants] active={active}");
     for (i, participant) in p.payload.participants[..active].iter().enumerate() {
@@ -174,7 +269,10 @@ fn car_setups() {
         eprintln!("skipping CarSetups: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::CarSetups(_)));
+    let V2Packet::CarSetups(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected CarSetups variant");
+    };
+    assert_header(p.header, PacketId::CarSetups);
     println!("[CarSetups] parsed ok ({} bytes)", bytes.len());
 }
 
@@ -189,18 +287,46 @@ fn car_telemetry() {
     let V2Packet::CarTelemetry(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected CarTelemetry variant");
     };
-    println!("[CarTelemetry]");
+
+    assert_header(p.header, PacketId::CarTelemetry);
+
+    // Field sanity bounds across all 22 car slots. These ranges are tolerant of
+    // garage/stationary frames (speed=0, gear=0 neutral). A byte-offset error
+    // would typically produce values like speed=40000, throttle=1e20, or NaN.
     for (i, car) in p.payload.car_telemetry_data.iter().enumerate() {
-        let st = car.surface_type();
-        println!(
-            "  [{}] surface: RL={:?}, RR={:?}, FL={:?}, FR={:?}",
-            i,
-            st.rear_left.unwrap(),
-            st.rear_right.unwrap(),
-            st.front_left.unwrap(),
-            st.front_right.unwrap(),
+        let speed = car.speed();
+        assert!(speed <= 400, "car[{i}] speed out of range: {speed}");
+
+        let gear = car.gear;
+        assert!((-1..=8).contains(&gear), "car[{i}] gear out of range: {gear}");
+
+        let throttle = car.throttle();
+        assert!(
+            throttle >= 0.0 && throttle <= 1.0,
+            "car[{i}] throttle out of range: {throttle}"
         );
+
+        let brake = car.brake();
+        assert!(brake >= 0.0 && brake <= 1.0, "car[{i}] brake out of range: {brake}");
+
+        let clutch = car.clutch;
+        assert!(clutch <= 100, "car[{i}] clutch out of range: {clutch}");
+
+        let rev = car.rev_lights_percent;
+        assert!(rev <= 100, "car[{i}] rev_lights_percent out of range: {rev}");
+
+        let rpm = car.engine_rpm();
+        assert!(rpm < 20000, "car[{i}] engine_rpm out of range: {rpm}");
+
+        // Surface type enum must resolve.
+        let st = car.surface_type();
+        st.rear_left.unwrap();
+        st.rear_right.unwrap();
+        st.front_left.unwrap();
+        st.front_right.unwrap();
     }
+
+    println!("[CarTelemetry] parsed ok ({} bytes)", bytes.len());
 }
 
 // ── Car Status ────────────────────────────────────────────────────────────────
@@ -214,7 +340,9 @@ fn car_status() {
     let V2Packet::CarStatus(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected CarStatus variant");
     };
-    println!("[CarStatus]");
+
+    assert_header(p.header, PacketId::CarStatus);
+
     for (i, car) in p.payload.car_status_data.iter().enumerate() {
         println!(
             "  [{}] tc: {:?}, fuel_mix: {:?}, tyre: {:?}/{:?}, ers: {:?}, fia_flag: {:?}",
@@ -240,6 +368,9 @@ fn final_classification() {
     let V2Packet::FinalClassification(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected FinalClassification variant");
     };
+
+    assert_header(p.header, PacketId::FinalClassification);
+
     let num_cars = p.payload.num_cars as usize;
     println!("[FinalClassification] num_cars={num_cars}");
     for (i, car) in p.payload.classification_data[..num_cars].iter().enumerate() {
@@ -263,10 +394,12 @@ fn lobby_info() {
     let V2Packet::LobbyInfo(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected LobbyInfo variant");
     };
+
+    assert_header(p.header, PacketId::LobbyInfo);
+
     let num_players = p.payload.num_players as usize;
     println!("[LobbyInfo] num_players={num_players}");
     for (i, player) in p.payload.lobby_players[..num_players].iter().enumerate() {
-        // nationality may be 0 (unset) in solo-session lobby captures
         println!(
             "  [{}] team: {:?}, platform: {:?}, nationality: {:?}, ready: {:?}",
             i,
@@ -286,7 +419,10 @@ fn car_damage() {
         eprintln!("skipping CarDamage: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::CarDamage(_)));
+    let V2Packet::CarDamage(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected CarDamage variant");
+    };
+    assert_header(p.header, PacketId::CarDamage);
     println!("[CarDamage] parsed ok ({} bytes)", bytes.len());
 }
 
@@ -301,6 +437,9 @@ fn session_history() {
     let V2Packet::SessionHistory(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected SessionHistory variant");
     };
+
+    assert_header(p.header, PacketId::SessionHistory);
+
     let num_stints = p.payload.num_tyre_stints as usize;
     println!(
         "[SessionHistory] num_laps={}, num_stints={num_stints}",
@@ -327,6 +466,9 @@ fn tyre_sets() {
     let V2Packet::TyreSets(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected TyreSets variant");
     };
+
+    assert_header(p.header, PacketId::TyreSets);
+
     println!("[TyreSets] fitted_idx={}", p.payload.fitted_idx());
     for (i, set) in p.payload.tyre_sets.iter().enumerate() {
         println!(
@@ -347,7 +489,10 @@ fn car_motion_ex() {
         eprintln!("skipping CarMotionEx: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::CarMotionEx(_)));
+    let V2Packet::CarMotionEx(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected CarMotionEx variant");
+    };
+    assert_header(p.header, PacketId::CarMotionEx);
     println!("[CarMotionEx] parsed ok ({} bytes)", bytes.len());
 }
 
@@ -362,6 +507,9 @@ fn time_trial() {
     let V2Packet::TimeTrial(p) = parse::parse(&bytes).unwrap() else {
         panic!("expected TimeTrial variant");
     };
+
+    assert_header(p.header, PacketId::TimeTrial);
+
     println!("[TimeTrial]");
     for (label, dataset) in [
         ("player_session_best", p.payload.player_session_best),
@@ -380,6 +528,9 @@ fn lap_positions() {
         eprintln!("skipping LapPositions: fixture not found");
         return;
     };
-    assert!(matches!(parse::parse(&bytes).unwrap(), V2Packet::LapPositions(_)));
+    let V2Packet::LapPositions(p) = parse::parse(&bytes).unwrap() else {
+        panic!("expected LapPositions variant");
+    };
+    assert_header(p.header, PacketId::LapPositions);
     println!("[LapPositions] parsed ok ({} bytes)", bytes.len());
 }
