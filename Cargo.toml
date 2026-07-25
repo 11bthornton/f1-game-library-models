@@ -7,11 +7,8 @@ description  = "Models associated with the F1 Video Game series for UDP Telemetr
 readme       = "README.md"
 license-file = "LICENSE"
 keywords     = ["gamedev"]
-repository   = "https://github.com/11bthornton/f1-game-library-models"
-homepage     = "https://github.com/11bthornton/f1-game-library-models"
-
-[release]
-allow-branch = ["main"]
+repository   = "https://github.com/mini-sector/f1-packets"
+homepage     = "https://github.com/mini-sector/f1-packets"
 
 [dependencies]
 anyhow = "1.0.100"
